@@ -6,7 +6,7 @@ Main -> Controller -> Model
 
 Model: 
 Zeiten werden in arrays double time = new Double[2];
-gespeichert. time[0] entspricht start time[1] entspricht Ende.
+gespeichert. 
 jedes Intervall wird in einer Liste gespeichert, sortiert nach Zeit.
 
 Controller: 
