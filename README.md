@@ -2,7 +2,7 @@
 Java-Projekt für Inf
 
 Aufbau: 
-Main -> Controller -> Model
+Main -> GUI -> Controller -> Model
 
 Model: 
 Zeiten werden in arrays double time = new Double[2];
