@@ -13,6 +13,5 @@ Controller:
 Vergleicht die Listen nach Überschneidungen und gibt diese in dem Array double match = new Double[2];
 Mehrer Überschneidungen werden wieder in eine Liste gepackt.
 
-
-felix war hier
+bernhard
 
