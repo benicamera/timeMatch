@@ -15,3 +15,6 @@ Mehrer Überschneidungen werden wieder in eine Liste gepackt.
 
 Eclipse: https://www.eclipse.org/downloads/
 
+Eclipse mit GitHub verbinden:
+
+
