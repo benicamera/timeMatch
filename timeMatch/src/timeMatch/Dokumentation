@@ -13,7 +13,7 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 20.06.2020 (14:00) (Beni): final controller erstellt. Es tut folgendes: Bindet Controller-Klasse ins Programm ein.
 20.06.2020 (15:15) (Beni): Methode initUI() erstellt. Sie tut folgendes: Baut und erstellt das Fenster.
 20.06.2020 (15:15) (Beni): Methode createActionListener() erstellt. Sie tut folgendes: Buttons können jetzt reagieren.
-
+20.06.2020 (17:35) (Beni): Methode createCalendar() erstellt. Sie tut folgendes: Erstellt einen Kalender.
 
 
 
