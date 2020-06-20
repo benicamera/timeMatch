@@ -1,0 +1,47 @@
+Methodenbeschreibungen:
+
+Hier ist die Syntax wie folgt:
+
+Von wem wird gebraucht?: Was wird gebraucht?
+Bsp.: 
+GUI: public boolean showedItem(String nameOfItem) //Wird in unserem Programm nicht gebraucht.
+Ggf. noch Zwischenschritte wie folgt beschreiben: //nameOfItem speichern.
+
+---TO-CODE:---
+
+Calendar: public String insertDate(Boolean[size: 12]) //Setze den Array als Neuen "Kann oder kann nicht". Leer ist true.
+          return-Optionen: "Erfolgreich", "Fehler"
+Calendar: public boolean isFree(int time)
+
+Controller: public String createCalender(String name) //Speichere den namen als Key und den Kalender als Value in einer HashMap(https://www.youtube.com/watch?v=70qy6_gw1Hc)
+			return-Optionen: "Erfolgreich", "Fehler", "Name bereits vergeben"
+Controller: public Calender getCalender(String name) 
+
+
+
+
+
+
+
+
+
+
+
+---------------
+
+Alle Public-Methoden werden hier auch beschrieben, wie folgt:
+
+Wer hat geschrieben?: Was macht es, ggf. wichtige Zwischenschritte
+Bsp.:
+GUI: public void showFrame(int i) //zeigt den i. Frame an und int var++;
+
+---PUBLIC-METHODS---
+
+
+
+
+
+
+
+
+---------------------
