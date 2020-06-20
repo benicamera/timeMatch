@@ -16,6 +16,7 @@ Calendar: public boolean isFree(int time)
 Controller: public String createCalender(String name) //Speichere den namen als Key und den Kalender als Value in einer HashMap(https://www.youtube.com/watch?v=70qy6_gw1Hc)
 			return-Optionen: "Erfolgreich", "Fehler", "Name bereits vergeben"
 Controller: public Calender getCalender(String name) 
+Controller: public ArrayList<Integer[size: 2]> getMatchingIntervalls() //Bitte die Syntax von der Liste Checken. Integer[0] ist start des Intervalls und Integer[1] das Ende.
 
 
 
