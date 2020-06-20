@@ -65,10 +65,12 @@ public class Gui {
 		       
 		        c.gridwidth = 1;
 		        
+		        c.gridx = 0;
+		        panel.add(new JLabel(""), c);
 		        c.gridy = 4;
 		        //Rechtsbündige Ausrichtung
 		         c.anchor = GridBagConstraints.EAST;
-		         c.gridx = 0;
+		         c.gridx = 1;
 		         c.anchor = GridBagConstraints.WEST;
 		         panel.add(createButton, c);
 		         
@@ -87,11 +89,15 @@ public class Gui {
 		         //Macht Lücke
 		         panel.add(new JLabel(""), c);
 		         
+		         c.gridx = 5;
+		         //Macht Lücke
+		         panel.add(new JLabel(""), c);
+		         
 		         //Baut das Fenster    
 		         frame.add(panel, BorderLayout.CENTER);
 		         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		         frame.setTitle("Time Match");
-		         frame.setSize(500, 200);
+		         frame.setSize(600, 200);
 		         frame.setResizable(true);
 		         frame.setLocationRelativeTo(null);
 		         frame.setVisible(true);
