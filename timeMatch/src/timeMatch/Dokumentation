@@ -11,6 +11,8 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 ----GUI:----
 
 20.06.2020 (14:00) (Beni): final controller erstellt. Es tut folgendes: Bindet Controller-Klasse ins Programm ein.
+20.06.2020 (15:15) (Beni): Methode initUI() erstellt. Sie tut folgendes: Baut und erstellt das Fenster.
+20.06.2020 (15:15) (Beni): Methode createActionListener() erstellt. Sie tut folgendes: Buttons können jetzt reagieren.
 
 
 
@@ -30,12 +32,7 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 
 -----------------
 ----CALENDAR:----
-<<<<<<< HEAD
-
-20.06.2020 (14:40) (Bernhard): Variablen erstellt und in Arrays eingefügt.
-=======
 20.06.2020 (14:38) (Bernhard): erstellung von arrays mit Variablen.
->>>>>>> branch 'master' of https://github.com/benicamera/timeMatch.git
 
 
 
