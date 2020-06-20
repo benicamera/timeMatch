@@ -1,5 +1,9 @@
 package timeMatch;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /*
  * Creates GUI
  * 
@@ -12,6 +16,13 @@ package timeMatch;
 public class Gui {
 
 	final Controller controller;
+	
+	 private JFrame frame = new JFrame();
+	 private JPanel panel = new JPanel();
+	 
+	  private JButton showButton = new JButton("Kalender anzeigen");
+	  private JButton matchButton = new JButton("Termin finden");
+	  private JButton createButton = new JButton("Erstelle Kalender");
 	
 	public Gui() {
 		controller = new Controller();
