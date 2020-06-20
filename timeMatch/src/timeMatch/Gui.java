@@ -46,7 +46,8 @@ public class Gui {
 	public void toTest(/* insert Parameters*/) {
 		controller.toTest(/*insert Parameters*/);
 	}
-		 private void initUI() {
+	
+	private void initUI() {
 		    	
 		    	//Baut das Feld
 		    	
@@ -64,12 +65,10 @@ public class Gui {
 		       
 		        c.gridwidth = 1;
 		        
-		        c.gridx = 0;
 		        c.gridy = 4;
 		        //Rechtsbündige Ausrichtung
 		         c.anchor = GridBagConstraints.EAST;
-		         panel.add(new JLabel("Spieler: "), c);
-		         c.gridx = 1;
+		         c.gridx = 0;
 		         c.anchor = GridBagConstraints.WEST;
 		         panel.add(createButton, c);
 		         
