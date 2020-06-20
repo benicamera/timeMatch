@@ -141,4 +141,67 @@ public class Gui {
 		
 	}
 	
+	private void createCalendar(int monthSort, String month, int year) {
+		int days;
+		
+		JFrame calendarFrame = new JFrame();
+		JPanel calendarPanel = new JPanel();
+		
+		calendarPanel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        calendarPanel.setLayout(new GridBagLayout());
+        
+        c.gridx = 0;
+        c.gridy = 0;	
+        
+        
+        //MonthSort: 0 = 28 Tage; 1 = 29 Tage; 2 = 30 Tage; 3 = 31 Tage;
+        switch (monthSort) {
+		case 0: {
+			
+			c.gridheight = 30;
+			days = 28;
+			break;
+		}
+		case 1: {
+			c.gridheight = 31;
+			days = 29;
+			break;
+		}
+		case 2:{
+			c.gridheight = 32;
+			days = 30;
+			break;
+		}
+		case 3:{
+			c.gridheight = 33;
+			days = 31;
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + monthSort);
+		}
+        c.gridwidth = 2;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        
+        calendarPanel.add(new JLabel("Klicke um Freie Zeit zu markieren"));
+        
+        for(int i = 1; i <= days; i++ ) {
+        	c.gridy = i;
+        	c.gridx = 0;
+        	calendarPanel.add(new JLabel(String.valueOf(i)));
+        	c.gridy = 2;
+        	calendarPanel.add(new JButton());
+        }
+        
+        frame.add(panel, BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle(month + " " + String.valueOf(year));
+        frame.setSize(600, 200);
+        frame.setResizable(true);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+		
+	}
+	
 }
