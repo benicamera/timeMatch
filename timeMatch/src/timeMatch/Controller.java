@@ -11,8 +11,14 @@ package timeMatch;
 
 public class Controller {
 
+	final Calendar testCalendar;
 	
 	public Controller() {
 		
+		testCalendar = new Calendar();
+	}
+	
+	public void toTest(/* insert Parameters*/) {
+		testCalendar.toTest(/*insert Parameters*/);
 	}
 }

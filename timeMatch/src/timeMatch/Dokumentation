@@ -2,7 +2,7 @@ Dokumentation:
 
 Änderungen wie folgt eintragen:
 
-tt.mm.jjjj (hh:mm): Methode xy erstellt. Sie tut folgendes: Kurzbeschreibung
+tt.mm.jjjj (hh:mm) (Autor): Methode xy erstellt/geändert (nur bei großen Änderungen). Sie tut folgendes: Kurzbeschreibung
 
 Genauere Beschreibung dann als Kommentar in der Klasse selbst. 
 
@@ -10,6 +10,7 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 
 ----GUI:----
 
+20.06.2020 (14:00) (Beni): final controller erstellt. Es tut folgendes: Bindet Controller-Klasse ins Programm ein.
 
 
 
@@ -20,7 +21,7 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 -------------------
 ----CONTROLLER:----
 
-
+20.06.2020 (14:05) (Beni): final testCalender erstellt. Es tut folgendes: Ermöglicht den Test von Calendar-Methoden durch die toTest-Methode.
 
 
 
@@ -30,3 +31,14 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 
 -----------------
 ----CALENDAR:----
+
+
+
+
+
+
+
+----------------------------
+----KLASSENÜBERGREIFEND:----
+
+20.06.2020 (14:05) (Beni): Methode toTest erstellt. Sie tut folgendes: Ermöglicht das übersichtlichere Testen einzelner Funktionen durch Ausführen des Programms

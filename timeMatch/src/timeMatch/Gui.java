@@ -11,8 +11,13 @@ package timeMatch;
 
 public class Gui {
 
+	final Controller controller;
 	
 	public Gui() {
-		
+		controller = new Controller();
+	}
+	
+	public void toTest(/* insert Parameters*/) {
+		controller.toTest(/*insert Parameters*/);
 	}
 }
