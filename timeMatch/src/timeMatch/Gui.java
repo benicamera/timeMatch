@@ -3,6 +3,8 @@ package timeMatch;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -142,6 +144,7 @@ public class Gui {
 	}
 	
 	private void equipCalendar(int monthSort, String month, int year) {
+		
 		int days;
 		
 		JFrame calendarFrame = new JFrame();
@@ -184,24 +187,73 @@ public class Gui {
         c.weightx = 1.0;
         c.weighty = 1.0;
         
-        calendarPanel.add(new JLabel("Klicke um Freie Zeit zu markieren"));
+        calendarPanel.add(new JLabel("Tag auswählen"));
         
         for(int i = 1; i <= days; i++ ) {
         	c.gridy = i;
         	c.gridx = 0;
         	calendarPanel.add(new JLabel(String.valueOf(i)));
         	c.gridy = 2;
-        	calendarPanel.add(new JButton());
+        	int _i = i;
+        	JButton button = new JButton("Weiter");
+        	button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    chooseIntervalls(_i, month, year);
+                }
+            });
+        	
+        	calendarPanel.add(button, c);
         }
         
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle(month + " " + String.valueOf(year));
-        frame.setSize(600, 200);
-        frame.setResizable(true);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        calendarFrame.add(panel, BorderLayout.CENTER);
+        calendarFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        calendarFrame.setTitle(month + " " + String.valueOf(year));
+        calendarFrame.setSize(600, 200);
+        calendarFrame.setResizable(true);
+        calendarFrame.setLocationRelativeTo(null);
+        calendarFrame.setVisible(true);
 		
+	}
+	
+	private void chooseIntervalls(int _day, String month, int year) {
+		
+		JFrame dayFrame = new JFrame();
+		JPanel dayPanel = new JPanel();
+		
+		dayPanel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        dayPanel.setLayout(new GridBagLayout());
+		
+        c.gridx = 0;
+        c.gridy = 0;	
+        c.gridheight = 2;
+        c.gridwidth = 13;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        
+        for(int i = 1; i <= 12; i++ ) {
+        	c.gridy = 1;
+        	c.gridx = i;
+        	dayPanel.add(new JLabel(String.valueOf(i)));
+        	c.gridy = 2;
+        	int _i = i;
+        	JButton button = new JButton("Zeit markieren");
+        	button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    chooseIntervalls(_i, month, year);
+                }
+            });
+        	
+        	dayPanel.add(button, c);
+        }
+        
+        
+        dayFrame.add(panel, BorderLayout.CENTER);
+        dayFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        dayFrame.setTitle(month + " " + String.valueOf(year));
+        dayFrame.setSize(600, 200);
+        dayFrame.setResizable(true);
+        dayFrame.setLocationRelativeTo(null);
+        dayFrame.setVisible(true);
 	}
 	
 }
