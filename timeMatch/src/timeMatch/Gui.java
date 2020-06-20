@@ -141,7 +141,7 @@ public class Gui {
 		
 	}
 	
-	private void createCalendar(int monthSort, String month, int year) {
+	private void equipCalendar(int monthSort, String month, int year) {
 		int days;
 		
 		JFrame calendarFrame = new JFrame();
