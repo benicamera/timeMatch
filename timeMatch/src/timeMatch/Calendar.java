@@ -22,6 +22,7 @@ public class Calendar {
 	private int x10 = 1;
 	private int x11 = 1;
 	private int x12 = 1;
+	
 	private int z1 = 1;
 	private int z2 = 1;
 	private int z3 = 0;
