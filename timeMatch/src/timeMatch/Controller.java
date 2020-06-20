@@ -3,7 +3,7 @@ package timeMatch;
 /*
  * Verrechnet und vergleicht
  * 
- * @author Felix Becht, Hussein (Nachnamen bitte Nachtragen .-))
+ * @author Felix Becht, Hussein Fazeli
  * Last Change: 20.06.2020
  * - Klasse erstellt (20.06.2020)
  * 
