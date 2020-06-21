@@ -7,6 +7,8 @@ Bsp.:
 GUI: public boolean showedItem(String nameOfItem) //Wird in unserem Programm nicht gebraucht.
 Ggf. noch Zwischenschritte wie folgt beschreiben: //nameOfItem speichern.
 
+Bitte programmiert sp, dass man am schluss auswählen kann welchen intervall man betrachten will.
+Später soll es so sein, dass ich bernhard jahr monat und tag gebe. bitte schaltjahre beachten xd . tage erst laden, wenn sie belegte intervalle beinhalten
 ---TO-CODE:---
 
 Calendar: public String insertDate(Boolean[size: 12]) //Setze den Array als Neuen "Kann oder kann nicht". Leer ist true.

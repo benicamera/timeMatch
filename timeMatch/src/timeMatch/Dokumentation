@@ -15,7 +15,8 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 20.06.2020 (15:15) (Beni): Methode createActionListener() erstellt. Sie tut folgendes: Buttons können jetzt reagieren.
 20.06.2020 (17:35) (Beni): Methode createCalendar() erstellt. Sie tut folgendes: Bestückt einen Kalender.
 20.06.2020 (17:40) (Beni): Methode createCalendar() in equipCalendar() umbenannt.
-21.06.2020 (12:40) (Beni): Gui wird jetzt mit WindowsBuilder gemacht.
+21.06.2020 (12:40) (Beni): Gui wird jetzt mit WindowBuilder gemacht.
+21.06.2020 (20:10) (Beni): GUi weiterentwickelt.
 
 
 
