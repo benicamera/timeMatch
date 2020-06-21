@@ -1,5 +1,7 @@
 package timeMatch;
 
+import java.awt.EventQueue;
+
 /*
  * Main-Class
  * 
@@ -11,8 +13,16 @@ package timeMatch;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		 Gui gui = new Gui();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Gui window = new Gui();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }
