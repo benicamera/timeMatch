@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Button;
@@ -34,9 +35,10 @@ public class Gui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 301);
+		frame.setBounds(100, 100, 436, 287);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
 		
 		Panel panel = new Panel();
 		panel.setBackground(new Color(204, 255, 153));
@@ -57,7 +59,12 @@ public class Gui {
 		panel_1.setBounds(36, 35, 398, 226);
 		frame.getContentPane().add(panel_1);
 		
-		JButton btnNewButton = new JButton("New button");
-		panel_1.add(btnNewButton);
+		ImageIcon createButtonIcon = new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png"));
+		Image createButtonImage = createButtonIcon.getImage();
+		
+		JButton createButton = new JButton(createButtonIcon);
+		createButton.setToolTipText("Erstellt neuen Kalender");
+		//createButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png")));
+		panel_1.add(createButton);
 	}
 }
