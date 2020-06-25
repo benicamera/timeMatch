@@ -14,6 +14,12 @@ import javax.swing.ImageIcon;
 import java.awt.Component;
 import javax.swing.Box;
 
+import java.io.File;
+import java.io.IOException;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.awt.*;
+
 public class Gui {
 
 	private JFrame frame;
@@ -21,14 +27,22 @@ public class Gui {
 	/**
 	 * Launch the application.
 	 */
-	
+	final Controller controller;
 
 	/**
 	 * Create the application.
 	 */
 	public Gui() {
+		controller = new Controller();
 		initialize();
+		toTest();
 	}
+		
+		public void toTest(/* insert Parameters*/) {
+			controller.toTest(/*insert Parameters*/);
+		}
+	
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -61,10 +75,13 @@ public class Gui {
 		
 		ImageIcon createButtonIcon = new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png"));
 		Image createButtonImage = createButtonIcon.getImage();
+		Image image = createButtonImage.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+		createButtonIcon = new ImageIcon(image);
 		
 		JButton createButton = new JButton(createButtonIcon);
 		createButton.setToolTipText("Erstellt neuen Kalender");
 		//createButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png")));
 		panel_1.add(createButton);
 	}
+	
 }
