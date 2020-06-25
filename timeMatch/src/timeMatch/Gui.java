@@ -76,7 +76,7 @@ public class Gui {
 		ImageIcon createButtonIcon = new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png"));
 		Image createButtonImage = createButtonIcon.getImage();
 		Image image = createButtonImage.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
-
+		createButtonIcon = new ImageIcon(image);
 		
 		JButton createButton = new JButton(createButtonIcon);
 		createButton.setToolTipText("Erstellt neuen Kalender");
