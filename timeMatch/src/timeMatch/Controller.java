@@ -4,6 +4,7 @@ package timeMatch;
  * Verrechnet und vergleicht
  * 
  * @author Felix Becht, Hussein Fazeli
+ *@version heute
  * Last Change: 20.06.2020
  * - Klasse erstellt (20.06.2020)
  * 
