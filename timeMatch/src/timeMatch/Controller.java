@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class Controller {
     final Calendar testCalendar;
-    HashMap <String,Calendar> Buch = new HashMap<String,Calendar>(); //erzeugt eine Haschmap f�r die Calendar
+    HashMap <String,Calendar> buch = new HashMap<String, Calendar>(); //erzeugt eine Haschmap f�r die Calendar
     
     public Controller() {
         
@@ -29,8 +29,8 @@ public class Controller {
     
     
     public String createCalendar (String name) {		//mit der methode ist es m�glich einen neuen Calendar in das Buch aufzunehmen
-    	if (Buch.containsKey(name) == false) {		//pr�ft ob der name schon vorhanden ist //Beni: Bei if == !
-    		Buch.put(name,new Calendar());
+    	if (buch.containsKey(name) == false) {		//pr�ft ob der name schon vorhanden ist //Beni: Bei if == !
+    		buch.put(name,new Calendar());
     		return "newCalendar: " + name;
     	}
         
@@ -38,8 +38,8 @@ public class Controller {
     }
     
     public int[] match (String name1 , String name2) { //du hast [] vergessen
-    	Calendar a = Buch.get(name1);
-    	Calendar b = Buch.get(name2);
+    	Calendar a = buch.get(name1);
+    	Calendar b = buch.get(name2);
     	int [] agreement = new int[11];
 		for (int p=0; p<11; p++) {     
             agreement[p] = 0;
@@ -53,7 +53,7 @@ public class Controller {
     }
     
     public Calendar getCalendar(String name) {
-       return Buch.get(name);
+       return buch.get(name);
     }
     
    
