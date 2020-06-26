@@ -10,13 +10,14 @@ package timeMatch;
  * 
  */
 
-Import java.util.HashMap;
+import java.util.HashMap;
 
 public class Controller {
     final Calendar testCalendar;
+    HashMap <String,Calendar> Buch = new HashMap<String,Calendar>(); //erzeugt eine Haschmap fï¿½r die Calendar
     
     public Controller() {
-        HashMap <String,Calendar> Buch = new HashMap<String,Calendar>(); //erzeugt eine Haschmap für die Calendar
+        
         testCalendar = new Calendar();
     }
     
@@ -27,8 +28,8 @@ public class Controller {
     
     
     
-    public String createCalendar (String name) {		//mit der methode ist es möglich einen neuen Calendar in das Buch aufzunehmen
-    	if (Buch.containsKey(name)=false) {		//prüft ob der name schon vorhanden ist
+    public String createCalendar (String name) {		//mit der methode ist es mï¿½glich einen neuen Calendar in das Buch aufzunehmen
+    	if (Buch.containsKey(name) == false) {		//prï¿½ft ob der name schon vorhanden ist //Beni: Bei if == !
     		Buch.put(name,new Calendar());
     		return "newCalendar: " + name;
     	}
@@ -40,7 +41,7 @@ public class Controller {
     }
     
     public Calendar getCalendar(String name) {
-       return Buch.name;
+       return Buch.get(name);
     }
     
    
