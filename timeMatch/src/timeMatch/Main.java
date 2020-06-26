@@ -2,6 +2,8 @@ package timeMatch;
 
 import java.awt.EventQueue;
 
+import ui.Gui;
+
 /*
  * Main-Class
  * 

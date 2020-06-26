@@ -1,4 +1,4 @@
-package timeMatch;
+package ui;
 
 import java.awt.EventQueue;
 
@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
+import timeMatch.Controller;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
@@ -59,6 +62,11 @@ public class Gui {
 		frame.getContentPane().add(titleLabel, gbc_titleLabel);
 		
 		JButton createButton = new JButton("");
+		createButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		createButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png")));
 		createButton.setToolTipText("Kalender erstellen");
 		GridBagConstraints gbc_createButton = new GridBagConstraints();
