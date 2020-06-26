@@ -33,7 +33,7 @@ public class EditCalendarUi extends JFrame {
 		controller = _controller;
 		year = yearInput();
 		month = monthInput();
-		day = dayInput(monthSort);
+		day = dayInput();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -55,8 +55,36 @@ public class EditCalendarUi extends JFrame {
 		}
 	}
 	
+	private int dayInput() {
+		Objects[] days;
+		switch (monthSort) {
+		case 1:
+			days = (Objects[]) days1;
+			break;
+		case 2: 
+			days = (Objects[]) days2;
+			break;
+		case 3:
+			days = (Objects[]) days3;
+			break;
+		case 4:
+			days = (Objects[]) days4;
+			break;
+			
+		default:
+			days = (Objects[]) days4;
+			break;
+		}
+		day = (int) JOptionPane.showInputDialog( contentPane, "Wähle den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
+		if(day == 0)
+			return dayInput();
+		else {
+			return day;
+		}
+	}
+	
 	private String monthInput() {
-		String _month = (String)JOptionPane.showInputDialog( contentPane, "Wähle den Monat", "", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
+		String _month = (String)JOptionPane.showInputDialog( contentPane, "Wähle den Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
 		
 		switch (_month) {
 		case "Januar":
