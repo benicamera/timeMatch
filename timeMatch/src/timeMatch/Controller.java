@@ -22,6 +22,9 @@ public class Controller {
 	
 	public void toTest(/* insert Parameters*/) {
 		testCalendar.toTest(/*insert Parameters*/);
-	aslögflöasfjhdlskfhlakjdf
+	
+	}
+	public int 123() {
+		return 4;
 	}
 }
