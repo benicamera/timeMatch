@@ -17,7 +17,7 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 20.06.2020 (17:40) (Beni): Methode createCalendar() in equipCalendar() umbenannt.
 21.06.2020 (12:40) (Beni): Gui wird jetzt mit WindowBuilder gemacht.
 21.06.2020 (20:10) (Beni): GUi weiterentwickelt.
-
+26.06.2020 (17:40) (Beni): Gui neu aufgesetzt. Bilder als Knöpfe.
 
 
 
@@ -28,7 +28,6 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 20.06.2020 (14:05) (Beni): final testCalender erstellt. Es tut folgendes: Ermöglicht den Test von Calendar-Methoden durch die toTest-Methode.
 26.06.2020 (16:54) (Felix): Methoden hinzugefügt
 26.06.2020 (16:54) (Felix): HashMap hinzugefügt
-
 
 
 
