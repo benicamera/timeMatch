@@ -1,0 +1,48 @@
+Dokumentation:
+
+Änderungen wie folgt eintragen:
+
+tt.mm.jjjj (hh:mm) (Autor): Methode xy erstellt/geändert (nur bei großen Änderungen). Sie tut folgendes: Kurzbeschreibung
+
+Genauere Beschreibung dann als Kommentar in der Klasse selbst. 
+
+ES HIEß DIE DOKUMENTATION SEI WICHTIG!
+
+----GUI:----
+
+20.06.2020 (14:00) (Beni): final controller erstellt. Es tut folgendes: Bindet Controller-Klasse ins Programm ein.
+20.06.2020 (15:15) (Beni): Methode initUI() erstellt. Sie tut folgendes: Baut und erstellt das Fenster.
+20.06.2020 (15:15) (Beni): Methode createActionListener() erstellt. Sie tut folgendes: Buttons können jetzt reagieren.
+20.06.2020 (17:35) (Beni): Methode createCalendar() erstellt. Sie tut folgendes: Bestückt einen Kalender.
+20.06.2020 (17:40) (Beni): Methode createCalendar() in equipCalendar() umbenannt.
+21.06.2020 (12:40) (Beni): Gui wird jetzt mit WindowBuilder gemacht.
+21.06.2020 (20:10) (Beni): GUi weiterentwickelt.
+
+
+
+
+
+-------------------
+----CONTROLLER:----
+
+20.06.2020 (14:05) (Beni): final testCalender erstellt. Es tut folgendes: Ermöglicht den Test von Calendar-Methoden durch die toTest-Methode.
+
+
+
+
+
+
+
+-----------------
+----CALENDAR:----
+20.06.2020 (14:38) (Bernhard): erstellung von arrays mit Variablen.
+
+
+
+
+
+
+----------------------------
+----KLASSENÜBERGREIFEND:----
+
+20.06.2020 (14:05) (Beni): Methode toTest erstellt. Sie tut folgendes: Ermöglicht das übersichtlichere Testen einzelner Funktionen durch Ausführen des Programms
