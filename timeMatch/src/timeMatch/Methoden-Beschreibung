@@ -14,12 +14,14 @@ Später soll es so sein, dass ich bernhard jahr monat und tag gebe. bitte schalt
 Calendar: public String insertDate(Boolean[size: 12]) //Setze den Array als Neuen "Kann oder kann nicht". Leer ist true.
           return-Optionen: "Erfolgreich", "Fehler"
 Calendar: public boolean isFree(int time)
+Calendar: 
 
 Controller: public String createCalender(String name) //Speichere den namen als Key und den Kalender als Value in einer HashMap(https://www.youtube.com/watch?v=70qy6_gw1Hc)
 			return-Optionen: "Erfolgreich", "Fehler", "Name bereits vergeben"
 Controller: public Calender getCalender(String name) 
 Controller: public ArrayList<Integer[size: 2]> getMatchingIntervalls() //Bitte die Syntax von der Liste Checken. Integer[0] ist start des Intervalls und Integer[1] das Ende.
-
+Controller: public boolean isNameTaken(String name) //im grunde das gleiche wie createCalendar, nur dass du keinen erstellst.
+Controller: public boolean isSchaltjahr(int year) //tu dich mit bernhard zusammen, vielleicht kann er das machen und du gibst nur weiter.
 
 
 

@@ -14,9 +14,13 @@ import javax.swing.JPanel;
 import timeMatch.Controller;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.concurrent.CompletableFuture.AsynchronousCompletionTask;
+import java.util.jar.Attributes.Name;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -64,7 +68,9 @@ public class Gui {
 		JButton createButton = new JButton("");
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String calendarName = askCalendarName();
+				new JOptionPane(controller.createCalendar(calendarName));
+				EditCalendarUi editCalendarUi = new EditCalendarUi(calendarName, controller);
 			}
 		});
 		createButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png")));
@@ -91,14 +97,14 @@ public class Gui {
 		gbc_spaceLabel2.gridy = 1;
 		frame.getContentPane().add(spaceLabel2, gbc_spaceLabel2);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
-		btnNewButton.setToolTipText("suche Match");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 9;
-		gbc_btnNewButton.gridy = 1;
-		frame.getContentPane().add(btnNewButton, gbc_btnNewButton);
+		JButton matchButton = new JButton("");
+		matchButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
+		matchButton.setToolTipText("suche Match");
+		GridBagConstraints gbc_matchButton = new GridBagConstraints();
+		gbc_matchButton.insets = new Insets(0, 0, 5, 0);
+		gbc_matchButton.gridx = 9;
+		gbc_matchButton.gridy = 1;
+		frame.getContentPane().add(matchButton, gbc_matchButton);
 		
 		JLabel spaceLabel = new JLabel("");
 		GridBagConstraints gbc_spaceLabel = new GridBagConstraints();
@@ -109,5 +115,18 @@ public class Gui {
 		frame.setVisible(true);
 	}
 
-	
+	private String askCalendarName() {
+		String calendarName = (String) JOptionPane.showInputDialog(frame,
+			    "Wie soll der Kalender heißen?",
+			    "Kalendername:",
+			    JOptionPane.QUESTION_MESSAGE);
+		
+		if(controller.isNameTaken()) {
+			JOptionPane.showMessageDialog(frame, "Name bereits vergeben", String.format("%s ist breits vergeben, veruche erneut.", calendarName), JOptionPane.ERROR_MESSAGE, null);
+			askCalendarName();
+		}else {
+			return calendarName;
+		}
+		
+	}
 }

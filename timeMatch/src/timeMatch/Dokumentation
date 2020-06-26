@@ -18,6 +18,12 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 21.06.2020 (12:40) (Beni): Gui wird jetzt mit WindowBuilder gemacht.
 21.06.2020 (20:10) (Beni): GUi weiterentwickelt.
 26.06.2020 (17:40) (Beni): Gui neu aufgesetzt. Bilder als Knöpfe.
+26.06.2020 (19:45) (Beni): ActionListener auf createButton.
+26.06.2020 (20:00) (Beni): String askCalendarName() erstellt. Fragt nach Namen und fragt, ob er bereits vergeben ist.
+26.06.2020 (20:00) (Beni): Klasse EditCalendarUi erstellt. Erschafft Frame, der einen Kalender bearbeiten kann.
+
+EditCalendar:
+26.06.2020 (21:10) (Beni): daysInput(), monthInput(), yearInput() erstellt. Erstellt popup-fenster mit input möglichkeit. Input wird in variable gespeichert.
 
 
 
