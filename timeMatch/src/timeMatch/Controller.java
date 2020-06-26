@@ -37,15 +37,15 @@ public class Controller {
         return "Fehler";
     }
     
-    public int match (String name1 , String name2) {
+    public int[] match (String name1 , String name2) { //du hast [] vergessen
     	Calendar a = Buch.get(name1);
-    	Calender b = Buch.get(name2);
+    	Calendar b = Buch.get(name2);
     	int [] agreement = new int[11];
 		for (int p=0; p<11; p++) {     
             agreement[p] = 0;
         }
     	for(int i=0;i<11;i++) {
-    		if (a==b && a==true) {
+    		if (a==b /*&& a==true*/) {  //zu testzwecken rauskommentiert
 				agreement[i] = 1;
 			}
     	}

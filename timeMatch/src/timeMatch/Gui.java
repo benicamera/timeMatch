@@ -9,12 +9,19 @@ import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Gui {
 
 	private JFrame frame;
 
+	final Controller controller;
+	
 	public Gui() {
+		controller = new Controller();
 		initialize();
 	}
 
@@ -27,36 +34,55 @@ public class Gui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowHeights = new int[]{66, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
+		
+		JLabel titleLabel = new JLabel("timeMatch!");
+		titleLabel.setForeground(new Color(221, 160, 221));
+		titleLabel.setBackground(new Color(240, 255, 240));
+		titleLabel.setFont(new Font("Rubik", Font.BOLD, 59));
+		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
+		gbc_titleLabel.gridwidth = 9;
+		gbc_titleLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_titleLabel.gridx = 0;
+		gbc_titleLabel.gridy = 0;
+		frame.getContentPane().add(titleLabel, gbc_titleLabel);
 		
 		JButton createButton = new JButton("");
 		createButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png")));
 		createButton.setToolTipText("Kalender erstellen");
 		GridBagConstraints gbc_createButton = new GridBagConstraints();
-		gbc_createButton.insets = new Insets(0, 0, 0, 5);
+		gbc_createButton.insets = new Insets(0, 0, 5, 5);
 		gbc_createButton.gridx = 0;
-		gbc_createButton.gridy = 3;
+		gbc_createButton.gridy = 1;
 		frame.getContentPane().add(createButton, gbc_createButton);
 		
 		JButton editButton = new JButton("");
 		editButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/editButtonIcon.png")));
 		editButton.setToolTipText("Kalender bearbeiten");
 		GridBagConstraints gbc_editButton = new GridBagConstraints();
-		gbc_editButton.insets = new Insets(0, 0, 0, 5);
+		gbc_editButton.insets = new Insets(0, 0, 5, 5);
 		gbc_editButton.gridx = 4;
-		gbc_editButton.gridy = 3;
+		gbc_editButton.gridy = 1;
 		frame.getContentPane().add(editButton, gbc_editButton);
 		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
 		btnNewButton.setToolTipText("suche Match");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton.gridx = 8;
-		gbc_btnNewButton.gridy = 3;
+		gbc_btnNewButton.gridy = 1;
 		frame.getContentPane().add(btnNewButton, gbc_btnNewButton);
+		
+		JLabel spaceLabel = new JLabel("");
+		GridBagConstraints gbc_spaceLabel = new GridBagConstraints();
+		gbc_spaceLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_spaceLabel.gridx = 0;
+		gbc_spaceLabel.gridy = 3;
+		frame.getContentPane().add(spaceLabel, gbc_spaceLabel);
 	}
 
 }
