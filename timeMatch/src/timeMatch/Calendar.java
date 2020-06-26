@@ -33,7 +33,7 @@ public class Calendar {
 	public int getTime(int i) {
 		return time [i];
 	}
-	public void createCalandar() {
+	public void createaCalandar() {
 		
 		
 	}
