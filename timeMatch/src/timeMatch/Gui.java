@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class Gui {
 
@@ -24,6 +28,10 @@ public class Gui {
 		controller = new Controller();
 		initialize();
 	}
+	
+	public void toTest(/*Parameters*/) {
+		controller.toTest(/*Parameters*/);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -33,9 +41,9 @@ public class Gui {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{66, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
@@ -44,7 +52,7 @@ public class Gui {
 		titleLabel.setBackground(new Color(240, 255, 240));
 		titleLabel.setFont(new Font("Rubik", Font.BOLD, 59));
 		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
-		gbc_titleLabel.gridwidth = 9;
+		gbc_titleLabel.gridwidth = 10;
 		gbc_titleLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_titleLabel.gridx = 0;
 		gbc_titleLabel.gridy = 0;
@@ -68,12 +76,19 @@ public class Gui {
 		gbc_editButton.gridy = 1;
 		frame.getContentPane().add(editButton, gbc_editButton);
 		
+		JLabel spaceLabel2 = new JLabel("");
+		GridBagConstraints gbc_spaceLabel2 = new GridBagConstraints();
+		gbc_spaceLabel2.insets = new Insets(0, 0, 5, 5);
+		gbc_spaceLabel2.gridx = 7;
+		gbc_spaceLabel2.gridy = 1;
+		frame.getContentPane().add(spaceLabel2, gbc_spaceLabel2);
+		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
 		btnNewButton.setToolTipText("suche Match");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 8;
+		gbc_btnNewButton.gridx = 9;
 		gbc_btnNewButton.gridy = 1;
 		frame.getContentPane().add(btnNewButton, gbc_btnNewButton);
 		
@@ -83,6 +98,8 @@ public class Gui {
 		gbc_spaceLabel.gridx = 0;
 		gbc_spaceLabel.gridy = 3;
 		frame.getContentPane().add(spaceLabel, gbc_spaceLabel);
+		frame.setVisible(true);
 	}
 
+	
 }
