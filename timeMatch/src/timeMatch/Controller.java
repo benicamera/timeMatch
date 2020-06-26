@@ -37,7 +37,19 @@ public class Controller {
         return "Fehler";
     }
     
-    public void match (Calendar a , Calendar b) {
+    public int match (String name1 , String name2) {
+    	Calendar a = Buch.get(name1);
+    	Calender b = Buch.get(name2);
+    	int [] agreement = new int[11];
+		for (int p=0; p<11; p++) {     
+            agreement[p] = 0;
+        }
+    	for(int i=0;i<11;i++) {
+    		if (a==b && a==true) {
+				agreement[i] = 1;
+			}
+    	}
+    	return agreement;
     }
     
     public Calendar getCalendar(String name) {
