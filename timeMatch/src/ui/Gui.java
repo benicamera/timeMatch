@@ -82,6 +82,12 @@ public class Gui {
 		frame.getContentPane().add(createButton, gbc_createButton);
 		
 		JButton editButton = new JButton("");
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object[] calendars = controller.getCalendarNameList.toArray();
+				new EditCalendarUi((String) JOptionPane.showInputDialog( frame, "Wähle den Kalender", "Kalender", JOptionPane.PLAIN_MESSAGE, null, calendars, "Kalender"), controller);
+			}
+		});
 		editButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/editButtonIcon.png")));
 		editButton.setToolTipText("Kalender bearbeiten");
 		GridBagConstraints gbc_editButton = new GridBagConstraints();

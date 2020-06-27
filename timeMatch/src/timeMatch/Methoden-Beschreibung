@@ -24,7 +24,7 @@ Controller: public ArrayList<Integer[size: 2]> getMatchingIntervalls() //Bitte d
 Controller: public boolean isNameTaken(String name) //im grunde das gleiche wie createCalendar, nur dass du keinen erstellst.
 (Done) Controller: public boolean isSchaltjahr(int year) //tu dich mit bernhard zusammen, vielleicht kann er das machen und du gibst nur weiter.
 Controller: public String deleteCalendar(String name) //löscht Kalender und gibt "erfolgreich" oder nicht zurück.
-
+Controller: public  ArrayList<String> getCalendarNameList() //gibt alle Kalendernamen in einer Liste zurück
 
 
 

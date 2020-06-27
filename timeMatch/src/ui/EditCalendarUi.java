@@ -86,6 +86,7 @@ public class EditCalendarUi extends JFrame{
 		JButton trashButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/wastebasket.png")));
 		trashButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich löschen?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
 					//JOptionPane.showMessageDialog(null, controller.deleteCalendar(calendarName));
 				}
