@@ -85,9 +85,17 @@ public class Gui {
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object[] calendars = controller.getCalendarNameList().toArray();
-				new EditCalendarUi((String) JOptionPane.showInputDialog( frame, "Wähle den Kalender", "Kalender", JOptionPane.PLAIN_MESSAGE, null, calendars, "Kalender"), controller);
+			if(calendars.length<1) {
+				
+			}else {
+				new EditCalendarUi((String) JOptionPane.showInputDialog( frame, "Wähle den Kalender", "Kalender", JOptionPane.PLAIN_MESSAGE, null, calendars, "Kalender"), controller);}
+			
 			}
 		});
+		private void createButtonAction(); {
+			
+			
+		}
 		editButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/editButtonIcon.png")));
 		editButton.setToolTipText("Kalender bearbeiten");
 		GridBagConstraints gbc_editButton = new GridBagConstraints();
@@ -119,6 +127,11 @@ public class Gui {
 		gbc_spaceLabel.gridy = 3;
 		frame.getContentPane().add(spaceLabel, gbc_spaceLabel);
 		frame.setVisible(true);
+	}
+
+	private void createButtonAction() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private String askCalendarName() {
