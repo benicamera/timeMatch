@@ -18,10 +18,10 @@ public class EditCalendarUi extends JFrame {
 	final Controller controller;
 	int year;
 	int day;
-	String month;
-	int monthSort;
+	int month;
+	int monthDays;
 	
-	Object[] months = {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"};
+	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 	Object[] days1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
 	Object[] days2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29};
 	Object[] days3 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
@@ -57,7 +57,7 @@ public class EditCalendarUi extends JFrame {
 	
 	private int dayInput() {
 		Objects[] days;
-		switch (monthSort) {
+		switch (monthDays) {
 		case 1:
 			days = (Objects[]) days1;
 			break;
@@ -83,54 +83,30 @@ public class EditCalendarUi extends JFrame {
 		}
 	}
 	
-	private String monthInput() {
-		String _month = (String)JOptionPane.showInputDialog( contentPane, "Wähle den Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
+	private int monthInput() {
+		int _month = (int)JOptionPane.showInputDialog( contentPane, "Wähle den Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
 		
-		switch (_month) {
-		case "Januar":
-			monthSort = 4;
-			break;
-		case "Februar":
-			if(controller.isSchaltjahr(year))
-				monthSort = 2;
-			else 
-				monthSort = 1;
-			break;
-		case "März":
-			monthSort = 4;
-			break;
-		case "April":
-			monthSort = 3;
-			break;
-		case "Mai":
-			monthSort = 4;
-			break;
-		case "Juni":
-			monthSort = 3;
-			break;
-		case "Juli":
-			monthSort = 4;
-			break;
-		case "August":
-			monthSort = 4;
-			break;
-		case "September":
-			monthSort = 3;
-			break;
-		case "Oktober":
-			monthSort = 4;
-			break;
-		case "November":
-			monthSort = 3;
-			break;
-		case "Dezember":
-			monthSort = 4;
-			break;
-			
-		default:
-			break;
+		if(_month < 8) {
+			if(_month%2 == 0) {
+				if(_month == 2) {
+					if(controller.isLeapYear(year))
+						monthDays = 29;
+					else 
+						monthDays = 28;
+				}else {
+					monthDays = 30;
+				}
+				}else {
+					monthDays = 31;
+				}	
+			}else {
+				if(_month%2 == 0) {
+					monthDays = 31;
+				}else {
+					monthDays = 30;
+				}
 		}
-		if(_month == null) {
+		if(_month < 1 || _month > 12) {
 			return monthInput();
 		}else {
 			
