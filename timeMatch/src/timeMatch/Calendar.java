@@ -74,6 +74,10 @@ public class Calendar {
 				calendar.put(_day, intervalls);	
 			}
 		}
+		System.out.println("-------");
+		for (int i = 0; i <calendar.get(_day).length; i++) {
+			System.out.print(calendar.get(_day)[i] + ", ");
+		}
 		
 	}
 	
@@ -82,8 +86,8 @@ public class Calendar {
 	        return true;
 	    } else {
 	        boolean first = intervalls[0];
-	        for (boolean element : intervalls) {
-	            if (element != first) {
+	        for (int i = 0; i < intervalls.length; i++) {
+	            if (intervalls[i] != first) {
 	                return false;
 	            }
 	        }
