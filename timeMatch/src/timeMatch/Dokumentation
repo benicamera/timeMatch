@@ -34,7 +34,7 @@ EditCalendar:
 20.06.2020 (14:05) (Beni): final testCalender erstellt. Es tut folgendes: Ermöglicht den Test von Calendar-Methoden durch die toTest-Methode.
 26.06.2020 (16:54) (Felix): Methoden hinzugefügt
 26.06.2020 (16:54) (Felix): HashMap hinzugefügt
-
+27.06.2020 (10:30) (Beni): boolean isLeapYear(int _year) erstellt. gibt isLeapYear(int _year) vom testCalendar zurück.
 
 
 
@@ -43,7 +43,7 @@ EditCalendar:
 -----------------
 ----CALENDAR:----
 20.06.2020 (14:38) (Bernhard): erstellung von arrays mit Variablen.
-
+27.06.2020 (10:30) (Beni): boolean isLeapYear(int _year) erstellt. Berechnet, ob es ein Schaltjahr ist.
 
 
 
