@@ -22,14 +22,15 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 26.06.2020 (20:00) (Beni): String askCalendarName() erstellt. Fragt nach Namen und fragt, ob er bereits vergeben ist.
 26.06.2020 (20:00) (Beni): Klasse EditCalendarUi erstellt. Erschafft Frame, der einen Kalender bearbeiten kann.
 27.06.2020 (18:30) (Beni): editButton mit EditCalendarUi verknüpft: Kalender auswählen und los gehts mit dem bearbeiten.
-27.06.2020 (20:00) (Bernhard): �nderung bei doppeltem Kalender Namen.
-27.06.2020 (20:40) (Bernhard): �nderung der Aufschrift auf den Kn�pfen.
+27.06.2020 (20:00) (Bernhard): �nderung bei doppeltem Kalender Namen.
+27.06.2020 (20:40) (Bernhard): �nderung der Aufschrift auf den Kn�pfen.
+
 EditCalendar:
 26.06.2020 (21:10) (Beni): daysInput(), monthInput(), yearInput() erstellt. Erstellt popup-fenster mit input möglichkeit. Input wird in variable gespeichert.
 27.06.2020 (11:30) (Beni): Angefangen, knöpfe zu positionieren.
 27.06.2020 (16:50) (Beni): initIntervallButtons() fertig gestellt. Positioniert Zeitknöpfe automatisch, egal, wie viele Intervalle es gibt..
 27.06.2020 (18:10) (Beni): okayButton hinzugefügt. schließt Fenster. trshButton konfiguriert: Fragt ob wirklich löschen, löscht und schließt das fenster.
-
+27.06.2020 (20:55) (Beni): ActionListener in eine andere Methode gemacht. Man kann jetzt einzeln drücken.
 
 -------------------
 ----CONTROLLER:----
