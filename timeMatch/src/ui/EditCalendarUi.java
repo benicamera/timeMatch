@@ -12,7 +12,7 @@ import timeMatch.Controller;
 import java.awt.GridBagLayout;
 import java.util.Objects;
 
-public class EditCalendarUi extends JFrame {
+public class EditCalendarUi extends JFrame{
 
 	private JPanel contentPane;
 	final Controller controller;
@@ -34,6 +34,7 @@ public class EditCalendarUi extends JFrame {
 		year = yearInput();
 		month = monthInput();
 		day = dayInput();
+		setTitle(String.format("%n.%n.%n", day, month, year));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -56,23 +57,23 @@ public class EditCalendarUi extends JFrame {
 	}
 	
 	private int dayInput() {
-		Objects[] days;
+		Object[] days;
 		switch (monthDays) {
-		case 1:
-			days = (Objects[]) days1;
+		case 28:
+			days = (Object[]) days1;
 			break;
-		case 2: 
-			days = (Objects[]) days2;
+		case 29: 
+			days = (Object[]) days2;
 			break;
-		case 3:
-			days = (Objects[]) days3;
+		case 30:
+			days = (Object[]) days3;
 			break;
-		case 4:
-			days = (Objects[]) days4;
+		case 31:
+			days = (Object[]) days4;
 			break;
 			
 		default:
-			days = (Objects[]) days4;
+			days = (Object[]) days4;
 			break;
 		}
 		day = (int) JOptionPane.showInputDialog( contentPane, "Wähle den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
@@ -85,27 +86,26 @@ public class EditCalendarUi extends JFrame {
 	
 	private int monthInput() {
 		int _month = (int)JOptionPane.showInputDialog( contentPane, "Wähle den Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
-		
-		if(_month < 8) {
-			if(_month%2 == 0) {
-				if(_month == 2) {
-					if(controller.isLeapYear(year))
-						monthDays = 29;
-					else 
-						monthDays = 28;
-				}else {
-					monthDays = 30;
-				}
-				}else {
-					monthDays = 31;
-				}	
-			}else {
+			if(_month < 8) {
 				if(_month%2 == 0) {
-					monthDays = 31;
+					if(_month == 2) {
+						if(controller.isLeapYear(year))
+							monthDays = 29;
+						else 
+							monthDays = 28;
+					}else {
+						monthDays = 30;
+					}
+					}else {
+						monthDays = 31;
+					}	
 				}else {
-					monthDays = 30;
-				}
-		}
+					if(_month%2 == 0) {
+						monthDays = 31;
+					}else {
+						monthDays = 30;
+					}
+			}
 		if(_month < 1 || _month > 12) {
 			return monthInput();
 		}else {
