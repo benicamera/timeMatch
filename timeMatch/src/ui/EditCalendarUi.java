@@ -132,7 +132,6 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 			
 			if(controller.getCalendar(calendarName).isFree(i, controller.getDayString(year, month, day))) {
 				buttonText = "Frei";
-				System.out.println(buttonText);
 			}else {
 				buttonText = "Belegt";
 			}
@@ -170,18 +169,22 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	}
 	
 	 public void actionPerformed (ActionEvent e){
+		 System.out.println("-----------");
 	        if(e.getSource() == intervallButtons[0]){
 	        	if(controller.getCalendar(calendarName).isFree(1, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(1, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
+					intervallButtons[0].setToolTipText("Als Frei markieren");
 					
 				}else {
 					controller.getCalendar(calendarName).setFree(1, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[0].setToolTipText("Als Belegt markieren");
 				}
-				intervallButtons[0].setText(buttonText);
-				intervallButtons[0].setToolTipText(String.format("als %s markieren", buttonText));
-	        
+	        	intervallButtons[0].setText(buttonText);
+				intervallButtons[0].setEnabled(false);
+				intervallButtons[0].setEnabled(true);
+
 			}else if(e.getSource() == intervallButtons[1]){
 				if(controller.getCalendar(calendarName).isFree(2, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(2, false, controller.getDayString(year, month, day));
@@ -192,7 +195,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 					buttonText = "Frei";
 				}
 				intervallButtons[1].setText(buttonText);
-				intervallButtons[1].setToolTipText(String.format("als %s markieren", buttonText));
+				intervallButtons[1].setEnabled(false);
+				intervallButtons[1].setEnabled(true);
 	        }
 	        else if (e.getSource() == intervallButtons[2]){
 	        	if(controller.getCalendar(calendarName).isFree(3, controller.getDayString(year, month, day))) {

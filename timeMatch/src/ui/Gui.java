@@ -1,16 +1,11 @@
 package ui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
-import java.awt.Panel;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-
 import timeMatch.Controller;
 
 import javax.swing.JLabel;
@@ -19,11 +14,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.util.concurrent.CompletableFuture.AsynchronousCompletionTask;
-import java.util.jar.Attributes.Name;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 public class Gui {
 

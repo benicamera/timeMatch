@@ -34,8 +34,10 @@ public class Calendar {
 	
 	public boolean isFree(int _time, String _day) {
 		if(!calendar.containsKey(_day)) {
+			System.out.println("free");
 			return true;
 		}
+		System.out.println(calendar.get(_day)[_time - 1]);
 		return calendar.get(_day)[_time - 1];
 	}
 	
