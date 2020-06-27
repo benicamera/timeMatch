@@ -15,7 +15,7 @@ public class Calendar {
 	
 	int numberOfIntervalls = 12;
 	
-	HashMap <String,Boolean[]> calendar = new HashMap<String, Boolean[]>();
+	HashMap <String,boolean[]> calendar = new HashMap<String, boolean[]>();
 	
 	public Calendar() {
 			
@@ -25,7 +25,7 @@ public class Calendar {
 		/*
 		 * Der String setzt sich nach dem Prinzip ddmmyyyy zusammen.
 		 */
-		Boolean[] intervalls = new Boolean[numberOfIntervalls];
+		boolean[] intervalls = new boolean[numberOfIntervalls];
 		for (int i = 0; i < numberOfIntervalls; i++) {
 			intervalls[i] = true;
 		}
@@ -40,7 +40,7 @@ public class Calendar {
 	}
 	
 	public void setFree(int _time, boolean _free, String _day) {
-		Boolean[] intervalls = new Boolean[numberOfIntervalls];
+		boolean[] intervalls = new boolean[numberOfIntervalls];
 		if(calendar.containsKey(_day)) {
 			intervalls = calendar.get(_day);
 			intervalls[_time-1] = _free;
@@ -58,7 +58,7 @@ public class Calendar {
 		
 	}
 	
-	public boolean allElementsTheSameBool(Boolean[] intervalls) {
+	public boolean allElementsTheSameBool(boolean[] intervalls) {
 	    if (intervalls.length == 0) {
 	        return true;
 	    } else {

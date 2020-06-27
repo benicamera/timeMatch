@@ -64,8 +64,7 @@ public class EditCalendarUi extends JFrame{
 		month = monthInput();
 		day = dayInput();
 		calendarName = name;
-		///numberOfIntervalls = controller.getCalendar(name).getNumberOfIntervalls();
-		numberOfIntervalls = 24;
+		numberOfIntervalls = controller.getCalendar(name).getNumberOfIntervalls();
 		intervallButtons = new JButton[numberOfIntervalls];
 		intervallLabels = new JLabel[numberOfIntervalls];
 		
@@ -98,7 +97,7 @@ public class EditCalendarUi extends JFrame{
 		
 		initIntervallButtons();
 	
-		trashButton.setToolTipText("Kalender löschen");
+		trashButton.setToolTipText("Kalender loeschen");
 		GridBagConstraints gbc_trashButton = new GridBagConstraints();
 		gbc_trashButton.insets = new Insets(0, 0, 5, 0);
 		gbc_trashButton.gridx = 13;
@@ -124,14 +123,14 @@ public class EditCalendarUi extends JFrame{
 	
 	private void initIntervallButtons() {
 		for (int i = 1; i <= numberOfIntervalls; i++) {
-			/*
-			if(controller.getCalendar(calendarName).isFree(i)) {
+			
+			if(controller.getCalendar(calendarName).isFree(i, controller.getDayString(year, month, day))) {
 				buttonText = "Frei";
-				
+				System.out.println(buttonText);
 			}else {
 				buttonText = "Belegt";
 			}
-			*/
+			
 			if(i%5 == 0) {
 				gridx = 1;
 				buttonGridy += 2;
@@ -142,7 +141,6 @@ public class EditCalendarUi extends JFrame{
 				gridx = (i%5) + 1;
 			}
 			globalI = i;
-			buttonText = String.format("%n", globalI);
 			intervallButtons[i-1] = new JButton(buttonText);
 			
 			intervallLabels[i-1] = new JLabel(intervallLabelBuilder(i));
@@ -153,33 +151,29 @@ public class EditCalendarUi extends JFrame{
 			gbc_btnNewButton.gridx = gridx;
 			gbc_btnNewButton.gridy = buttonGridy;
 			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", buttonText));
-			System.out.println(gbc_btnNewButton.gridy);
+			
 			contentPane.add(intervallButtons[i-1], gbc_btnNewButton);
 			
 			GridBagConstraints gbc_labels = new GridBagConstraints();
 			//gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_labels.gridx = gridx;
 			gbc_labels.gridy = textGridy;
-			System.out.println(gbc_labels);
-			System.out.println(intervallLabels[i-1].getText());
 			contentPane.add(intervallLabels[i-1], gbc_labels); 
 
-			
-			/*
 			intervallButtons[i-1].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(controller.getCalendar(calendarName).isFree(globalI)) {
-						controller.getCalendar(calendarName).setFree(globalI, false);
+					if(controller.getCalendar(calendarName).isFree(globalI, controller.getDayString(year, month, day))) {
+						controller.getCalendar(calendarName).setFree(globalI, false, controller.getDayString(year, month, day));
 						buttonText = "Belegt";
 						
 					}else {
-						controller.getCalendar(calendarName).setFree(globalI, true);
+						controller.getCalendar(calendarName).setFree(globalI, true, controller.getDayString(year, month, day));
 						buttonText = "Frei";
 					}
+					intervallButtons[globalI-1].setText(buttonText);
 					intervallButtons[globalI-1].setToolTipText(String.format("als %s markieren", buttonText));
 				}
 			});
-			*/
 		}
 	}
 	
@@ -223,7 +217,7 @@ public class EditCalendarUi extends JFrame{
 			days = (Object[]) days4;
 			break;
 		}
-		day = (int) JOptionPane.showInputDialog( contentPane, "Wähle den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
+		day = (int) JOptionPane.showInputDialog( contentPane, "Welcher den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
 		if(day == 0)
 			return dayInput();
 		else {
