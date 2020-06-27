@@ -38,6 +38,8 @@ public class EditCalendarUi extends JFrame{
 	int textGridy = 1;
 	int gridx = 1;
 	
+	int globalI;
+	
 	String buttonText;
 	String buttonToolTipString;
 	
@@ -61,7 +63,10 @@ public class EditCalendarUi extends JFrame{
 		month = monthInput();
 		day = dayInput();
 		calendarName = name;
-		numberOfIntervalls = controller.getCalendar(name).getNumberOfIntervalls();
+		///numberOfIntervalls = controller.getCalendar(name).getNumberOfIntervalls();
+		numberOfIntervalls = 12;
+		intervallButtons = new JButton[numberOfIntervalls];
+		intervallLabels = new JLabel[numberOfIntervalls];
 		initIntervallButtons();
 		setTitle(String.format("%s - %n.%n.%n",calendarName, day, month, year));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +85,7 @@ public class EditCalendarUi extends JFrame{
 		trashButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich löschen?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-					JOptionPane.showMessageDialog(null, controller.deleteCalendar(calendarName));
+					//JOptionPane.showMessageDialog(null, controller.deleteCalendar(calendarName));
 				}
 				if(!controller.isNameTaken(calendarName))
 					editFrame.dispatchEvent(new WindowEvent(editFrame, WindowEvent.WINDOW_CLOSING));
@@ -94,55 +99,63 @@ public class EditCalendarUi extends JFrame{
 		contentPane.add(trashButton, gbc_trashButton);	
 		editFrame.add(contentPane);
 		
-		for(int i = 1; i <= 12; i++) {
-		JLabel lblNewLabel = new JLabel(String.format("%nh-%nh", i+5, i+6));
-		if(controller.getCalendar(calendarName).isFree(1))
-			buttonText = "Frei";
-		else {
-			buttonText = "Belegt";
-		}
-		if(i < 5) {
-			gridx = 1;
-			buttonGridy += 2;
-			textGridy += 2;
-		}else {
-			gridx = i;
-		}
-		JButton btnNewButton = new JButton(buttonText);
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = gridx;
-		gbc_lblNewLabel.gridy = textGridy;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
-		
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = gridx;
-		gbc_btnNewButton.gridy = buttonGridy;
-		btnNewButton.setToolTipText(String.format("als %s markieren", buttonText));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(controller.getCalendar(calendarName).isFree(i)) {
-					controller.getCalendar(calendarName).setFree(i, false);
-					buttonText = "Belegt";
-					
-				}else {
-					controller.getCalendar(calendarName).setFree(i, true);
-					buttonText = "Frei";
-				}
-				btnNewButton.setToolTipText(String.format("als %s markieren", buttonText));
-			}
-		});
-		contentPane.add(btnNewButton, gbc_btnNewButton);
-		}
 		contentPane.setVisible(true);
 		
 	}
 	
 	private void initIntervallButtons() {
-		for (int i = 1; i <= 12; i++) {
-			intervallButtons[i-1] = new JButton();
+		for (int i = 1; i <= numberOfIntervalls; i++) {
+			/*
+			if(controller.getCalendar(calendarName).isFree(i)) {
+				buttonText = "Frei";
+				
+			}else {
+				buttonText = "Belegt";
+			}
+			*/
+			if(i < 5) {
+				gridx = 1;
+				buttonGridy += 2;
+				textGridy += 2;
+			}else {
+				gridx = i;
+			}
+			globalI = i;
+			buttonText = String.format("%n", globalI);
+			intervallButtons[i-1] = new JButton(buttonText);
 			
+			intervallLabels[i-1] = new JLabel(String.format("%nh-%nh", i+5, i+6));
+			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", buttonText));
+			
+			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel.gridx = gridx;
+			gbc_lblNewLabel.gridy = textGridy;
+			contentPane.add(intervallLabels[i-1], gbc_lblNewLabel);
+			
+			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+			gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+			gbc_btnNewButton.gridx = gridx;
+			gbc_btnNewButton.gridy = buttonGridy;
+			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", buttonText));
+			contentPane.add(intervallButtons[i-1], gbc_btnNewButton);
+			
+			
+			/*
+			intervallButtons[i-1].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(controller.getCalendar(calendarName).isFree(globalI)) {
+						controller.getCalendar(calendarName).setFree(globalI, false);
+						buttonText = "Belegt";
+						
+					}else {
+						controller.getCalendar(calendarName).setFree(globalI, true);
+						buttonText = "Frei";
+					}
+					intervallButtons[globalI-1].setToolTipText(String.format("als %s markieren", buttonText));
+				}
+			});
+			*/
 		}
 	}
 	
