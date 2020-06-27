@@ -86,7 +86,7 @@ public class Gui {
 			if(calendars.length<1) {
 				createButtonAction();
 			}else {
-				new EditCalendarUi((String) JOptionPane.showInputDialog( frame, "Wähle den Kalender", "Kalender", JOptionPane.PLAIN_MESSAGE, null, calendars, "Kalender"), controller);}
+				new EditCalendarUi((String) JOptionPane.showInputDialog( frame, "Bestimme den Kalender", "Kalender", JOptionPane.PLAIN_MESSAGE, null, calendars, "Kalender"), controller);}
 			
 			}
 		});
@@ -133,7 +133,7 @@ public class Gui {
 
 	private String askCalendarName() {
 		String calendarName = (String) JOptionPane.showInputDialog(frame,
-			    "Wie soll der Kalender heißen?",
+			    "Wie soll der Kalender heissen?",
 			    "Kalendername:",
 			    JOptionPane.QUESTION_MESSAGE);
 		
@@ -141,7 +141,7 @@ public class Gui {
 			JOptionPane.showMessageDialog(frame, "Name bereits vergeben", String.format("%s ist breits vergeben, veruche erneut.", calendarName), JOptionPane.ERROR_MESSAGE, null);
 			askCalendarName();
 		}else if(calendarName == null || calendarName == ""){
-			JOptionPane.showMessageDialog(frame, "Name ungültig", String.format("Name ist ungültig, veruche erneut."), JOptionPane.ERROR_MESSAGE, null);
+			JOptionPane.showMessageDialog(frame, "Name nicht werwendbar", String.format("Name ist nicht verwendbar, veruche erneut."), JOptionPane.ERROR_MESSAGE, null);
 			askCalendarName();
 			
 		}else
