@@ -28,6 +28,28 @@ public class Controller {
         testCalendar.toTest(/*insert Parameters*/);
     }
     
+    public String getDayString(int _year, int _month, int _day) {
+    	StringBuilder sb = new StringBuilder();  
+    	for(int i = 2; i > String.format("%d", _day).length(); i--) {
+    		sb.append("0");
+    	}
+    	sb.append(String.format("%d", _day));
+    	
+    	for(int i = 2; i > String.format("%d", _month).length(); i--) {
+    		sb.append("0");
+    	}
+    	sb.append(String.format("%d", _month));
+    	
+    	if(_year < 10000) {
+    	for(int i = 4; i > String.format("%d", _year).length(); i--) {
+    		sb.append("0");
+    	}
+    	}
+    	sb.append(String.format("%d", _year));
+    	
+    	return sb.toString();
+    }
+    
     public boolean isLeapYear(int _year) {
     	return testCalendar.isLeapYear(_year);
     }
