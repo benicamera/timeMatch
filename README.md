@@ -19,3 +19,5 @@ Eclipse mit GitHub verbinden:
 Im GitHub-Projekt auf "Clone or download" und Link kopieren.
 Dem Tutorial hier folgen. https://youtu.be/LPT7v69guVY?t=136 Step 5 und 6: Mach ich, also überspringt ihr das.
 Als Commit-Message schreiben wir immer die Neuheiten rein. Dass sollte dann so aussehen: "Klassenname: Änderung"
+
+Schaut euch das an ;-DDDDD : https://youtu.be/-5wpm-gesOY
