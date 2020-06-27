@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class EditCalendarUi extends JFrame{
@@ -27,6 +29,8 @@ public class EditCalendarUi extends JFrame{
 	int month;
 	int monthDays;
 	String calendarName;
+	
+	Frame editFrame = new Frame();
 	
 	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 	Object[] days1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
@@ -58,14 +62,19 @@ public class EditCalendarUi extends JFrame{
 		JButton trashButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/wastebasket.png")));
 		trashButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.deleteCalendar(calendarName);
+				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich löschen?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+					JOptionPane.showMessageDialog(null, controller.deleteCalendar(calendarName));
+				}
+				if(!controller.isNameTaken(calendarName))
+					editFrame.dispatchEvent(new WindowEvent(editFrame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 		trashButton.setToolTipText("Kalender löschen");
 		GridBagConstraints gbc_trashButton = new GridBagConstraints();
 		gbc_trashButton.gridx = 13;
 		gbc_trashButton.gridy = 0;
-		contentPane.add(trashButton, gbc_trashButton);
+		contentPane.add(trashButton, gbc_trashButton);	
+		editFrame.add(contentPane);
 		contentPane.setVisible(true);
 	}
 	
