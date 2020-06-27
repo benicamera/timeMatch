@@ -53,6 +53,7 @@ public class EditCalendarUi extends JFrame{
 	Object[] days2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29};
 	Object[] days3 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
 	Object[] days4 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+	private final JButton okayButton = new JButton("Okay");
 	
 	/**
 	 * Create the frame.
@@ -68,7 +69,7 @@ public class EditCalendarUi extends JFrame{
 		intervallButtons = new JButton[numberOfIntervalls];
 		intervallLabels = new JLabel[numberOfIntervalls];
 		
-		editFrame.setBounds(100, 100, 350, 300);
+		editFrame.setBounds(100, 100, 472, 300);
 		editFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		editFrame.setTitle(String.format("%s - %d.%d.%d",calendarName, day, month, year));
@@ -77,9 +78,9 @@ public class EditCalendarUi extends JFrame{
 		//setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JButton trashButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/wastebasket.png")));
@@ -89,7 +90,8 @@ public class EditCalendarUi extends JFrame{
 					//JOptionPane.showMessageDialog(null, controller.deleteCalendar(calendarName));
 				}
 				if(!controller.isNameTaken(calendarName))
-					editFrame.dispatchEvent(new WindowEvent(editFrame, WindowEvent.WINDOW_CLOSING));
+					editFrame.setVisible(false); //you can't see me!
+					editFrame.dispose(); //Destroy the JFrame object
 			}
 		});
 		
@@ -102,6 +104,18 @@ public class EditCalendarUi extends JFrame{
 		gbc_trashButton.gridy = 0;
 		contentPane.add(trashButton, gbc_trashButton);	
 		editFrame.getContentPane().add(contentPane);
+		
+		GridBagConstraints gbc_okayButton = new GridBagConstraints();
+		gbc_okayButton.gridx = 13;
+		gbc_okayButton.gridy = 7;
+		okayButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editFrame.setVisible(false); //you can't see me!
+				editFrame.dispose(); //Destroy the JFrame object
+			}
+		});
+		okayButton.setToolTipText("Bearbeitung beenden");
+		contentPane.add(okayButton, gbc_okayButton);
 		
 		contentPane.setVisible(true);
 		editFrame.setVisible(true);
@@ -130,7 +144,7 @@ public class EditCalendarUi extends JFrame{
 			buttonText = String.format("%n", globalI);
 			intervallButtons[i-1] = new JButton(buttonText);
 			
-			intervallLabels[i-1] = new JLabel(String.format("%dh-%dh", (i+(12 - (numberOfIntervalls/2 + 1))), (i+(12 - (numberOfIntervalls/2 )))));
+			intervallLabels[i-1] = new JLabel(intervallLabelBuilder(i));
 			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", buttonText));
 			
 			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -166,6 +180,18 @@ public class EditCalendarUi extends JFrame{
 			});
 			*/
 		}
+	}
+	
+	private String intervallLabelBuilder(int i) {
+		StringBuilder sb = new StringBuilder();  
+		if(numberOfIntervalls > 24) {
+			sb.append(String.format("%dh-", (i+(12 - (24/2 + 1)))));
+			sb.append(String.format("%dh", (i+(12 - (24/2)))));
+		}else {
+			sb.append(String.format("%dh-", (i+(12 - (numberOfIntervalls/2 + 1)))));
+			sb.append(String.format("%dh", (i+(12 - (numberOfIntervalls/2)))));
+		}
+		return sb.toString();
 	}
 	
 	private int yearInput() {
