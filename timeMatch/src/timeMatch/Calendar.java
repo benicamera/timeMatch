@@ -33,9 +33,22 @@ public class Calendar {
 	public int getTime(int i) {
 		return time [i];
 	}
-	public void createaCalandar() {
-		
-		
+	
+	public boolean isLeapYear(int _year) {
+		/*
+		 *     Schaltjahre müssen durch 4 teilbar sein.
+    Ist das Jahr auch durch 100 teilbar, ist es kein Schaltjahr, es sei denn...
+    ...das Jahr ist ebenfalls durch 400 teilbar – dann ist es ein Schaltjahr.
+		 */
+		if(_year%4 == 0) {
+			if(_year%100 == 0) {
+				if(_year%400 == 0)
+					return true;
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 	public void toTest(/* insert Parameters*/) {
 

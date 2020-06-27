@@ -25,7 +25,9 @@ public class Controller {
         testCalendar.toTest(/*insert Parameters*/);
     }
     
-    
+    public boolean isLeapYear(int _year) {
+    	return testCalendar.isLeapYear(_year);
+    }
     
     
     public String createCalendar (String name) {		//mit der methode ist es m�glich einen neuen Calendar in das Buch aufzunehmen
