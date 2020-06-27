@@ -189,10 +189,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				if(controller.getCalendar(calendarName).isFree(2, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(2, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[1].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(2, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[1].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[1].setText(buttonText);
 				intervallButtons[1].setEnabled(false);
@@ -202,10 +203,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(3, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(3, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[2].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(3, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[2].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[2].setText(buttonText);
 				intervallButtons[2].setToolTipText(String.format("als %s markieren", buttonText));
@@ -214,10 +216,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(4, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(4, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[3].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(4, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[3].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[3].setText(buttonText);
 				intervallButtons[3].setToolTipText(String.format("als %s markieren", buttonText));
@@ -226,10 +229,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(5, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(5, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[4].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(5, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[4].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[4].setText(buttonText);
 				intervallButtons[4].setToolTipText(String.format("als %s markieren", buttonText));
@@ -238,10 +242,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(6, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(6, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[5].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(6, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[5].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[5].setText(buttonText);
 				intervallButtons[5].setToolTipText(String.format("als %s markieren", buttonText));
@@ -250,10 +255,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(7, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(7, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[6].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(7, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[6].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[6].setText(buttonText);
 				intervallButtons[6].setToolTipText(String.format("als %s markieren", buttonText));
@@ -262,10 +268,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(8, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(8, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[7].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(8, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[7].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[7].setText(buttonText);
 				intervallButtons[7].setToolTipText(String.format("als %s markieren", buttonText));
@@ -274,10 +281,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(9, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(9, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[8].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(9, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[8].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[8].setText(buttonText);
 				intervallButtons[8].setToolTipText(String.format("als %s markieren", buttonText));
@@ -286,10 +294,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(10, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(10, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[9].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(10, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[9].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[9].setText(buttonText);
 				intervallButtons[9].setToolTipText(String.format("als %s markieren", buttonText));
@@ -298,10 +307,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(11, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(11, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[10].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(11, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[10].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[10].setText(buttonText);
 				intervallButtons[10].setToolTipText(String.format("als %s markieren", buttonText));
@@ -310,10 +320,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        	if(controller.getCalendar(calendarName).isFree(12, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(12, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
-					
+					intervallButtons[11].setToolTipText("Als Frei markieren");
 				}else {
 					controller.getCalendar(calendarName).setFree(12, true, controller.getDayString(year, month, day));
 					buttonText = "Frei";
+					intervallButtons[11].setToolTipText("Als Belegt markieren");
 				}
 				intervallButtons[11].setText(buttonText);
 				intervallButtons[11].setToolTipText(String.format("als %s markieren", buttonText));
