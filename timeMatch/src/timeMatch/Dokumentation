@@ -38,7 +38,7 @@ EditCalendar:
 26.06.2020 (16:54) (Felix): HashMap hinzugefügt
 27.06.2020 (10:30) (Beni): boolean isLeapYear(int _year) erstellt. gibt isLeapYear(int _year) vom testCalendar zurück.
 27.06.2020 (11:00) (Beni): boolean isNameTaken(String _calendarName) erstellt. Schaut, ob bereits ein Kalender mit dem Namen existiert.
-
+27.06.2020 (18:30) (Beni): public  ArrayList<String> getCalendarNameList() erstellt. Gibt alle Namen der Kalender in einer Liste wieder.
 
 
 

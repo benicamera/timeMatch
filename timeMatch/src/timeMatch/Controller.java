@@ -1,5 +1,7 @@
 package timeMatch;
 
+import java.util.ArrayList;
+
 /*
  * Verrechnet und vergleicht
  * 
@@ -11,6 +13,7 @@ package timeMatch;
  */
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Controller {
     final Calendar testCalendar;
@@ -27,6 +30,11 @@ public class Controller {
     
     public boolean isLeapYear(int _year) {
     	return testCalendar.isLeapYear(_year);
+    }
+    public  ArrayList<String> getCalendarNameList(){
+    	List<String> names = new ArrayList<String>();
+    	names.addAll(calendarRegister.keySet());
+    	return (ArrayList<String>) names;
     }
     
     public boolean isNameTaken(String _calendarName) {

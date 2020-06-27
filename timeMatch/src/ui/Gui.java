@@ -84,7 +84,7 @@ public class Gui {
 		JButton editButton = new JButton("");
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object[] calendars = controller.getCalendarNameList.toArray();
+				Object[] calendars = controller.getCalendarNameList().toArray();
 				new EditCalendarUi((String) JOptionPane.showInputDialog( frame, "Wähle den Kalender", "Kalender", JOptionPane.PLAIN_MESSAGE, null, calendars, "Kalender"), controller);
 			}
 		});
