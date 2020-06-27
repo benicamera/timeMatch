@@ -124,9 +124,12 @@ public class Gui {
 		if(controller.isNameTaken(calendarName)) {
 			JOptionPane.showMessageDialog(frame, "Name bereits vergeben", String.format("%s ist breits vergeben, veruche erneut.", calendarName), JOptionPane.ERROR_MESSAGE, null);
 			askCalendarName();
-		}else {
+		}else if(calendarName == null || calendarName == ""){
+			JOptionPane.showMessageDialog(frame, "Name ungültig", String.format("Name ist ungültig, veruche erneut."), JOptionPane.ERROR_MESSAGE, null);
+			askCalendarName();
+			
+		}else
 			return calendarName;
-		}
 		return calendarName;
 	}
 }

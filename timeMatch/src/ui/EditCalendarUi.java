@@ -32,7 +32,7 @@ public class EditCalendarUi extends JFrame{
 	int monthDays;
 	String calendarName;
 	
-	Frame editFrame = new Frame();
+	JFrame editFrame = new JFrame();
 	
 	int buttonGridy = 2;
 	int textGridy = 1;
@@ -64,13 +64,14 @@ public class EditCalendarUi extends JFrame{
 		day = dayInput();
 		calendarName = name;
 		///numberOfIntervalls = controller.getCalendar(name).getNumberOfIntervalls();
-		numberOfIntervalls = 12;
+		numberOfIntervalls = 24;
 		intervallButtons = new JButton[numberOfIntervalls];
 		intervallLabels = new JLabel[numberOfIntervalls];
-		initIntervallButtons();
-		setTitle(String.format("%s - %n.%n.%n",calendarName, day, month, year));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		
+		editFrame.setBounds(100, 100, 350, 300);
+		editFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		editFrame.setTitle(String.format("%s - %d.%d.%d",calendarName, day, month, year));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		//setContentPane(contentPane);
@@ -91,16 +92,19 @@ public class EditCalendarUi extends JFrame{
 					editFrame.dispatchEvent(new WindowEvent(editFrame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
+		
+		initIntervallButtons();
+	
 		trashButton.setToolTipText("Kalender löschen");
 		GridBagConstraints gbc_trashButton = new GridBagConstraints();
 		gbc_trashButton.insets = new Insets(0, 0, 5, 0);
 		gbc_trashButton.gridx = 13;
 		gbc_trashButton.gridy = 0;
 		contentPane.add(trashButton, gbc_trashButton);	
-		editFrame.add(contentPane);
+		editFrame.getContentPane().add(contentPane);
 		
 		contentPane.setVisible(true);
-		
+		editFrame.setVisible(true);
 	}
 	
 	private void initIntervallButtons() {
@@ -113,33 +117,38 @@ public class EditCalendarUi extends JFrame{
 				buttonText = "Belegt";
 			}
 			*/
-			if(i < 5) {
+			if(i%5 == 0) {
 				gridx = 1;
 				buttonGridy += 2;
 				textGridy += 2;
+			}else if(i < 5){
+				gridx = (i%5);
 			}else {
-				gridx = i;
+				gridx = (i%5) + 1;
 			}
 			globalI = i;
 			buttonText = String.format("%n", globalI);
 			intervallButtons[i-1] = new JButton(buttonText);
 			
-			intervallLabels[i-1] = new JLabel(String.format("%nh-%nh", i+5, i+6));
+			intervallLabels[i-1] = new JLabel(String.format("%dh-%dh", (i+(12 - (numberOfIntervalls/2 + 1))), (i+(12 - (numberOfIntervalls/2 )))));
 			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", buttonText));
-			
-			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel.gridx = gridx;
-			gbc_lblNewLabel.gridy = textGridy;
-			contentPane.add(intervallLabels[i-1], gbc_lblNewLabel);
 			
 			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 			gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 			gbc_btnNewButton.gridx = gridx;
 			gbc_btnNewButton.gridy = buttonGridy;
 			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", buttonText));
+			System.out.println(gbc_btnNewButton.gridy);
 			contentPane.add(intervallButtons[i-1], gbc_btnNewButton);
 			
+			GridBagConstraints gbc_labels = new GridBagConstraints();
+			//gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_labels.gridx = gridx;
+			gbc_labels.gridy = textGridy;
+			System.out.println(gbc_labels);
+			System.out.println(intervallLabels[i-1].getText());
+			contentPane.add(intervallLabels[i-1], gbc_labels); 
+
 			
 			/*
 			intervallButtons[i-1].addActionListener(new ActionListener() {
