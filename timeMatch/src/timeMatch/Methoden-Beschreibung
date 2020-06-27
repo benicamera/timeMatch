@@ -22,7 +22,7 @@ Controller: public Calender getCalender(String name)
 Controller: public ArrayList<Integer[size: 2]> getMatchingIntervalls() //Bitte die Syntax von der Liste Checken. Integer[0] ist start des Intervalls und Integer[1] das Ende.
 Controller: public boolean isNameTaken(String name) //im grunde das gleiche wie createCalendar, nur dass du keinen erstellst.
 (Done) Controller: public boolean isSchaltjahr(int year) //tu dich mit bernhard zusammen, vielleicht kann er das machen und du gibst nur weiter.
-
+Controller: public String deleteCalendar(String name) //löscht Kalender und gibt "erfolgreich" oder nicht zurück.
 
 
 

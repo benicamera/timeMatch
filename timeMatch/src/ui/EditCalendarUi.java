@@ -12,6 +12,12 @@ import timeMatch.Controller;
 import java.awt.GridBagLayout;
 import java.util.Objects;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.GridBagConstraints;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class EditCalendarUi extends JFrame{
 
 	private JPanel contentPane;
@@ -20,6 +26,7 @@ public class EditCalendarUi extends JFrame{
 	int day;
 	int month;
 	int monthDays;
+	String calendarName;
 	
 	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 	Object[] days1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
@@ -34,18 +41,32 @@ public class EditCalendarUi extends JFrame{
 		year = yearInput();
 		month = monthInput();
 		day = dayInput();
-		setTitle(String.format("%n.%n.%n", day, month, year));
+		calendarName = name;
+		setTitle(String.format("%s - %n.%n.%n",calendarName, day, month, year));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0};
-		gbl_contentPane.rowHeights = new int[]{0};
-		gbl_contentPane.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
+		
+		JButton trashButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/wastebasket.png")));
+		trashButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.deleteCalendar(calendarName);
+			}
+		});
+		trashButton.setToolTipText("Kalender löschen");
+		GridBagConstraints gbc_trashButton = new GridBagConstraints();
+		gbc_trashButton.gridx = 13;
+		gbc_trashButton.gridy = 0;
+		contentPane.add(trashButton, gbc_trashButton);
+		contentPane.setVisible(true);
 	}
 	
 	private int yearInput() {
