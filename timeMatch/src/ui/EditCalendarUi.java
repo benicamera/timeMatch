@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.ActiveEvent;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
@@ -22,8 +23,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Insets;
 
-public class EditCalendarUi extends JFrame{
 
+public class EditCalendarUi extends JFrame implements ActionListener{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	final Controller controller;
 	int year;
@@ -86,7 +92,7 @@ public class EditCalendarUi extends JFrame{
 		trashButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich löschen?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich vernichten?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
 					//JOptionPane.showMessageDialog(null, controller.deleteCalendar(calendarName));
 				}
 				if(!controller.isNameTaken(calendarName))
@@ -142,7 +148,7 @@ public class EditCalendarUi extends JFrame{
 			}
 			globalI = i;
 			intervallButtons[i-1] = new JButton(buttonText);
-			
+			intervallButtons[i-1].addActionListener((ActionListener) this);
 			intervallLabels[i-1] = new JLabel(intervallLabelBuilder(i));
 			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", buttonText));
 			
@@ -159,23 +165,157 @@ public class EditCalendarUi extends JFrame{
 			gbc_labels.gridx = gridx;
 			gbc_labels.gridy = textGridy;
 			contentPane.add(intervallLabels[i-1], gbc_labels); 
-
-			intervallButtons[i-1].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if(controller.getCalendar(calendarName).isFree(globalI, controller.getDayString(year, month, day))) {
-						controller.getCalendar(calendarName).setFree(globalI, false, controller.getDayString(year, month, day));
-						buttonText = "Belegt";
-						
-					}else {
-						controller.getCalendar(calendarName).setFree(globalI, true, controller.getDayString(year, month, day));
-						buttonText = "Frei";
-					}
-					intervallButtons[globalI-1].setText(buttonText);
-					intervallButtons[globalI-1].setToolTipText(String.format("als %s markieren", buttonText));
-				}
-			});
+			
 		}
 	}
+	
+	 public void actionPerformed (ActionEvent e){
+	        if(e.getSource() == intervallButtons[0]){
+	        	if(controller.getCalendar(calendarName).isFree(1, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(1, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(1, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[0].setText(buttonText);
+				intervallButtons[0].setToolTipText(String.format("als %s markieren", buttonText));
+	        
+			}else if(e.getSource() == intervallButtons[1]){
+				if(controller.getCalendar(calendarName).isFree(2, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(2, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(2, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[1].setText(buttonText);
+				intervallButtons[1].setToolTipText(String.format("als %s markieren", buttonText));
+	        }
+	        else if (e.getSource() == intervallButtons[2]){
+	        	if(controller.getCalendar(calendarName).isFree(3, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(3, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(3, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[2].setText(buttonText);
+				intervallButtons[2].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[3]){
+	        	if(controller.getCalendar(calendarName).isFree(4, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(4, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(4, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[3].setText(buttonText);
+				intervallButtons[3].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[4]){
+	        	if(controller.getCalendar(calendarName).isFree(5, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(5, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(5, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[4].setText(buttonText);
+				intervallButtons[4].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[5]){
+	        	if(controller.getCalendar(calendarName).isFree(6, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(6, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(6, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[5].setText(buttonText);
+				intervallButtons[5].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[6]){
+	        	if(controller.getCalendar(calendarName).isFree(7, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(7, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(7, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[6].setText(buttonText);
+				intervallButtons[6].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[7]){
+	        	if(controller.getCalendar(calendarName).isFree(8, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(8, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(8, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[7].setText(buttonText);
+				intervallButtons[7].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[8]){
+	        	if(controller.getCalendar(calendarName).isFree(9, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(9, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(9, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[8].setText(buttonText);
+				intervallButtons[8].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[9]){
+	        	if(controller.getCalendar(calendarName).isFree(10, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(10, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(10, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[9].setText(buttonText);
+				intervallButtons[9].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[10]){
+	        	if(controller.getCalendar(calendarName).isFree(11, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(11, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(11, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[10].setText(buttonText);
+				intervallButtons[10].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }else if (e.getSource() == intervallButtons[11]){
+	        	if(controller.getCalendar(calendarName).isFree(12, controller.getDayString(year, month, day))) {
+					controller.getCalendar(calendarName).setFree(12, false, controller.getDayString(year, month, day));
+					buttonText = "Belegt";
+					
+				}else {
+					controller.getCalendar(calendarName).setFree(12, true, controller.getDayString(year, month, day));
+					buttonText = "Frei";
+				}
+				intervallButtons[11].setText(buttonText);
+				intervallButtons[11].setToolTipText(String.format("als %s markieren", buttonText));
+	            
+	        }
+	    }
 	
 	private String intervallLabelBuilder(int i) {
 		StringBuilder sb = new StringBuilder();  
@@ -226,7 +366,7 @@ public class EditCalendarUi extends JFrame{
 	}
 	
 	private int monthInput() {
-		int _month = (int)JOptionPane.showInputDialog( contentPane, "Wähle den Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
+		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
 			if(_month < 8) {
 				if(_month%2 == 0) {
 					if(_month == 2) {
