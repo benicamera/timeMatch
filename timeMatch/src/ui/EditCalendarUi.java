@@ -171,6 +171,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	 public void actionPerformed (ActionEvent e){
 		 System.out.println("-----------");
 	        if(e.getSource() == intervallButtons[0]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+	        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(1, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(1, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -186,6 +188,9 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[0].setEnabled(true);
 
 			}else if(e.getSource() == intervallButtons[1]){
+				if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+	        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
+				
 				if(controller.getCalendar(calendarName).isFree(2, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(2, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -200,6 +205,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[1].setEnabled(true);
 	        }
 	        else if (e.getSource() == intervallButtons[2]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(3, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(3, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -214,6 +221,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[2].setEnabled(true);
 	            
 	        }else if (e.getSource() == intervallButtons[3]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(4, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(4, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -228,6 +237,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[3].setEnabled(true);
 	            
 	        }else if (e.getSource() == intervallButtons[4]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(5, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(5, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -242,6 +253,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[4].setEnabled(true);
 	            
 	        }else if (e.getSource() == intervallButtons[5]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(6, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(6, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -256,6 +269,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[5].setEnabled(true);
 	            
 	        }else if (e.getSource() == intervallButtons[6]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(7, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(7, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -270,6 +285,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[5].setEnabled(true);
 	            
 	        }else if (e.getSource() == intervallButtons[7]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(8, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(8, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -284,6 +301,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[7].setEnabled(true);
 	            
 	        }else if (e.getSource() == intervallButtons[8]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(9, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(9, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -298,6 +317,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[8].setEnabled(true);
 	            
 	        }else if (e.getSource() == intervallButtons[9]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+	        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(10, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(10, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -311,7 +332,9 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[9].setEnabled(false);
 				intervallButtons[9].setEnabled(true);
 	            
-	        }else if (e.getSource() == intervallButtons[10]){
+	        }else  if (e.getSource() == intervallButtons[10]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(11, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(11, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";
@@ -326,6 +349,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[10].setEnabled(true);
 	            
 	        }else if (e.getSource() == intervallButtons[11]){
+	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+        			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
 	        	if(controller.getCalendar(calendarName).isFree(12, controller.getDayString(year, month, day))) {
 					controller.getCalendar(calendarName).setFree(12, false, controller.getDayString(year, month, day));
 					buttonText = "Belegt";

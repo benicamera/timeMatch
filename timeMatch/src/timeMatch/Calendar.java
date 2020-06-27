@@ -21,7 +21,7 @@ public class Calendar {
 			
 	}
 	
-	private void summonDay(String _day) {
+	public void summonDay(String _day) {
 		/*
 		 * Der String setzt sich nach dem Prinzip ddmmyyyy zusammen.
 		 */
@@ -55,6 +55,9 @@ public class Calendar {
 		return _intervalls[time];
 	}
 	
+	public boolean isLoaded(String _day) {
+		return calendar.containsKey(_day);
+	}
 	public void setFree(int _time, boolean _free, String _day) {
 		int time = _time - 1;
 		boolean[] intervalls = new boolean[numberOfIntervalls];
