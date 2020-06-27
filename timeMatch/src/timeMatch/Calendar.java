@@ -1,5 +1,7 @@
 package timeMatch;
 
+import java.util.HashMap;
+
 /*
  * Speichert daten der Zeitintervalle
  * 
@@ -10,30 +12,72 @@ package timeMatch;
  */
 
 public class Calendar {
-	private int x1 = 1;
-	private int x2 = 1;
-	private int x3 = 0;
-	private int x4 = 0;
-	private int x5 = 1;
-	private int x6 = 0;
-	private int x7 = 1;
-	private int x8 = 1;
-	private int x9 = 0;
-	private int x10 = 1;
-	private int x11 = 1;
-	private int x12 = 1;
+	
+	int numberOfIntervalls = 12;
+	
 
-	int [] time = {x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12};
+	
+	HashMap <String,Boolean[]> calendar = new HashMap<String, Boolean[]>();
 	
 	public Calendar() {
 		
-
+		
 		
 	}
-	public int getTime(int i) {
-		return time [i];
+	
+	private void summonDay(String _day) {
+		/*
+		 * Der String setzt sich nach dem Prinzip ddmmyyyy zusammen.
+		 */
+		Boolean[] intervalls = new Boolean[numberOfIntervalls];
+		for (int i = 0; i < numberOfIntervalls; i++) {
+			intervalls[i] = true;
+		}
+		calendar.put(_day, intervalls);	
+	}
+	public boolean isFree(int _time, String _day) {
+		if(!calendar.containsKey(_day)) {
+			return true;
+		}
+		return calendar.get(_day)[_time - 1];
 	}
 	
+	public void setFree(int _time, boolean _free, String _day) {
+		Boolean[] intervalls = new Boolean[numberOfIntervalls];
+		if(calendar.containsKey(_day)) {
+			intervalls = calendar.get(_day);
+			intervalls[_time] = _free;
+			if(allElementsTheSameBool(intervalls) && _free)
+				calendar.remove(_day);
+			else
+			calendar.put(_day, intervalls);	
+		}else {
+			if(!_free) {
+				summonDay(_day);
+				intervalls[_time] = _free;
+				calendar.put(_day, intervalls);	
+			}
+		}
+		
+	}
+	
+	public boolean allElementsTheSameBool(Boolean[] intervalls) {
+	    if (intervalls.length == 0) {
+	        return true;
+	    } else {
+	        boolean first = intervalls[0];
+	        for (boolean element : intervalls) {
+	            if (element != first) {
+	                return false;
+	            }
+	        }
+	        return true;
+	    }
+	}
+	
+	public int getNumberOfIntervalls() {
+		return numberOfIntervalls;
+	}
 	public boolean isLeapYear(int _year) {
 		/*
 		 *     Schaltjahre müssen durch 4 teilbar sein.

@@ -13,9 +13,9 @@ Später soll es so sein, dass ich bernhard jahr monat und tag gebe. bitte schalt
 
 Calendar: public String insertDate(Boolean[size: 12]) //Setze den Array als Neuen "Kann oder kann nicht". Leer ist true.
           return-Optionen: "Erfolgreich", "Fehler"
-Calendar: public boolean isFree(int time)
-Calendar: public void setFree(int time, boolean free) //belege oder mach frei. true = frei false = belegt.
-Calendar: public int getNumberOfIntervalls() //gibt einfach die Anzahl der Intervalle zurück -> besser erweiterung und Debug möglichkeiten.
+(done) Calendar: public boolean isFree(int time)
+(done) Calendar: public void setFree(int time, boolean free) //belege oder mach frei. true = frei false = belegt.
+(done) Calendar: public int getNumberOfIntervalls() //gibt einfach die Anzahl der Intervalle zurück -> besser erweiterung und Debug möglichkeiten.
 
 Controller: public String createCalender(String name) //Speichere den namen als Key und den Kalender als Value in einer HashMap(https://www.youtube.com/watch?v=70qy6_gw1Hc)
 			return-Optionen: "Erfolgreich", "Fehler", "Name bereits vergeben"
