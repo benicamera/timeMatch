@@ -121,12 +121,12 @@ public class Gui {
 			    "Kalendername:",
 			    JOptionPane.QUESTION_MESSAGE);
 		
-		if(controller.isNameTaken()) {
+		if(controller.isNameTaken(calendarName)) {
 			JOptionPane.showMessageDialog(frame, "Name bereits vergeben", String.format("%s ist breits vergeben, veruche erneut.", calendarName), JOptionPane.ERROR_MESSAGE, null);
 			askCalendarName();
 		}else {
 			return calendarName;
 		}
-		
+		return calendarName;
 	}
 }
