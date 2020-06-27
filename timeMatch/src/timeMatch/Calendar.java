@@ -15,14 +15,10 @@ public class Calendar {
 	
 	int numberOfIntervalls = 12;
 	
-
-	
 	HashMap <String,Boolean[]> calendar = new HashMap<String, Boolean[]>();
 	
 	public Calendar() {
-		
-		
-		
+			
 	}
 	
 	private void summonDay(String _day) {
@@ -35,6 +31,7 @@ public class Calendar {
 		}
 		calendar.put(_day, intervalls);	
 	}
+	
 	public boolean isFree(int _time, String _day) {
 		if(!calendar.containsKey(_day)) {
 			return true;
