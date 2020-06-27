@@ -43,7 +43,7 @@ public class Calendar {
 		Boolean[] intervalls = new Boolean[numberOfIntervalls];
 		if(calendar.containsKey(_day)) {
 			intervalls = calendar.get(_day);
-			intervalls[_time] = _free;
+			intervalls[_time-1] = _free;
 			if(allElementsTheSameBool(intervalls) && _free)
 				calendar.remove(_day);
 			else
@@ -51,7 +51,7 @@ public class Calendar {
 		}else {
 			if(!_free) {
 				summonDay(_day);
-				intervalls[_time] = _free;
+				intervalls[_time-1] = _free;
 				calendar.put(_day, intervalls);	
 			}
 		}
