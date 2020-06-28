@@ -3,6 +3,7 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -37,10 +38,12 @@ public class ShowCalendarsUi extends JFrame {
 	final Controller controller;
 	JFrame showFrame = new JFrame();
 	JList<String> list;
+	DefaultListModel<String> model = new DefaultListModel<>();
+
 	public ShowCalendarsUi(Controller _controller) {
 		controller = _controller;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		showFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		showFrame.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,7 +65,7 @@ public class ShowCalendarsUi extends JFrame {
 		gbc_calendarListLabel.gridy = 2;
 		contentPane.add(calendarListLabel, gbc_calendarListLabel);
 		
-		list = new JList<String>();
+		list = new JList<String>(model);
 		list.setVisibleRowCount(8);
 		
 		initList(list);
@@ -91,7 +94,7 @@ public class ShowCalendarsUi extends JFrame {
 	
 	private void initList(JList<String> list) {
 		if(controller.getCalendarNameList().size() <= 0) {
-			list.add("Keine Kalender gefunden.", null);
+			model.addElement("Keine Kalender gefunden.");
 			JOptionPane.showMessageDialog(showFrame, "Keine Kalender gefunden.");
 			showFrame.setVisible(false); //you can't see me!
 			showFrame.dispose(); //Destroy the JFrame object
@@ -99,7 +102,9 @@ public class ShowCalendarsUi extends JFrame {
 		}
 			
 		for(String elementString : controller.getCalendarNameList()) {
-			list.add(elementString, null);
+			model.addElement(elementString);
+			
+			//list.add(elementString, null);
 			
 		}
 	}
@@ -118,7 +123,7 @@ public class ShowCalendarsUi extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich vernichten?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-					JOptionPane.showMessageDialog(showFrame, controller.delete(calendarNameString));
+					//JOptionPane.showMessageDialog(showFrame, controller.delete(calendarNameString));
 				}
 				
 				if(!controller.isNameTaken(calendarNameString)) {

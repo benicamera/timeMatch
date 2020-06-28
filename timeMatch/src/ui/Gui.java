@@ -90,7 +90,14 @@ public class Gui {
 		gbc_editButton.gridy = 1;
 		frame.getContentPane().add(editButton, gbc_editButton);
 		
-		JButton showButton = new JButton("");
+		JButton showButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/showButtonIcon.png")));
+		showButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			ShowCalendarsUi showuiCalendarsUi = new ShowCalendarsUi(controller);
+			System.out.println("show erstellt");
+			}
+		});
+		//showButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/showButtonIcon.png")));
 		GridBagConstraints gbc_showButton = new GridBagConstraints();
 		gbc_showButton.insets = new Insets(0, 0, 5, 5);
 		gbc_showButton.gridx = 5;
