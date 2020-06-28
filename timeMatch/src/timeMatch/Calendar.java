@@ -1,5 +1,6 @@
 package timeMatch;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /*
@@ -11,7 +12,8 @@ import java.util.HashMap;
  * 
  */
 
-public class Calendar {
+@SuppressWarnings("serial")
+public class Calendar implements Serializable{
 	
 	int numberOfIntervalls = 12;
 	
