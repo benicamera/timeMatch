@@ -23,12 +23,16 @@ import java.awt.GridBagConstraints;
 import javax.swing.JScrollBar;
 import java.awt.Insets;
 import java.awt.Scrollbar;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JScrollPane;
 import java.awt.List;
+import java.awt.MouseInfo;
 import java.awt.Font;
 import java.awt.Color;
 
@@ -70,14 +74,16 @@ public class ShowCalendarsUi extends JFrame {
 		
 		initList(list);
 		
-		list.addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				showPopUpMenu();
-			}
-		});
+		MouseListener mouseListener = new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		        if (e.getClickCount() == 1 || e.getClickCount() == 2) {
+		           String selectedItem = (String) list.getSelectedValue();
+		           showPopUpMenu(selectedItem);
+		         }
+		    }
+		};
+		
+		list.addMouseListener(mouseListener);
 		GridBagConstraints gbc_list = new GridBagConstraints();
 		gbc_list.ipady = 100;
 		gbc_list.ipadx = 100;
@@ -109,11 +115,12 @@ public class ShowCalendarsUi extends JFrame {
 		}
 	}
 	
-	private void showPopUpMenu() {
-		String[] calendarNameArray = (String[]) controller.getCalendarNameList().toArray();
-		final String calendarNameString = calendarNameArray[list.getSelectedIndex()];
+	private void showPopUpMenu(String selectedItem) {
 		
-		JPopupMenu menu = new JPopupMenu();
+		System.out.println("popUp aufgerufen");
+		final String calendarNameString = selectedItem;
+		
+		final JPopupMenu menu = new JPopupMenu(calendarNameString);
 		JMenuItem deleteItem = new JMenuItem("Vernichten");
 		JMenuItem editItem = new JMenuItem("Bearbeiten");
 		
@@ -127,6 +134,7 @@ public class ShowCalendarsUi extends JFrame {
 				}
 				
 				if(!controller.isNameTaken(calendarNameString)) {
+					menu.setVisible(false);
 				showFrame.setVisible(false); //you can't see me!
 				showFrame.dispose(); //Destroy the JFrame object
 		}
@@ -140,12 +148,18 @@ public class ShowCalendarsUi extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				EditCalendarUi editUi = new EditCalendarUi(calendarNameString, controller);
+				menu.setVisible(false);
 				showFrame.setVisible(false); //you can't see me!
 				showFrame.dispose(); //Destroy the JFrame object
 			}
 		});
 		menu.add(deleteItem);
 		menu.add(editItem);
+		
+		menu.setLocation(MouseInfo.getPointerInfo().getLocation() );
+		menu.setVisible(true);
 	}
+	
+	
 
 }

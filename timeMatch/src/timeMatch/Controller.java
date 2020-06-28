@@ -50,9 +50,9 @@ public class Controller {
     }
     
     public  ArrayList<String> getCalendarNameList(){
-    	List<String> names = new ArrayList<String>();
-    	names.addAll(calendarRegister.keySet());
-    	return (ArrayList<String>) names;
+    	List<String> _names = new ArrayList<String>();
+    	_names.addAll(calendarRegister.keySet());
+    	return (ArrayList<String>) _names;
     }
     
     public boolean isNameTaken(String _calendarName) {
