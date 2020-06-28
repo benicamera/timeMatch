@@ -47,7 +47,7 @@ ShowCalendarUi:
 27.06.2020 (11:00) (Beni): boolean isNameTaken(String _calendarName) erstellt. Schaut, ob bereits ein Kalender mit dem Namen existiert.
 27.06.2020 (18:30) (Beni): public  ArrayList<String> getCalendarNameList() erstellt. Gibt alle Namen der Kalender in einer Liste wieder.
 27.06.2020 (19:50) (Beni): String getDayString(int _year, int _month, int _day) erstellt. generiert Datum als String ddmmyyyy.
-
+28.06.2020 (14:00) (Beni): String delete(String calendarname) hinzugefügt. löscht kalender aus verzeichnis.
 
 -----------------
 ----CALENDAR:----
