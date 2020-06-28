@@ -49,6 +49,15 @@ public class Controller {
     	return testCalendar.isLeapYear(_year);
     }
     
+    public String delete(String calendarNameString) {
+    	if(calendarRegister.containsKey(calendarNameString))
+    		calendarRegister.remove(calendarNameString);
+    	else {
+			return "Kalender nicht gefunden";
+		}
+    	return "Erfolgreich";
+    }
+    
     public  ArrayList<String> getCalendarNameList(){
     	List<String> _names = new ArrayList<String>();
     	_names.addAll(calendarRegister.keySet());
