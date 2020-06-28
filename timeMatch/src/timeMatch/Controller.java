@@ -24,7 +24,7 @@ import java.util.List;
 
 public class Controller {
     final Calendar testCalendar;
-    final static String CALENDARPATH_STRING = "C:\\Windows\\TimeMatch\\.saved\\calendars.dat";
+    final static String CALENDAR_PATH_STRING = "C:\\Calendars\\calendars.dat";
     HashMap <String,Calendar> calendarRegister = new HashMap<String, Calendar>(); //erzeugt eine Haschmap f�r die Calendar
     
     public Controller() {
@@ -39,6 +39,33 @@ public class Controller {
     
     public void saveCalendars() {
     	
+    	 try (FileOutputStream fos = new FileOutputStream(new File(CALENDAR_PATH_STRING)); 
+    	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+    	        for (Calendar elementCalendar : calendarRegister.values()) {
+    	            oos.writeObject(elementCalendar);
+    	        }
+    	      } catch (IOException e) {
+    	        System.out.println("Creating: Error initializing stream");
+    	      }
+    	/*
+    	  File calendarFile = new File(CALENDARPATH_STRING);
+    	    try {
+    	        if(calendarFile.createNewFile()) {
+    	            System.out.println("File not found. New file was created");
+    	        }
+    	    } catch (IOException e) {
+    	        System.out.printf("Can not create file %s\n", CALENDARPATH_STRING);
+    	    }
+
+    	    try(FileOutputStream fos = new FileOutputStream(CALENDARPATH_STRING);
+    	        ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+    	        for(Calendar elementCalendar : calendarRegister.values()) {
+    	            oos.writeObject(elementCalendar);
+    	        }
+    	    } catch (IOException e) {
+    	        System.out.println("Save: Error initializing stream");
+    	    }
+    	/*
     	try {FileOutputStream fos = new FileOutputStream(CALENDARPATH_STRING);
     		     ObjectOutputStream oos = new ObjectOutputStream(fos);
     			for(Calendar elementCalendar : calendarRegister.values()) {
@@ -61,14 +88,15 @@ public class Controller {
 		} catch (IOException e) {
 			System.out.println("Save: Error initializing stream");
     		}
-
+*/
     }
     
     public void loadCalendars() {
     	boolean cont = true;
     	
     	while (cont) {
-    		try (FileInputStream fos = new FileInputStream(CALENDARPATH_STRING);
+    		System.out.println("started while");
+    		try (FileInputStream fos = new FileInputStream(CALENDAR_PATH_STRING);
     	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
     			Calendar obj = (Calendar) oos.readObject();
     		    if (obj != null) {
@@ -80,12 +108,16 @@ public class Controller {
     	   			 fos.close();
     	   	} catch (FileNotFoundException e) {
     				System.out.println("Load: File not found");
+    				System.out.println(e.getMessage());
     				saveCalendars();
-    			} catch (IOException e) {
+    				return;
+    			} catch (IOException ex) {
     				System.out.println("Load: Error initializing stream");
+    				System.out.println(ex);
+    				System.out.println(ex.getMessage());
     	   		}
     	   catch (Exception e) {
-    	    // System.out.println(e.printStackTrace());
+    	    e.printStackTrace();
     	  }
     	}
 
