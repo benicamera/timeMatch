@@ -95,6 +95,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich verwerfen?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
 					JOptionPane.showMessageDialog(editFrame, controller.getCalendar(calendarName).resetDay(controller.getDayString(year, month, day)));
 				}
+				controller.saveCalendars();
 				if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)));
 					editFrame.setVisible(false); //you can't see me!
 					editFrame.dispose(); //Destroy the JFrame object
@@ -116,6 +117,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		gbc_okayButton.gridy = 7;
 		okayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.saveCalendars();
 				editFrame.setVisible(false); //you can't see me!
 				editFrame.dispose(); //Destroy the JFrame object
 			}
@@ -364,6 +366,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[11].setEnabled(true);
 	            
 	        }
+	        controller.saveCalendars();
 	    }
 	
 	private String intervallLabelBuilder(int i) {
@@ -410,6 +413,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		if(day == 0)
 			return dayInput();
 		else {
+			controller.saveCalendars();
 			return day;
 		}
 	}

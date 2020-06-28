@@ -1,5 +1,12 @@
 package timeMatch;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /*
@@ -17,16 +24,72 @@ import java.util.List;
 
 public class Controller {
     final Calendar testCalendar;
+    final static String CALENDARPATH_STRING = "C:\\Windows\\TimeMatch\\.saved\\calendars.dat";
     HashMap <String,Calendar> calendarRegister = new HashMap<String, Calendar>(); //erzeugt eine Haschmap f�r die Calendar
     
     public Controller() {
         
-        testCalendar = new Calendar();
+        testCalendar = new Calendar("testCalendar");
+        loadCalendars();
     }
     
     public void toTest(/* insert Parameters*/) {
         testCalendar.toTest(/*insert Parameters*/);
     }
+    
+    public void saveCalendars() {
+    	
+    	try {FileOutputStream fos = new FileOutputStream(CALENDARPATH_STRING);
+    		     ObjectOutputStream oos = new ObjectOutputStream(fos);
+    			for(Calendar elementCalendar : calendarRegister.values()) {
+    				oos.writeObject(elementCalendar);
+    			}
+    			 oos.close();
+    			 fos.close();
+    	} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			try {FileOutputStream fos = new FileOutputStream(new File(CALENDARPATH_STRING));
+	    		     ObjectOutputStream oos = new ObjectOutputStream(fos);
+	    			for(Calendar elementCalendar : calendarRegister.values()) {
+	    				oos.writeObject(elementCalendar);
+	    			}
+	    			 oos.close();
+	    			 fos.close();
+			} catch (IOException ex) {
+				System.out.println("Creating: Error initializing stream");
+	    		}
+		} catch (IOException e) {
+			System.out.println("Save: Error initializing stream");
+    		}
+
+    }
+    
+    public void loadCalendars() {
+    	boolean cont = true;
+    	
+    	while (cont) {
+    		try (FileInputStream fos = new FileInputStream(CALENDARPATH_STRING);
+    	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
+    			Calendar obj = (Calendar) oos.readObject();
+    		    if (obj != null) {
+    		      calendarRegister.put(obj.getName(), obj);
+    		    } else {
+    		      cont = false;
+    		    }
+    	   			 oos.close();
+    	   			 fos.close();
+    	   	} catch (FileNotFoundException e) {
+    				System.out.println("Load: File not found");
+    				saveCalendars();
+    			} catch (IOException e) {
+    				System.out.println("Load: Error initializing stream");
+    	   		}
+    	   catch (Exception e) {
+    	    // System.out.println(e.printStackTrace());
+    	  }
+    	}
+
+   }
     
     public String getDayString(int _year, int _month, int _day) {
     	StringBuilder sb = new StringBuilder();  
@@ -50,9 +113,10 @@ public class Controller {
     }
     
     public String delete(String calendarNameString) {
-    	if(calendarRegister.containsKey(calendarNameString))
+    	if(calendarRegister.containsKey(calendarNameString)) {
     		calendarRegister.remove(calendarNameString);
-    	else {
+    		saveCalendars();
+    	}else {
 			return "Kalender nicht gefunden";
 		}
     	return "Erfolgreich";
@@ -70,7 +134,8 @@ public class Controller {
     
     public String createCalendar (String name) {		//mit der methode ist es m�glich einen neuen Calendar in das Buch aufzunehmen
     	if (calendarRegister.containsKey(name) == false) {		//pr�ft ob der name schon vorhanden ist //Beni: Bei if == !
-    		calendarRegister.put(name,new Calendar());
+    		calendarRegister.put(name,new Calendar(name));
+    		saveCalendars();
     		return "Erfolgreich";
     	}
         

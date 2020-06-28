@@ -15,12 +15,17 @@ import java.util.HashMap;
 @SuppressWarnings("serial")
 public class Calendar implements Serializable{
 	
+	private String name;
 	int numberOfIntervalls = 12;
 	
 	HashMap <String,boolean[]> calendar = new HashMap<String, boolean[]>();
 	
-	public Calendar() {
-			
+	public Calendar(String name) {
+			this.name = name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	public void summonDay(String _day) {
