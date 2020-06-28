@@ -92,10 +92,10 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		trashButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich vernichten?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-					//JOptionPane.showMessageDialog(null, controller.deleteCalendar(calendarName));
+				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich verwerfen?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+					JOptionPane.showMessageDialog(editFrame, controller.getCalendar(calendarName).resetDay(controller.getDayString(year, month, day)));
 				}
-				if(!controller.isNameTaken(calendarName))
+				if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)));
 					editFrame.setVisible(false); //you can't see me!
 					editFrame.dispose(); //Destroy the JFrame object
 			}
@@ -103,7 +103,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		
 		initIntervallButtons();
 	
-		trashButton.setToolTipText("Kalender vernichten");
+		trashButton.setToolTipText("Termine verwerfen.");
 		GridBagConstraints gbc_trashButton = new GridBagConstraints();
 		gbc_trashButton.insets = new Insets(0, 0, 5, 0);
 		gbc_trashButton.gridx = 13;
