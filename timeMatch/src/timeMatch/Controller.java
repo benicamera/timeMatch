@@ -38,9 +38,11 @@ public class Controller {
     }
     
     public void saveCalendars() {
-    	
+    	int numberOfObjects = getCalendarNameList().size();
     	 try (FileOutputStream fos = new FileOutputStream(new File(CALENDAR_PATH_STRING)); 
     	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+    		 oos.write(numberOfObjects);
+    		 System.out.println(numberOfObjects);
     	        for (Calendar elementCalendar : calendarRegister.values()) {
     	            oos.writeObject(elementCalendar);
     	        }
@@ -92,20 +94,15 @@ public class Controller {
     }
     
     public void loadCalendars() {
-    	boolean cont = true;
-    	
-    	while (cont) {
-    		System.out.println("started while");
+
     		try (FileInputStream fos = new FileInputStream(CALENDAR_PATH_STRING);
     	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
-    			Calendar obj = (Calendar) oos.readObject();
-    		    if (obj != null) {
+    			int numberOfObjects = oos.read();
+    			for(int i = 0; i < numberOfObjects; i++) {
+    			Calendar obj = (Calendar) oos.readObject(); 
     		      calendarRegister.put(obj.getName(), obj);
-    		    } else {
-    		      cont = false;
-    		    }
-    	   			 oos.close();
-    	   			 fos.close();
+    			}
+    			
     	   	} catch (FileNotFoundException e) {
     				System.out.println("Load: File not found");
     				System.out.println(e.getMessage());
@@ -115,13 +112,14 @@ public class Controller {
     				System.out.println("Load: Error initializing stream");
     				System.out.println(ex);
     				System.out.println(ex.getMessage());
+    				
     	   		}
     	   catch (Exception e) {
     	    e.printStackTrace();
     	  }
     	}
 
-   }
+   
     
     public String getDayString(int _year, int _month, int _day) {
     	StringBuilder sb = new StringBuilder();  
