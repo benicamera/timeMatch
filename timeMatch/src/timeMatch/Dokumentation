@@ -24,7 +24,7 @@ ES HIEß DIE DOKUMENTATION SEI WICHTIG!
 27.06.2020 (18:30) (Beni): editButton mit EditCalendarUi verknüpft: Kalender auswählen und los gehts mit dem bearbeiten.
 27.06.2020 (20:00) (Bernhard): �nderung bei doppeltem Kalender Namen.
 27.06.2020 (20:40) (Bernhard): �nderung der Aufschrift auf den Kn�pfen.
-27.06.2020 (21:00) (Bernhard): Ver�nderung der ausgegebenen Texte.
+27.06.2020 (21:00) (Bernhard): Ver�nderung der ausgegebenen Texte.
 27.06.2020 (23:00) (Beni,Bernhard,FJSV(ein freundlicher User auf StackOverFlow)): behebung der gedrehten Arrays, Vertrauen in Foren wiederhergestellt.
 
 EditCalendar:
@@ -33,6 +33,9 @@ EditCalendar:
 27.06.2020 (16:50) (Beni): initIntervallButtons() fertig gestellt. Positioniert Zeitknöpfe automatisch, egal, wie viele Intervalle es gibt..
 27.06.2020 (18:10) (Beni): okayButton hinzugefügt. schließt Fenster. trshButton konfiguriert: Fragt ob wirklich löschen, löscht und schließt das fenster.
 27.06.2020 (20:55) (Beni): ActionListener in eine andere Methode gemacht. Man kann jetzt einzeln drücken.
+
+ShowCalendarUi:
+28.06.2020 (11:20) (Beni): Erstellt.
 
 -------------------
 ----CONTROLLER:----
