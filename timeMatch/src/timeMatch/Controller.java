@@ -28,7 +28,6 @@ public class Controller {
     HashMap <String,Calendar> calendarRegister = new HashMap<String, Calendar>(); //erzeugt eine Haschmap f�r die Calendar
     
     public Controller() {
-        
         testCalendar = new Calendar("testCalendar");
         loadCalendars();
     }

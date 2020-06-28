@@ -48,6 +48,7 @@ ShowCalendarUi:
 27.06.2020 (18:30) (Beni): public  ArrayList<String> getCalendarNameList() erstellt. Gibt alle Namen der Kalender in einer Liste wieder.
 27.06.2020 (19:50) (Beni): String getDayString(int _year, int _month, int _day) erstellt. generiert Datum als String ddmmyyyy.
 28.06.2020 (14:00) (Beni): String delete(String calendarname) hinzugefügt. löscht kalender aus verzeichnis.
+28.06.2020 (16:45) (Beni): save und load methoden erstellt. speichert alle Calendar-Objekte in calendars.dat und kann alle wieder in die HashMap ziehen. 
 
 -----------------
 ----CALENDAR:----
