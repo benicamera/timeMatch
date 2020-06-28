@@ -69,7 +69,7 @@ public class Gui {
 		gbc_createButton.gridx = 0;
 		gbc_createButton.gridy = 1;
 		frame.getContentPane().add(createButton, gbc_createButton);
-		
+		/*
 		JButton editButton = new JButton("");
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,7 +89,7 @@ public class Gui {
 		gbc_editButton.gridx = 3;
 		gbc_editButton.gridy = 1;
 		frame.getContentPane().add(editButton, gbc_editButton);
-		
+		*/
 		JButton showButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/showButtonIcon.png")));
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -144,10 +144,10 @@ public class Gui {
 		
 		if(controller.isNameTaken(calendarName)) {
 			JOptionPane.showMessageDialog(frame, "Name bereits vergeben", String.format("%s ist breits vergeben, veruche erneut.", calendarName), JOptionPane.ERROR_MESSAGE, null);
-			askCalendarName();
+			calendarName = askCalendarName();
 		}else if(calendarName == null || calendarName == ""){
 			JOptionPane.showMessageDialog(frame, "Name nicht werwendbar", String.format("Name ist nicht verwendbar, veruche erneut."), JOptionPane.ERROR_MESSAGE, null);
-			askCalendarName();
+			calendarName = askCalendarName();
 			
 		}else
 			return calendarName;

@@ -55,7 +55,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	JLabel[] intervallLabels = new JLabel[12];
 	
 	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-	Object[] days1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
+	Object[] days1 = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"};
 	Object[] days2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29};
 	Object[] days3 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
 	Object[] days4 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
@@ -409,10 +409,12 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 			days = (Object[]) days4;
 			break;
 		}
-		day = (int) JOptionPane.showInputDialog( contentPane, "Welcher den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
-		if(day == 0)
+		String dayInputString = (String) JOptionPane.showInputDialog( contentPane, "Welcher den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
+		
+		if(dayInputString == "0" || dayInputString == null)
 			return dayInput();
 		else {
+			day = Integer.parseInt(dayInputString);
 			controller.saveCalendars();
 			return day;
 		}
