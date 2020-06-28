@@ -130,7 +130,7 @@ public class ShowCalendarsUi extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(JOptionPane.showConfirmDialog(null, "Achtung", "Wirklich vernichten?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-					//JOptionPane.showMessageDialog(showFrame, controller.delete(calendarNameString));
+					JOptionPane.showMessageDialog(showFrame, controller.delete(calendarNameString));
 				}
 				
 				if(!controller.isNameTaken(calendarNameString)) {
