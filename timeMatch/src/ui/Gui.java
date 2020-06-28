@@ -93,7 +93,11 @@ public class Gui {
 		JButton showButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/showButtonIcon.png")));
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			ShowCalendarsUi showuiCalendarsUi = new ShowCalendarsUi(controller);
+				if(controller.getCalendarNameList().size() > 0) {
+					ShowCalendarsUi showuiCalendarsUi = new ShowCalendarsUi(controller);
+				}else {
+						JOptionPane.showMessageDialog(frame, "Keine Kalender gefunden.");
+					}
 			System.out.println("show erstellt");
 			}
 		});
