@@ -40,11 +40,6 @@ public class Controller {
     	}
     	sb.append(String.format("%d", _month));
     	
-    	if(_year < 10000) {
-    	for(int i = 4; i > String.format("%d", _year).length(); i--) {
-    		sb.append("0");
-    	}
-    	}
     	sb.append(String.format("%d", _year));
     	
     	return sb.toString();
@@ -53,6 +48,7 @@ public class Controller {
     public boolean isLeapYear(int _year) {
     	return testCalendar.isLeapYear(_year);
     }
+    
     public  ArrayList<String> getCalendarNameList(){
     	List<String> names = new ArrayList<String>();
     	names.addAll(calendarRegister.keySet());
@@ -66,7 +62,7 @@ public class Controller {
     public String createCalendar (String name) {		//mit der methode ist es m�glich einen neuen Calendar in das Buch aufzunehmen
     	if (calendarRegister.containsKey(name) == false) {		//pr�ft ob der name schon vorhanden ist //Beni: Bei if == !
     		calendarRegister.put(name,new Calendar());
-    		return "newCalendar: " + name;
+    		return "Erfolgreich";
     	}
         
         return "Fehler";

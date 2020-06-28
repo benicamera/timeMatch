@@ -29,35 +29,30 @@ public class Calendar {
 		System.out.print("Summoned " + _day + " ");
 		for (int i = 0; i < numberOfIntervalls; i++) {
 			intervalls[i] = true;
-			System.out.print(intervalls[i] + ", ");
 		}
-		System.out.println(".");
 		calendar.put(_day, intervalls);	
 		
+	}
+	
+	public String resetDay(String day) {
+		calendar.remove(day);
+		return "Erfolgreich";
 	}
 	
 	public boolean isFree(int _time, String _day) {
 		int time = _time - 1;
 		if(!calendar.containsKey(_day)) {
-			System.out.println("free");
 			return true;
 		}
 		boolean[] _intervalls = calendar.get(_day);
 		_intervalls = calendar.get(_day);
-		for (int i = 0; i <calendar.get(_day).length; i++) {
-			System.out.print(calendar.get(_day)[i] + ", ");
-		}
-		for (int i = 0; i < _intervalls.length; i++) {
-			System.out.print(_intervalls[i] + ", ");
-		}
-		System.out.println(_intervalls[time]);
-		
 		return _intervalls[time];
 	}
 	
 	public boolean isLoaded(String _day) {
 		return calendar.containsKey(_day);
 	}
+	
 	public void setFree(int _time, boolean _free, String _day) {
 		int time = _time - 1;
 		boolean[] intervalls = new boolean[numberOfIntervalls];
@@ -65,7 +60,6 @@ public class Calendar {
 			System.out.println("Contains " + _day);
 			intervalls = calendar.get(_day);
 			intervalls[time] = _free;
-			System.out.println(intervalls[time]);
 			if(allElementsTheSameBool(intervalls) && _free)
 				calendar.remove(_day);
 			else
@@ -76,12 +70,7 @@ public class Calendar {
 				intervalls[time] = _free;
 				calendar.put(_day, intervalls);	
 			}
-		}
-		System.out.println("-------");
-		for (int i = 0; i <calendar.get(_day).length; i++) {
-			System.out.print(calendar.get(_day)[i] + ", ");
-		}
-		
+		}	
 	}
 	
 	public boolean allElementsTheSameBool(boolean[] intervalls) {
@@ -117,6 +106,7 @@ public class Calendar {
 		}
 		return false;
 	}
+	
 	public void toTest(/* insert Parameters*/) {
 
 	}

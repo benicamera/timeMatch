@@ -160,7 +160,6 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 			contentPane.add(intervallButtons[i-1], gbc_btnNewButton);
 			
 			GridBagConstraints gbc_labels = new GridBagConstraints();
-			//gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_labels.gridx = gridx;
 			gbc_labels.gridy = textGridy;
 			contentPane.add(intervallLabels[i-1], gbc_labels); 

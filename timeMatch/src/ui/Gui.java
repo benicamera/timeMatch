@@ -118,7 +118,7 @@ public class Gui {
 	private void createButtonAction() {
 		// TODO Auto-generated method stub
 		String calendarName = askCalendarName();
-		new JOptionPane(controller.createCalendar(calendarName));
+		JOptionPane.showMessageDialog(frame, String.format("Erstellen: %s", controller.createCalendar(calendarName)), "Kalender erstellen", JOptionPane.INFORMATION_MESSAGE, null);
 		EditCalendarUi editCalendarUi = new EditCalendarUi(calendarName, controller);
 	}
 
