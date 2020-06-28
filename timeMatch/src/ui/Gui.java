@@ -86,9 +86,16 @@ public class Gui {
 		editButton.setToolTipText("Kalender bearbeiten");
 		GridBagConstraints gbc_editButton = new GridBagConstraints();
 		gbc_editButton.insets = new Insets(0, 0, 5, 5);
-		gbc_editButton.gridx = 4;
+		gbc_editButton.gridx = 3;
 		gbc_editButton.gridy = 1;
 		frame.getContentPane().add(editButton, gbc_editButton);
+		
+		JButton showButton = new JButton("");
+		GridBagConstraints gbc_showButton = new GridBagConstraints();
+		gbc_showButton.insets = new Insets(0, 0, 5, 5);
+		gbc_showButton.gridx = 5;
+		gbc_showButton.gridy = 1;
+		frame.getContentPane().add(showButton, gbc_showButton);
 		
 		JLabel spaceLabel2 = new JLabel("");
 		GridBagConstraints gbc_spaceLabel2 = new GridBagConstraints();
