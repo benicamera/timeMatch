@@ -151,6 +151,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 			}
 			globalI = i;
 			intervallButtons[i-1] = new JButton(buttonText);
+			intervallButtons[i-1].setActionCommand("" + i);
 			intervallButtons[i-1].addActionListener((ActionListener) this);
 			intervallLabels[i-1] = new JLabel(intervallLabelBuilder(i));
 			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", toolTextString));
@@ -170,6 +171,26 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	}
 	
 	 public void actionPerformed (ActionEvent e){
+		 
+		 int index = Integer.parseInt( e.getActionCommand());
+		 
+		 if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
+ 			controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
+ 	if(controller.getCalendar(calendarName).isFree(index, controller.getDayString(year, month, day))) {
+			controller.getCalendar(calendarName).setFree(index, false, controller.getDayString(year, month, day));
+			buttonText = "Belegt";
+			intervallButtons[index - 1].setToolTipText("Als Frei markieren");
+			
+		}else {
+			controller.getCalendar(calendarName).setFree(index, true, controller.getDayString(year, month, day));
+			buttonText = "Frei";
+			intervallButtons[index - 1].setToolTipText("Als Belegt markieren");
+		}
+ 	intervallButtons[index-1].setText(buttonText);
+		intervallButtons[index-1].setEnabled(false);
+		intervallButtons[index-1].setEnabled(true);
+		//Kommentar ist für die Dokumentation
+		 /*
 		 System.out.println("-----------");
 	        if(e.getSource() == intervallButtons[0]){
 	        	if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
@@ -366,6 +387,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				intervallButtons[11].setEnabled(true);
 	            
 	        }
+	        */
 	        controller.saveCalendars();
 	    }
 	

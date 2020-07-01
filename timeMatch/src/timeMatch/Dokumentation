@@ -33,6 +33,7 @@ EditCalendar:
 27.06.2020 (16:50) (Beni): initIntervallButtons() fertig gestellt. Positioniert Zeitknöpfe automatisch, egal, wie viele Intervalle es gibt..
 27.06.2020 (18:10) (Beni): okayButton hinzugefügt. schließt Fenster. trshButton konfiguriert: Fragt ob wirklich löschen, löscht und schließt das fenster.
 27.06.2020 (20:55) (Beni): ActionListener in eine andere Methode gemacht. Man kann jetzt einzeln drücken.
+01.07.2020 (06:33) (Beni): Action Performed methode deutlich verbessert. numberOfIntervalls ist jetzt wieder anpassbar. dank Stackoverflow
 
 ShowCalendarUi:
 28.06.2020 (11:20) (Beni): Erstellt.
