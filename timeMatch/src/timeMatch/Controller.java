@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /*
  * Verrechnet und vergleicht
@@ -20,7 +21,9 @@ import java.util.ArrayList;
  */
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Controller {
     final Calendar testCalendar;
@@ -171,17 +174,30 @@ public class Controller {
         return "Fehler";
     }
     
-    public int[] match (String name1 , String name2) { //du hast [] vergessen
-    	Calendar a = calendarRegister.get(name1);
-    	Calendar b = calendarRegister.get(name2);
-    	int [] agreement = new int[11];
-		for (int p=0; p<11; p++) {     
-            agreement[p] = 0;
-        }
-    	for(int i=0;i<11;i++) {
-    		if (a==b /*&& a==true*/) {  //zu testzwecken rauskommentiert
-				agreement[i] = 1;
-			}
+    public int[] match (Calendar[] calendars, String[] intervall ) { //du hast [] vergessen
+    	int[] agreement;
+    	List<Integer[]> agreementsList = new ArrayList<Integer[]>();
+    	
+    	String startString = intervall[0];
+    	String endString = intervall[1];
+    	int currentIntervall = 0;
+    	String currentString = startString;
+    	Boolean previousBoolean = false;
+    	Boolean allFreeBoolean = false;
+    	while(currentString != endString) {
+    		boolean previosCalendarBoolean = calendars[0].isFree(currentIntervall, currentString);
+    		for(Calendar calendar : calendars) {
+    			if(calendar.isFree(currentIntervall, currentString))
+    				allFreeBoolean = true;
+    			else {
+					allFreeBoolean = false;
+					break;
+				}
+    		}
+    		
+    		if(allFreeBoolean) {
+    			
+    		}
     	}
     	return agreement;
     }
