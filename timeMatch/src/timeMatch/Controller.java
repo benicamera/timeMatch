@@ -41,8 +41,9 @@ public class Controller {
         loadCalendars();
     }
     
-    public void toTest(/* insert Parameters*/) {
+    public void toTest(/* insert Parameters*/ String string) {
         testCalendar.toTest(/*insert Parameters*/);
+        dayStringAdd(string);
     }
     
     public void saveCalendars() {
@@ -141,10 +142,12 @@ public class Controller {
         
         return "Fehler";
     }
-    /*
-    public int[] match (Calendar[] calendars, String[] intervall ) { //du hast [] vergessen
+    
+    
+    public List<HashMap<String, Integer[]>> match (Calendar[] calendars, String[] intervall ) { //du hast [] vergessen
     	int[] agreement;
-    	List<Integer[]> agreementsList = new ArrayList<Integer[]>();
+    	List<HashMap<String, Integer[]>> agreementsList = new ArrayList<HashMap<String, Integer[]>>();
+    	List<HashMap<String, Integer>> listRaw = new ArrayList<HashMap<String, Integer>>();
     	
     	String startString = intervall[0];
     	String endString = intervall[1];
@@ -152,9 +155,12 @@ public class Controller {
     	String currentString = startString;
     	Boolean previousBoolean = false;
     	Boolean allFreeBoolean = false;
-    	while(currentString != endString) {
+    	while(currentString != endString) { //Solange zwischen den Tagen
+    		while(currentIntervall <= testCalendar.getNumberOfIntervalls()) { //sloange im Tag
+    			
     		boolean previosCalendarBoolean = calendars[0].isFree(currentIntervall, currentString);
-    		for(Calendar calendar : calendars) {
+    		
+    		for(Calendar calendar : calendars) { //schaut ob alle frei sind
     			if(calendar.isFree(currentIntervall, currentString))
     				allFreeBoolean = true;
     			else {
@@ -163,13 +169,95 @@ public class Controller {
 				}
     		}
     		
-    		if(allFreeBoolean) {
-    			
+    		if(allFreeBoolean) { //wenn alle frei
+    			HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+    			hashMap.put(currentString, currentIntervall);
+    			listRaw.add(hashMap);
     		}
+    		
+    		currentIntervall++;
     	}
-    	return agreement;
+    		currentString = dayStringAdd(currentString);
+    		currentIntervall = 0;
+    	}
+    	
+    	return  agreementSummary(listRaw);
     }
-    */
+    
+    private ArrayList<CustomMapArray> agreementSummary(List<CustomMap> listRaw){
+    	String preDayString = listRaw.get(0).getString();
+    	ArrayList<CustomMapArray> list = new ArrayList<CustomMapArray>();
+    	
+    	for (int i = 0; i < listRaw.size(); i++) {
+			if(listRaw.get(i).getString() == preDayString) {
+				
+			}
+		}
+    }
+    
+    public  String dayStringAdd(String previousString) {
+    	Integer[] dateIntegers = new Integer[3];
+    	dateIntegers = reverseDayString(previousString);
+    	int day = dateIntegers[0];
+    	int month = dateIntegers[1];
+    	int year = dateIntegers[2];
+    	if(day + 1 > monthDays(month, year)) {
+    		if(!(month + 1 > 12)) {
+    			day = 1;
+    			month++;
+    		}else {
+    			day = 1;
+    			month = 1;
+    			year++;
+    		}
+    	}else{
+    		day++;
+    	}
+    		return getDayString(year, month, day);
+    }
+    
+    public int monthDays(int month, int year) {
+    	int monthDays;
+    	if(month < 8) {
+			if(month%2 == 0) {
+				if(month == 2) {
+					if(isLeapYear(year))
+						monthDays = 29;
+					else 
+						monthDays = 28;
+				}else {
+					monthDays = 30;
+				}
+				}else {
+					monthDays = 31;
+				}	
+			}else {
+				if(month%2 == 0) {
+					monthDays = 31;
+				}else {
+					monthDays = 30;
+				}
+		}
+    	
+    	return monthDays;
+    }
+    public Integer[] reverseDayString(String dayString) {
+    	
+    	int day;
+		int month;
+		int year;
+		Integer[] splitIntegers = new Integer[3];
+		day = Integer.parseInt(dayString.substring(0, 2));
+		month = Integer.parseInt(dayString.substring(2,4));
+		year = Integer.parseInt(dayString.substring(4,8));
+		System.out.println(String.format("%d.%d.%d", day, month, year));
+		
+		splitIntegers[0] = day;
+		splitIntegers[1] = month;
+		splitIntegers[2] = year;
+		
+		return splitIntegers;
+    }
     public Calendar getCalendar(String name) {
        return calendarRegister.get(name);
     }

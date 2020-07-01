@@ -46,6 +46,7 @@ public class ShowCalendarsUi extends JFrame {
 	JList<String> list;
 	DefaultListModel<String> model = new DefaultListModel<>();
 	JPopupMenu menu;
+	boolean menuVisble = false;
 
 	public ShowCalendarsUi(Controller _controller) {
 		controller = _controller;
@@ -54,6 +55,17 @@ public class ShowCalendarsUi extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
+		contentPane.addMouseListener(new MouseAdapter() {// provides empty implementation of all
+            // MouseListener`s methods, allowing us to
+            // override only those which interests us
+			@Override //I override only one method for presentation
+			public void mousePressed(MouseEvent e) {
+				if(menu.isVisible())
+					menu.setVisible(false);
+			}
+		});
+		
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -142,6 +154,7 @@ public class ShowCalendarsUi extends JFrame {
 			}
 		});
 		
+		
 		editItem.addActionListener(new ActionListener() {
 			
 			@Override
@@ -153,15 +166,14 @@ public class ShowCalendarsUi extends JFrame {
 				showFrame.dispose(); //Destroy the JFrame object
 			}
 		});
+		
 		menu.add(deleteItem);
 		menu.add(editItem);
 		
 		menu.setLocation(MouseInfo.getPointerInfo().getLocation() );
 		menu.setVisible(true);
+		menuVisble = true;
 	}
 	
-	private void closePopUp() {
-		menu.setVisible(false);
-	}
 
 }
