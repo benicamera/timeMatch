@@ -7,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -28,6 +31,9 @@ import java.util.ListIterator;
 public class Controller {
     final Calendar testCalendar;
     final static String CALENDAR_PATH_STRING = "C:\\Calendars\\calendars.dat";
+    final Path folderPath = Paths.get("C:\\Calendars");
+
+    
     HashMap <String,Calendar> calendarRegister = new HashMap<String, Calendar>(); //erzeugt eine Haschmap f�r die Calendar
     
     public Controller() {
@@ -41,6 +47,9 @@ public class Controller {
     
     public void saveCalendars() {
     	int numberOfObjects = getCalendarNameList().size();
+    	if (!Files.exists(folderPath)) {
+    		new File("C:\\\\Calendars").mkdirs();
+        }
     	 try (FileOutputStream fos = new FileOutputStream(new File(CALENDAR_PATH_STRING)); 
     	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
     		 oos.write(numberOfObjects);
@@ -51,48 +60,7 @@ public class Controller {
     	      } catch (IOException e) {
     	        System.out.println("Creating: Error initializing stream");
     	      }
-    	/*
-    	  File calendarFile = new File(CALENDARPATH_STRING);
-    	    try {
-    	        if(calendarFile.createNewFile()) {
-    	            System.out.println("File not found. New file was created");
-    	        }
-    	    } catch (IOException e) {
-    	        System.out.printf("Can not create file %s\n", CALENDARPATH_STRING);
-    	    }
-
-    	    try(FileOutputStream fos = new FileOutputStream(CALENDARPATH_STRING);
-    	        ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-    	        for(Calendar elementCalendar : calendarRegister.values()) {
-    	            oos.writeObject(elementCalendar);
-    	        }
-    	    } catch (IOException e) {
-    	        System.out.println("Save: Error initializing stream");
-    	    }
-    	/*
-    	try {FileOutputStream fos = new FileOutputStream(CALENDARPATH_STRING);
-    		     ObjectOutputStream oos = new ObjectOutputStream(fos);
-    			for(Calendar elementCalendar : calendarRegister.values()) {
-    				oos.writeObject(elementCalendar);
-    			}
-    			 oos.close();
-    			 fos.close();
-    	} catch (FileNotFoundException e) {
-			System.out.println("File not found");
-			try {FileOutputStream fos = new FileOutputStream(new File(CALENDARPATH_STRING));
-	    		     ObjectOutputStream oos = new ObjectOutputStream(fos);
-	    			for(Calendar elementCalendar : calendarRegister.values()) {
-	    				oos.writeObject(elementCalendar);
-	    			}
-	    			 oos.close();
-	    			 fos.close();
-			} catch (IOException ex) {
-				System.out.println("Creating: Error initializing stream");
-	    		}
-		} catch (IOException e) {
-			System.out.println("Save: Error initializing stream");
-    		}
-*/
+    	
     }
     
     public void loadCalendars() {
@@ -173,7 +141,7 @@ public class Controller {
         
         return "Fehler";
     }
-    
+    /*
     public int[] match (Calendar[] calendars, String[] intervall ) { //du hast [] vergessen
     	int[] agreement;
     	List<Integer[]> agreementsList = new ArrayList<Integer[]>();
@@ -201,7 +169,7 @@ public class Controller {
     	}
     	return agreement;
     }
-    
+    */
     public Calendar getCalendar(String name) {
        return calendarRegister.get(name);
     }
