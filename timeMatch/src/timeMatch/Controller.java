@@ -48,17 +48,17 @@ public class Controller {
     public void saveCalendars() {
     	int numberOfObjects = getCalendarNameList().size();
     	if (!Files.exists(folderPath)) {
-    		new File("C:\\\\Calendars").mkdirs();
+    		new File("C:\\\\Calendars").mkdirs(); //erstellt den Ordner
         }
     	 try (FileOutputStream fos = new FileOutputStream(new File(CALENDAR_PATH_STRING)); 
     	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-    		 oos.write(numberOfObjects);
+    		 oos.write(numberOfObjects); //schreibt int numberOfObject in Datei.
     		 System.out.println(numberOfObjects);
     	        for (Calendar elementCalendar : calendarRegister.values()) {
-    	            oos.writeObject(elementCalendar);
+    	            oos.writeObject(elementCalendar); //Schreibt Objekt von Calendar in Datei
     	        }
     	      } catch (IOException e) {
-    	        System.out.println("Creating: Error initializing stream");
+    	        System.out.println("Creating: Error initializing stream"); //Falls es einen Error gibt.
     	      }
     	
     }
@@ -67,15 +67,15 @@ public class Controller {
 
     		try (FileInputStream fos = new FileInputStream(CALENDAR_PATH_STRING);
     	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
-    			int numberOfObjects = oos.read();
+    			int numberOfObjects = oos.read(); //schreibt gespeicherte numberOfObjects in int
     			for(int i = 0; i < numberOfObjects; i++) {
-    			Calendar obj = (Calendar) oos.readObject(); 
+    			Calendar obj = (Calendar) oos.readObject();  
     		      calendarRegister.put(obj.getName(), obj);
     			}
     			
     	   	} catch (FileNotFoundException e) {
     				System.out.println("Load: File not found");
-    				System.out.println(e.getMessage());
+    				System.out.println(e.getMessage()); //Druckt ganauen Fehler
     				saveCalendars();
     				return;
     			} catch (IOException ex) {
@@ -85,7 +85,7 @@ public class Controller {
     				
     	   		}
     	   catch (Exception e) {
-    	    e.printStackTrace();
+    	    e.printStackTrace(); //druckt genaue Fehlerwuelle
     	  }
     	}
 

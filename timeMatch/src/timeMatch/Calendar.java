@@ -12,16 +12,20 @@ import java.util.HashMap;
  * 
  */
 
-@SuppressWarnings("serial")
+//@SuppressWarnings("serial")
 public class Calendar implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
-	int numberOfIntervalls = 12;
+	int numberOfIntervalls = 24;
 	
 	HashMap <String,boolean[]> calendar = new HashMap<String, boolean[]>();
 	
 	public Calendar(String name) {
-			this.name = name;
+			this.name = name; //this.name ist private String name
 	}
 	
 	public String getName() {
@@ -31,11 +35,12 @@ public class Calendar implements Serializable{
 	public void summonDay(String _day) {
 		/*
 		 * Der String setzt sich nach dem Prinzip ddmmyyyy zusammen.
+		 * Erstellt tag
 		 */
 		boolean[] intervalls = new boolean[numberOfIntervalls];
 		System.out.print("Summoned " + _day + " ");
 		for (int i = 0; i < numberOfIntervalls; i++) {
-			intervalls[i] = true;
+			intervalls[i] = true; 
 		}
 		calendar.put(_day, intervalls);	
 		
@@ -48,6 +53,7 @@ public class Calendar implements Serializable{
 	
 	public boolean isFree(int _time, String _day) {
 		int time = _time - 1;
+		//Tag nicht da bedeutet alles frei
 		if(!calendar.containsKey(_day)) {
 			return true;
 		}
@@ -67,6 +73,7 @@ public class Calendar implements Serializable{
 			System.out.println("Contains " + _day);
 			intervalls = calendar.get(_day);
 			intervalls[time] = _free;
+			//wenn alle intervalle frei sind, soll der Tag gelöscht werden, weil gelöscht frei entspricht
 			if(allElementsTheSameBool(intervalls) && _free)
 				calendar.remove(_day);
 			else
@@ -97,6 +104,7 @@ public class Calendar implements Serializable{
 	public int getNumberOfIntervalls() {
 		return numberOfIntervalls;
 	}
+	
 	public boolean isLeapYear(int _year) {
 		/*
 		 *     Schaltjahre müssen durch 4 teilbar sein.

@@ -69,31 +69,12 @@ public class Gui {
 		gbc_createButton.gridx = 0;
 		gbc_createButton.gridy = 1;
 		frame.getContentPane().add(createButton, gbc_createButton);
-		/*
-		JButton editButton = new JButton("");
-		editButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Object[] calendars = controller.getCalendarNameList().toArray();
-			if(calendars.length<1) {
-				createButtonAction();
-			}else {
-				new EditCalendarUi((String) JOptionPane.showInputDialog( frame, "Bestimme den Kalender", "Kalender", JOptionPane.PLAIN_MESSAGE, null, calendars, "Kalender"), controller);}
-			
-			}
-		});
 		
-		editButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/editButtonIcon.png")));
-		editButton.setToolTipText("Kalender bearbeiten");
-		GridBagConstraints gbc_editButton = new GridBagConstraints();
-		gbc_editButton.insets = new Insets(0, 0, 5, 5);
-		gbc_editButton.gridx = 3;
-		gbc_editButton.gridy = 1;
-		frame.getContentPane().add(editButton, gbc_editButton);
-		*/
 		JButton showButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/showButtonIcon.png")));
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(controller.getCalendarNameList().size() > 0) {
+					@SuppressWarnings("unused")
 					ShowCalendarsUi showuiCalendarsUi = new ShowCalendarsUi(controller);
 				}else {
 						JOptionPane.showMessageDialog(frame, "Keine Kalender gefunden.");

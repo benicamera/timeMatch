@@ -31,6 +31,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JScrollPane;
+import javax.swing.Popup;
+
 import java.awt.List;
 import java.awt.MouseInfo;
 import java.awt.Font;
@@ -43,6 +45,7 @@ public class ShowCalendarsUi extends JFrame {
 	JFrame showFrame = new JFrame();
 	JList<String> list;
 	DefaultListModel<String> model = new DefaultListModel<>();
+	JPopupMenu menu;
 
 	public ShowCalendarsUi(Controller _controller) {
 		controller = _controller;
@@ -108,10 +111,7 @@ public class ShowCalendarsUi extends JFrame {
 		}
 			
 		for(String elementString : controller.getCalendarNameList()) {
-			model.addElement(elementString);
-			
-			//list.add(elementString, null);
-			
+			model.addElement(elementString);	
 		}
 	}
 	
@@ -120,7 +120,7 @@ public class ShowCalendarsUi extends JFrame {
 		System.out.println("popUp aufgerufen");
 		final String calendarNameString = selectedItem;
 		
-		final JPopupMenu menu = new JPopupMenu(calendarNameString);
+		menu = new JPopupMenu(calendarNameString);
 		JMenuItem deleteItem = new JMenuItem("Vernichten");
 		JMenuItem editItem = new JMenuItem("Bearbeiten");
 		
@@ -160,6 +160,8 @@ public class ShowCalendarsUi extends JFrame {
 		menu.setVisible(true);
 	}
 	
-	
+	private void closePopUp() {
+		menu.setVisible(false);
+	}
 
 }
