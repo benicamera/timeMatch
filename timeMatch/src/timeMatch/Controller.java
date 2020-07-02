@@ -37,10 +37,12 @@ public class Controller {
     public Controller() {
         testCalendar = new Calendar("testCalendar");
         loadCalendars();
+        calendarRegister.put("test1",new Calendar("test1"));
+        calendarRegister.put("test2",new Calendar("test2"));
         //toTest();
     }
-   /* 
-    public void toTest(/* insert Parameters*) {
+   
+   /* public void toTest(/* insert Parameters*). {
         testCalendar.toTest(/*insert Parameters*);
         System.out.println("********");
         Calendar[] calendars = new Calendar[2];
@@ -163,12 +165,12 @@ public class Controller {
     }
     
     
-    public List<CustomMap[]> match (Calendar[] calendars, String[] intervall ) { //du hast [] vergessen
+    public List<CustomMap[]> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
     	List<CustomMap[]> agreementsList = new ArrayList<CustomMap[]>();
     	List<CustomMap> listRaw = new ArrayList<CustomMap>();
     	
-    	String startString = intervall[0];
-    	String endString = intervall[1];
+    	String startString = _intervall[0];
+    	String endString = _intervall[1];
     	int currentIntervall = 1;
     	String currentString = startString;
     	Boolean allFreeBoolean = false;
@@ -177,9 +179,9 @@ public class Controller {
 	    
     	while(currentString != endString) { //Solange zwischen den Tagen
     		while(currentIntervall <= testCalendar.getNumberOfIntervalls()) { //sloange im Tag
-    		
-    		for(Calendar calendar : calendars) { //schaut ob alle frei sind
     			
+    			
+    		for(int i=0;i<_calendars.length;i++) {
     			if(currentIntervall == 0 && currentString == null)
     				System.out.println("null");
     			else
@@ -187,18 +189,21 @@ public class Controller {
     			
     			System.out.println(currentIntervall);
     			//System.out.println(calendar.isFree(currentIntervall, currentString));
-    			if(calendar.isFree(currentIntervall, currentString)) // nullpointer exception
+    			System.out.println(_calendars[i].getName());
+    			if(_calendars[i].isFree(currentIntervall, currentString)) // nullpointer exception
     				allFreeBoolean = true;
     			else {
 					allFreeBoolean = false;
 					break;
 				}
+    			
     		}
     		
     		if(allFreeBoolean) { //wenn alle frei
     			listRaw.add(new CustomMap(currentString, currentIntervall));
     		currentIntervall++;
-		if(currentIntervall <= testCalendar.getNumberOfIntervalls())
+    		
+		if(currentIntervall > testCalendar.getNumberOfIntervalls())
 			System.out.println("Planned Stop");
     	}
     		System.out.println("_"); //Unendlich warum?

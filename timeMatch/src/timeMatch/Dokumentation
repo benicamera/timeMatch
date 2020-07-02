@@ -51,7 +51,7 @@ ShowCalendarUi:
 28.06.2020 (14:00) (Beni): String delete(String calendarname) hinzugefügt. löscht kalender aus verzeichnis.
 28.06.2020 (16:45) (Beni): save und load methoden erstellt. speichert alle Calendar-Objekte in calendars.dat und kann alle wieder in die HashMap ziehen. 
 01.06.2020 (10:20) (Beni): Bug in der Save methode behoben. Speichert jetzt, auch wenn kein Speicher-Ordner bereits erstellt wurde
-
+02.07.2020 (13:8) (Beni&Felix): Bug wegen nicht vorhandenen calenders behoben 
 -----------------
 ----CALENDAR:----
 20.06.2020 (14:38) (Bernhard): erstellung von arrays mit Variablen.
