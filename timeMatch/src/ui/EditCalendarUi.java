@@ -29,7 +29,7 @@ import java.awt.Insets;
 public class EditCalendarUi extends JFrame implements ActionListener{
 
 	/**
-	 * 
+	 * .
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;

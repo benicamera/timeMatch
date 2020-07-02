@@ -8,7 +8,7 @@ import java.util.HashMap;
  * 
  * @author Bernhard Gschwind
  * Last Change: 20.06.2020
- * - Klasse erstellt (20.06.2020)
+ * - Klasse erstellt (20.06.2020).
  * 
  */
 
@@ -53,6 +53,7 @@ public class Calendar implements Serializable{
 	
 	public boolean isFree(int _time, String _day) {
 		int time = _time - 1;
+	
 		//Tag nicht da bedeutet alles frei
 		if(!calendar.containsKey(_day)) {
 			return true;

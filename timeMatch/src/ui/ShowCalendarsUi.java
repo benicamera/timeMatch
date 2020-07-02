@@ -118,7 +118,7 @@ public class ShowCalendarsUi extends JFrame {
 			model.addElement("Keine Kalender gefunden.");
 			JOptionPane.showMessageDialog(showFrame, "Keine Kalender gefunden.");
 			showFrame.setVisible(false); //you can't see me!
-			showFrame.dispose(); //Destroy the JFrame object
+			showFrame.dispose(); //Destroy the JFrame object.
 			return;
 		}
 			

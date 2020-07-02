@@ -1,6 +1,7 @@
 package timeMatch;
 
 public class CustomMapArray{
+	//.
 	private String string;
 	private Integer[] integer;
 	

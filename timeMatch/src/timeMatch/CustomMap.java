@@ -1,7 +1,7 @@
 package timeMatch;
 
 public class CustomMap {
-	
+	//.
 	private String string;
 	private int integer;
 	

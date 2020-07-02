@@ -19,7 +19,7 @@ import java.util.Collection;
  * @author Felix Becht, Hussein Fazeli
  *@version 26.06.2020
  * Last Change: 20.06.2020
- * - Klasse erstellt (20.06.2020)
+ * - Klasse erstellt (20.06.2020).
  * 
  */
 
@@ -43,7 +43,23 @@ public class Controller {
     
     public void toTest(/* insert Parameters*/ String string) {
         testCalendar.toTest(/*insert Parameters*/);
-        dayStringAdd(string);
+        Calendar[] calendars = new Calendar[2];
+        calendars[0] = calendarRegister.get("test1");
+        calendars[1] = calendarRegister.get("test2");
+        String[] intervall = new String[2];
+        intervall[0] = "01010001";
+        intervall[1] = "02010001";
+        List<CustomMap[]> list = new ArrayList<CustomMap[]>();
+        list = match(calendars,intervall );
+        for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i)[0].getString() + " ; ");
+			System.out.print(list.get(i)[0].getInteger() + " - ");
+			if(list.get(i)[1] != null) {
+				System.out.print(list.get(i)[1].getString() + " ; ");
+				System.out.print(list.get(i)[1].getInteger());
+			}
+		}
+        
     }
     
     public void saveCalendars() {
@@ -144,23 +160,22 @@ public class Controller {
     }
     
     
-    public List<HashMap<String, Integer[]>> match (Calendar[] calendars, String[] intervall ) { //du hast [] vergessen
+    public List<CustomMap[]> match (Calendar[] calendars, String[] intervall ) { //du hast [] vergessen
     	int[] agreement;
-    	List<HashMap<String, Integer[]>> agreementsList = new ArrayList<HashMap<String, Integer[]>>();
-    	List<HashMap<String, Integer>> listRaw = new ArrayList<HashMap<String, Integer>>();
+    	List<CustomMap[]> agreementsList = new ArrayList<CustomMap[]>();
+    	List<CustomMap> listRaw = new ArrayList<CustomMap>();
     	
     	String startString = intervall[0];
     	String endString = intervall[1];
-    	int currentIntervall = 0;
+    	int currentIntervall = 1;
     	String currentString = startString;
-    	Boolean previousBoolean = false;
     	Boolean allFreeBoolean = false;
+    	
     	while(currentString != endString) { //Solange zwischen den Tagen
     		while(currentIntervall <= testCalendar.getNumberOfIntervalls()) { //sloange im Tag
-    			
-    		boolean previosCalendarBoolean = calendars[0].isFree(currentIntervall, currentString);
     		
     		for(Calendar calendar : calendars) { //schaut ob alle frei sind
+    			
     			if(calendar.isFree(currentIntervall, currentString))
     				allFreeBoolean = true;
     			else {
@@ -170,29 +185,51 @@ public class Controller {
     		}
     		
     		if(allFreeBoolean) { //wenn alle frei
-    			HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
-    			hashMap.put(currentString, currentIntervall);
-    			listRaw.add(hashMap);
-    		}
-    		
+    			listRaw.add(new CustomMap(currentString, currentIntervall));
+    			
     		currentIntervall++;
     	}
     		currentString = dayStringAdd(currentString);
-    		currentIntervall = 0;
+    		currentIntervall = 1;
+    	}
     	}
     	
     	return  agreementSummary(listRaw);
     }
     
-    private ArrayList<CustomMapArray> agreementSummary(List<CustomMap> listRaw){
+    private ArrayList<CustomMap[]> agreementSummary(List<CustomMap> listRaw){
     	String preDayString = listRaw.get(0).getString();
-    	ArrayList<CustomMapArray> list = new ArrayList<CustomMapArray>();
+    	ArrayList<CustomMap[]> list = new ArrayList<CustomMap[]>();
+    	CustomMap[] intervall = new CustomMap[2];
+    	intervall[0] = new CustomMap(listRaw.get(0).getString(), listRaw.get(0).getInteger());
+    	int prevIntervallEnding = intervall[0].getInteger();
     	
-    	for (int i = 0; i < listRaw.size(); i++) {
+    	for (int i = 1; i < listRaw.size(); i++) {
 			if(listRaw.get(i).getString() == preDayString) {
+				if(listRaw.get(i).getInteger() == prevIntervallEnding + 1) {
+					intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
 				
+				}else {
+					list.add(intervall);
+					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
+					prevIntervallEnding = listRaw.get(i).getInteger();
+				}
+				
+			}else if(listRaw.get(i).getString() == dayStringAdd(preDayString) && prevIntervallEnding > testCalendar.getNumberOfIntervalls()){
+				
+				intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
+				prevIntervallEnding = listRaw.get(i).getInteger();
+				preDayString = listRaw.get(i).getString();
+				
+					
+				}else {
+					list.add(intervall);
+					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
+					prevIntervallEnding = listRaw.get(i).getInteger();
+				}
 			}
-		}
+    	
+    	return list;
     }
     
     public  String dayStringAdd(String previousString) {
@@ -249,7 +286,7 @@ public class Controller {
 		Integer[] splitIntegers = new Integer[3];
 		day = Integer.parseInt(dayString.substring(0, 2));
 		month = Integer.parseInt(dayString.substring(2,4));
-		year = Integer.parseInt(dayString.substring(4,8));
+		year = Integer.parseInt(dayString.substring(4,dayString.length()));
 		System.out.println(String.format("%d.%d.%d", day, month, year));
 		
 		splitIntegers[0] = day;
