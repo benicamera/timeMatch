@@ -29,7 +29,7 @@ public class Gui {
 	}
 	
 	public void toTest(/*Parameters*/) {
-		controller.toTest(/*Parameters*/);
+		//controller.toTest(/*Parameters*/);
 	}
 
 	/**

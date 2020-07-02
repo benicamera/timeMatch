@@ -50,19 +50,22 @@ public class Calendar implements Serializable{
 		calendar.remove(day);
 		return "Erfolgreich";
 	}
+	////////////////////////////////////////////
 	
 	public boolean isFree(int _time, String _day) {
 		int time = _time - 1;
+		System.out.println("is free");
 	
 		//Tag nicht da bedeutet alles frei
 		if(!calendar.containsKey(_day)) {
 			return true;
 		}
 		boolean[] _intervalls = calendar.get(_day);
-		_intervalls = calendar.get(_day);
+		System.out.println(_intervalls[time]);
 		return _intervalls[time];
+		
 	}
-	
+	/////////////////////////////////////////
 	public boolean isLoaded(String _day) {
 		return calendar.containsKey(_day);
 	}

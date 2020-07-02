@@ -37,11 +37,11 @@ public class Controller {
     public Controller() {
         testCalendar = new Calendar("testCalendar");
         loadCalendars();
-        toTest();
+        //toTest();
     }
-    
-    public void toTest(/* insert Parameters*/) {
-        testCalendar.toTest(/*insert Parameters*/);
+   /* 
+    public void toTest(/* insert Parameters*) {
+        testCalendar.toTest(/*insert Parameters*);
         System.out.println("********");
         Calendar[] calendars = new Calendar[2];
         calendars[0] = calendarRegister.get("test1");
@@ -64,7 +64,7 @@ public class Controller {
 		}
         
     }
-    
+    */
     public void saveCalendars() {
     	int numberOfObjects = getCalendarNameList().size();
     	if (!Files.exists(folderPath)) {
@@ -173,13 +173,21 @@ public class Controller {
     	String currentString = startString;
     	Boolean allFreeBoolean = false;
     	System.out.println(endString);
+    	System.out.println(startString);
 	    
     	while(currentString != endString) { //Solange zwischen den Tagen
     		while(currentIntervall <= testCalendar.getNumberOfIntervalls()) { //sloange im Tag
     		
     		for(Calendar calendar : calendars) { //schaut ob alle frei sind
     			
-    			if(calendar.isFree(currentIntervall, currentString))
+    			if(currentIntervall == 0 && currentString == null)
+    				System.out.println("null");
+    			else
+    				System.out.println("Not null");
+    			
+    			System.out.println(currentIntervall);
+    			//System.out.println(calendar.isFree(currentIntervall, currentString));
+    			if(calendar.isFree(currentIntervall, currentString)) // nullpointer exception
     				allFreeBoolean = true;
     			else {
 					allFreeBoolean = false;
@@ -203,7 +211,7 @@ public class Controller {
     	System.out.println(listRaw.size());
     	return  agreementSummary(listRaw);
     }
-    
+   
     private ArrayList<CustomMap[]> agreementSummary(List<CustomMap> listRaw){
     	String preDayString = listRaw.get(0).getString();
     	ArrayList<CustomMap[]> list = new ArrayList<CustomMap[]>();
