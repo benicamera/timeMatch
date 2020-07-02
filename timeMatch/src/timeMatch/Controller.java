@@ -173,6 +173,7 @@ public class Controller {
     	String currentString = startString;
     	Boolean allFreeBoolean = false;
     	System.out.println(endString);
+	    
     	while(currentString != endString) { //Solange zwischen den Tagen
     		while(currentIntervall <= testCalendar.getNumberOfIntervalls()) { //sloange im Tag
     		
@@ -188,8 +189,9 @@ public class Controller {
     		
     		if(allFreeBoolean) { //wenn alle frei
     			listRaw.add(new CustomMap(currentString, currentIntervall));
-    			
     		currentIntervall++;
+		if(currentIntervall <= testCalendar.getNumberOfIntervalls())
+			System.out.println("Planned Stop");
     	}
     		System.out.println("_"); //Unendlich warum?
     	}
