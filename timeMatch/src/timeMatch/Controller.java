@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
+
 
 /*
  * Verrechnet und vergleicht
@@ -24,9 +24,7 @@ import java.util.Collection;
  */
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Controller {
     final Calendar testCalendar;
@@ -39,10 +37,12 @@ public class Controller {
     public Controller() {
         testCalendar = new Calendar("testCalendar");
         loadCalendars();
+        toTest();
     }
     
-    public void toTest(/* insert Parameters*/ String string) {
+    public void toTest(/* insert Parameters*/) {
         testCalendar.toTest(/*insert Parameters*/);
+        System.out.println("********");
         Calendar[] calendars = new Calendar[2];
         calendars[0] = calendarRegister.get("test1");
         calendars[1] = calendarRegister.get("test2");
@@ -50,8 +50,11 @@ public class Controller {
         intervall[0] = "01010001";
         intervall[1] = "02010001";
         List<CustomMap[]> list = new ArrayList<CustomMap[]>();
+        System.out.println("********");
         list = match(calendars,intervall );
+        System.out.println(list.size() + "*");
         for (int i = 0; i < list.size(); i++) {
+        	System.out.println("-------------------");
 			System.out.print(list.get(i)[0].getString() + " ; ");
 			System.out.print(list.get(i)[0].getInteger() + " - ");
 			if(list.get(i)[1] != null) {
@@ -161,7 +164,6 @@ public class Controller {
     
     
     public List<CustomMap[]> match (Calendar[] calendars, String[] intervall ) { //du hast [] vergessen
-    	int[] agreement;
     	List<CustomMap[]> agreementsList = new ArrayList<CustomMap[]>();
     	List<CustomMap> listRaw = new ArrayList<CustomMap>();
     	
@@ -170,7 +172,7 @@ public class Controller {
     	int currentIntervall = 1;
     	String currentString = startString;
     	Boolean allFreeBoolean = false;
-    	
+    	System.out.println(endString);
     	while(currentString != endString) { //Solange zwischen den Tagen
     		while(currentIntervall <= testCalendar.getNumberOfIntervalls()) { //sloange im Tag
     		
@@ -189,11 +191,14 @@ public class Controller {
     			
     		currentIntervall++;
     	}
+    		System.out.println("_"); //Unendlich warum?
+    	}
     		currentString = dayStringAdd(currentString);
     		currentIntervall = 1;
+    		System.out.println("*");
     	}
-    	}
-    	
+    	System.out.println("____________");
+    	System.out.println(listRaw.size());
     	return  agreementSummary(listRaw);
     }
     
@@ -286,8 +291,7 @@ public class Controller {
 		Integer[] splitIntegers = new Integer[3];
 		day = Integer.parseInt(dayString.substring(0, 2));
 		month = Integer.parseInt(dayString.substring(2,4));
-		year = Integer.parseInt(dayString.substring(4,dayString.length()));
-		System.out.println(String.format("%d.%d.%d", day, month, year));
+		year = Integer.parseInt(dayString.substring(4,dayString.length()));		
 		
 		splitIntegers[0] = day;
 		splitIntegers[1] = month;

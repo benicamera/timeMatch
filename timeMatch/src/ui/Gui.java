@@ -24,12 +24,12 @@ public class Gui {
 	
 	public Gui() {
 		controller = new Controller();
-		toTest();
 		initialize();
+		toTest();
 	}
 	
 	public void toTest(/*Parameters*/) {
-		controller.toTest(/*Parameters*/"02030004");
+		controller.toTest(/*Parameters*/);
 	}
 
 	/**
