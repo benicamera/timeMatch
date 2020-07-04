@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -59,7 +60,6 @@ public class Controller {
         list = match(calendars,intervall );
         System.out.println(list.size() + "*");
         for (int i = 0; i < list.size(); i++) {
-        	System.out.println("-------------------");
 			System.out.print(list.get(i)[0].getString() + " ; "); //Ist bis jetzt start des ersten Stunde
 			System.out.print(list.get(i)[0].getInteger() + " - ");
 			if(list.get(i)[1] != null) {
@@ -170,6 +170,15 @@ public class Controller {
         return "Fehler";
     }
     
+    public ArrayList<Calendar> getCalendarList(){
+    	ArrayList<Calendar> list = new ArrayList<Calendar>();
+    	
+    	for (int i = 0; i < getCalendarNameList().size(); i++) {
+			list.add(calendarRegister.get(getCalendarNameList().get(i)));
+		}
+    	
+    	return list;
+    }
     
     public List<CustomMap[]> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
     	List<CustomMap> listRaw = new ArrayList<CustomMap>();
@@ -217,39 +226,49 @@ public class Controller {
     private ArrayList<CustomMap[]> agreementSummary(List<CustomMap> listRaw){
     	String preDayString = listRaw.get(0).getString();
     	ArrayList<CustomMap[]> list = new ArrayList<CustomMap[]>();
-    	CustomMap[] intervall = new CustomMap[2];
-    	intervall[0] = new CustomMap(listRaw.get(0).getString(), listRaw.get(0).getInteger());
-    	System.out.println(intervall[0].getInteger() + "+");
-    	int prevIntervallEnding = intervall[0].getInteger();
+    	//System.out.println(intervall[0].getInteger() + "+0");
+    	int prevIntervallEnding = listRaw.get(0).getInteger();
     	
+    	//////////////////////////////////////////// Wo wird list.get(0)[0].getInteger() 3 ? ///////////////////////////
     	for (int i = 0; i < listRaw.size(); i++) {
+    		
+        	CustomMap[] intervall = new CustomMap[2];
+        	intervall[0] = new CustomMap(listRaw.get(0).getString(), listRaw.get(0).getInteger());
+        	
 			if(listRaw.get(i).getString().equals(preDayString)) {
 				System.out.println("Equals preday string");
 				if(listRaw.get(i).getInteger() == prevIntervallEnding + 1) {
 					System.out.println("is next hour");
 					intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
+					System.out.println(list.get(0)[0].getInteger() + "+1+" + i);
 				
-				}else {
+				}else { /////////////////////////////////////////////////////////////////////////////////
 					list.add(intervall);
+					System.out.println(list.get(0)[0].getInteger() + "+1,25+" + i); //hier ist es 1 beim 2. durchgang
 					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
 					prevIntervallEnding = listRaw.get(i).getInteger();
-				}
+					System.out.println(list.get(0)[0].getInteger() + "+1,5+" + i); ///hier ist es 3 beim 2 durchgang
+				}////////////////////////////////////////////////////////////////////////
+				///nach dem 2. Durchgang ist hier 3
+				System.out.println(list.get(0)[0].getInteger() + "+2+" + i);
 				
 			}else if(listRaw.get(i).getString().equals(dayStringAdd(preDayString)) && prevIntervallEnding > testCalendar.getNumberOfIntervalls()){
 				
 				intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
 				prevIntervallEnding = listRaw.get(i).getInteger();
 				preDayString = listRaw.get(i).getString();
-				
+				System.out.println(list.get(0)[0].getInteger() + "+3+" + i);
 					
 				}else {
 					list.add(intervall);
 					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
 					prevIntervallEnding = listRaw.get(i).getInteger();
+					System.out.println(list.get(0)[0].getInteger() + "+4+" + i);
 				}
 			}
     	System.out.println(list.size());
-    	System.out.println(list.get(0)[0].getInteger() + "+");
+    	System.out.println(list.get(0)[0].getInteger() + "+5");
+    	/////////////////////////////////////////////Hier ist es 3/////////////////////////
     	return list;
     }
     
