@@ -48,25 +48,7 @@ public class Controller {
     }
    
     public void toTest(/* insert Parameters*/) {
-        testCalendar.toTest(/*insert Parameters*/);
-        System.out.println("********");
-        Calendar[] calendars = new Calendar[2];
-        calendars[0] = calendarRegister.get("test1");
-        calendars[1] = calendarRegister.get("test2");
-        String[] intervall = new String[2];
-        intervall[0] = "01010001";
-        intervall[1] = "02010001";
-        List<CustomMap[]> list = new ArrayList<CustomMap[]>();
-        list = match(calendars,intervall );
-        System.out.println(list.size() + "*");
-        for (int i = 0; i < list.size(); i++) {
-			System.out.print(list.get(i)[0].getString() + " ; "); //Ist bis jetzt start des ersten Stunde
-			System.out.print(list.get(i)[0].getInteger() + " - ");
-			if(list.get(i)[1] != null) {
-				System.out.print(list.get(i)[1].getString() + " ; ");//ist bis jetzt
-				System.out.print(list.get(i)[1].getInteger());
-			}
-			}
+        
 		}
         
     
@@ -205,8 +187,8 @@ public class Controller {
     	return -1;
     }
     
-    public List<CustomMap[]> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
-    	List<CustomMap> listRaw = new ArrayList<CustomMap>();
+    public ArrayList<CustomMap[]> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
+    	ArrayList<CustomMap> listRaw = new ArrayList<CustomMap>();
     	
     	String startString = _intervall[0];
     	String endString = _intervall[1];
@@ -343,6 +325,7 @@ public class Controller {
     	
     	return monthDays;
     }
+    
     public Integer[] reverseDayString(String dayString) {
     	
     	int day;
@@ -359,6 +342,7 @@ public class Controller {
 		
 		return splitIntegers;
     }
+    
     public Calendar getCalendar(String name) {
        return calendarRegister.get(name);
     }

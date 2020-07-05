@@ -98,6 +98,11 @@ public class Gui {
 		frame.getContentPane().add(spaceLabel2, gbc_spaceLabel2);
 		
 		JButton matchButton = new JButton("");
+		matchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CompareCalendarsUi matchWindowCalendarsUi = new CompareCalendarsUi(controller);
+			}
+		});
 		matchButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
 		matchButton.setToolTipText("suche Match");
 		GridBagConstraints gbc_matchButton = new GridBagConstraints();
