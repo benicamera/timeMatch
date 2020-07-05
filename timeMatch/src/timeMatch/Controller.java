@@ -156,6 +156,11 @@ public class Controller {
     	return (ArrayList<String>) _names;
     }
     
+    public String getCalendarName(Calendar calendar) {
+    	Calendar[] calendars = (Calendar[]) getCalendarList().toArray();
+    	return calendars[getElementIndexOfArray(calendars, calendar)].getName();
+    }
+    
     public boolean isNameTaken(String _calendarName) {
     	return calendarRegister.containsKey(_calendarName);
     }
@@ -178,6 +183,26 @@ public class Controller {
 		}
     	
     	return list;
+    }
+    
+    public Object[] getObjectArrayIntersection(Object[] array1, Object[] array2) {
+    	ArrayList<Object> resultObjects = new ArrayList<Object>();
+    	  for(int i = 0; i<array1.length; i++ ) {
+    	         for(int j = 0; j<array2.length; j++) {
+    	            if(array1[i]==array2[j]) {
+    	               resultObjects.add(array2[j]);
+    	            }
+    	         }
+    	      }
+    	  
+    	  return resultObjects.toArray();
+    }
+    
+    public <T> int getElementIndexOfArray(T[] array, T target) {
+    	for (int i = 0; i < array.length; i++)
+    		if (target.equals(array[i]))
+    			return i;
+    	return -1;
     }
     
     public List<CustomMap[]> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
