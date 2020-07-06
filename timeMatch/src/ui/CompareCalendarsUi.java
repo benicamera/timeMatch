@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.time.Year;
@@ -271,28 +272,37 @@ public class CompareCalendarsUi {
 	
 	private Calendar[] getSelectCalendars() {
 		int number = askNumber("Wie viele Kalender sollen abgeglichen werden??");
-		Object[] selectedObjects = new Object[number];	
+		Calendar[] selectedObjects = new Calendar[number];	
 		for(int i = 0; i<number; i++) {
 			selectedObjects[i] = getChoosCalendarWithObjectArrays(selectedObjects);
 		}
 		
-		return (Calendar[]) selectedObjects;
+		return selectedObjects;
 	}
 	
 	private Calendar getChoosCalendarWithObjectArrays(Object[] selectedObjects) {
-		Object[] allCalendarsObjects = controller.getCalendarList().toArray();
-		Calendar inputCalendar = controller.getCalendar(String.valueOf(JOptionPane.showInputDialog(null, "Welcher Kalender?", "Kalender", JOptionPane.PLAIN_MESSAGE, null, getCalendarNamesFromArray(getUnusedFromArrays(allCalendarsObjects, selectedObjects)), "Tag")));
-				return (inputCalendar != null) ? inputCalendar : getChoosCalendarWithObjectArrays(selectedObjects);
+		Object[] allCalendarStrings = controller.getCalendarNameList().toArray();
+		Calendar inputCalendar = controller.getCalendar(String.valueOf(JOptionPane.showInputDialog(null, "Welcher Kalender?", "Kalender", JOptionPane.PLAIN_MESSAGE, null, getUnusedFromArrays(allCalendarStrings, calendarArrayToStringArray(selectedObjects)), controller.getCalendarList().get(0))));
+		return (inputCalendar != null) ? inputCalendar : getChoosCalendarWithObjectArrays(selectedObjects);	
 	}
 	
-	private Object[]  getCalendarNamesFromArray(Object[] array) {
+	private Object[]  getCalendarNamesFromArray(Calendar[] array) {
 		ArrayList<Object> resultArrayList = new ArrayList<Object>();
 		
-		for (Object object : array) {
-			resultArrayList.add(controller.getCalendarName((Calendar) object));
+		for (Calendar object : array) {
+			resultArrayList.add(controller.getCalendarName(object));
 		}
 		
 		return resultArrayList.toArray();
+	}
+	
+	private Object[] calendarArrayToStringArray(Object[] calendars) {
+		Object[] stringsObject = new Object[calendars.length];
+		for (int i = 0; i < calendars.length; i++) {
+			stringsObject[i] = ((Component) calendars[i]).getName();
+		}
+		
+		return stringsObject;
 	}
 	
 	private Object[] getUnusedFromArrays(Object[] base, Object[] selection) {
@@ -300,6 +310,9 @@ public class CompareCalendarsUi {
 		for (Object object : controller.getObjectArrayIntersection(base, selection)) {
 			if(controller.getElementIndexOfArray(base, object) < 0)
 				resultArrayList.add(object);
+		}
+		for (Object object : resultArrayList) {
+			System.out.println(object);
 		}
 		
 		return resultArrayList.toArray();
