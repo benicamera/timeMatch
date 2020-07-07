@@ -181,9 +181,12 @@ public class Controller {
     }
     
     public <T> int getElementIndexOfArray(T[] array, T target) {
+    	System.out.println("array length: " + array.length);
     	for (int i = 0; i < array.length; i++)
-    		if (target.equals(array[i]))
+    		if (target.equals(array[i])) {
+    			System.out.println("ElementIndex: " + i);
     			return i;
+    		}
     	return -1;
     }
     
