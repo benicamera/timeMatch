@@ -96,8 +96,6 @@ public class Controller {
     	    e.printStackTrace(); //druckt genaue Fehlerwuelle
     	  }
     	}
-
-   
     
     public String getDayString(int _year, int _month, int _day) {
     	StringBuilder sb = new StringBuilder();  
@@ -145,6 +143,15 @@ public class Controller {
     
     public boolean isNameTaken(String _calendarName) {
     	return calendarRegister.containsKey(_calendarName);
+    }
+    
+    public boolean isElementOfArray(Object element, Object[] array) {
+    	for(Object object : array) {
+    		if(element.equals(object))
+    			return true;
+    	}
+    	
+    	return false;
     }
     
     public String createCalendar (String name) {		//mit der methode ist es m�glich einen neuen Calendar in das Buch aufzunehmen

@@ -1,9 +1,7 @@
 package ui;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +98,7 @@ public class CompareCalendarsUi {
 			StringBuilder intervallStringBuilder = new StringBuilder();
 			for(int i = 0; i<customMaps.length; i++) {
 				for(int y = 0; y<3; y++) {
-					intervallStringBuilder.append(controller.reverseDayString(customMaps[i].getString())[y]);
+					intervallStringBuilder.append(controller.reverseDayString(customMaps[i].getString())[y]); //NullPointerException - Warum?
 				}
 			intervallStringBuilder.append(", ");
 			intervallStringBuilder.append(customMaps[i].getInteger() + "h ");
@@ -145,7 +143,7 @@ public class CompareCalendarsUi {
 		
 		days = daysList.toArray();
 		
-		String dayInputString = (String) JOptionPane.showInputDialog( contentPane, "Welcher den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
+		String dayInputString = (String) JOptionPane.showInputDialog( contentPane, "Welcher den Tag", "Intervallende", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
 		
 		if(dayInputString == "0" || dayInputString == null)
 			return getDayInput();
@@ -157,7 +155,7 @@ public class CompareCalendarsUi {
 	}
 	
 	private int getYearInputMod(int startYear) {
-		int year = getYearInput();
+		int year = getYearInputMod();
 		if(year < startYear) {
 			JOptionPane.showMessageDialog(null, "Auswahl nicht vereinbar");
 			return getYearInputMod(startYear);
@@ -165,13 +163,20 @@ public class CompareCalendarsUi {
 		return year;
 	}
 	
+	private int getYearInputMod() {
+		try {
+			return Integer.parseInt((String) JOptionPane.showInputDialog(null, "Welches Jahr?", "Intervallende", JOptionPane.PLAIN_MESSAGE, null, null, "Jahr:"));
+		} catch (Exception e) { //wenn nicht eingetragen wurde oder es sonst einen Fehler gibt
+			return getYearInputMod();
+		}
+	}
 	private int getMonthInputMod(int startMonth, int year) {
 		ArrayList<Object> modMonthsObjectList = new ArrayList<Object>();
 		for(int i = (startMonth - 1); i < months.length; i++) {
 			modMonthsObjectList.add(months[i]);
 		}
 		
-		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, modMonthsObjectList.toArray(), "Monat");
+		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Intervallende", JOptionPane.PLAIN_MESSAGE, null, modMonthsObjectList.toArray(), "Monat");
 		
 		//Wie viele Tage hat der Monat?
 			if(_month < 8) {
@@ -208,7 +213,7 @@ public class CompareCalendarsUi {
 	
 	private int getYearInput() {
 		try {
-			return Integer.parseInt(JOptionPane.showInputDialog("Welches Jahr?", "Jahr:"));
+			return Integer.parseInt((String) JOptionPane.showInputDialog(null, "Welches Jahr?", "Intervallstart", JOptionPane.PLAIN_MESSAGE, null, null, "Jahr:"));
 		} catch (Exception e) { //wenn nicht eingetragen wurde oder es sonst einen Fehler gibt
 			return getYearInput();
 		}
@@ -226,7 +231,7 @@ public class CompareCalendarsUi {
 		
 		days = daysList.toArray();
 		
-		String dayInputString = (String) JOptionPane.showInputDialog( null, "Welcher den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
+		String dayInputString = (String) JOptionPane.showInputDialog( null, "Welcher den Tag", "Intervallstart", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
 		
 		if(dayInputString == "0" || dayInputString == null)
 			return getDayInput();
@@ -238,7 +243,7 @@ public class CompareCalendarsUi {
 	}
 	
 	private int getMonthInput(int year) {
-		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
+		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Intervallstart", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
 		
 		//Wie viele Tage hat der Monat?
 			if(_month < 8) {
@@ -290,7 +295,6 @@ public class CompareCalendarsUi {
 		return (inputCalendar != null) ? inputCalendar : getChoosCalendarWithObjectArrays(selectedObjects);	
 	}
 	
-	
 	private Object[] calendarArrayToStringArray(Object[] calendars) {
 		Object[] stringsObject = new Object[calendars.length];
 		for (int i = 0; i < calendars.length; i++) {
@@ -306,17 +310,11 @@ public class CompareCalendarsUi {
 	private Object[] getUnusedFromArrays(Object[] base, Object[] selection) {
 		ArrayList<Object> resultArrayList = new ArrayList<Object>();
 		
-		/* FALSCH
-		for (Object object : controller.getObjectArrayIntersection(base, selection)) {
-			System.out.println("In For");
-			System.out.println(controller.getElementIndexOfArray(base, object));
-			if(controller.getElementIndexOfArray(base, object) == -1) {
-				System.out.println("In if");
-				if(object != null)
-					resultArrayList.add(object);
-			}
+		for (int i = 0; i < base.length; i++) {
+			if(!controller.isElementOfArray(base[i], selection))
+				resultArrayList.add(base[i]);
 		}
-		*/
+		
 		System.out.println(resultArrayList.size());
 		return resultArrayList.toArray();
 	}
