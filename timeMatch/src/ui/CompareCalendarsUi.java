@@ -306,6 +306,7 @@ public class CompareCalendarsUi {
 	private Object[] getUnusedFromArrays(Object[] base, Object[] selection) {
 		ArrayList<Object> resultArrayList = new ArrayList<Object>();
 		
+		/* FALSCH
 		for (Object object : controller.getObjectArrayIntersection(base, selection)) {
 			System.out.println("In For");
 			System.out.println(controller.getElementIndexOfArray(base, object));
@@ -315,7 +316,7 @@ public class CompareCalendarsUi {
 					resultArrayList.add(object);
 			}
 		}
-		
+		*/
 		System.out.println(resultArrayList.size());
 		return resultArrayList.toArray();
 	}
