@@ -243,49 +243,37 @@ public class Controller {
     private ArrayList<CustomMap[]> agreementSummary(List<CustomMap> listRaw){
     	String preDayString = listRaw.get(0).getString();
     	ArrayList<CustomMap[]> list = new ArrayList<CustomMap[]>();
-    	//System.out.println(intervall[0].getInteger() + "+0");
     	int prevIntervallEnding = listRaw.get(0).getInteger();
     	
-    	//////////////////////////////////////////// Wo wird list.get(0)[0].getInteger() 3 ? ///////////////////////////
     	for (int i = 0; i < listRaw.size(); i++) {
     		
         	CustomMap[] intervall = new CustomMap[2];
         	intervall[0] = new CustomMap(listRaw.get(0).getString(), listRaw.get(0).getInteger());
         	
 			if(listRaw.get(i).getString().equals(preDayString)) {
-				System.out.println("Equals preday string");
 				if(listRaw.get(i).getInteger() == prevIntervallEnding + 1) {
-					System.out.println("is next hour");
-					intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
-					System.out.println(list.get(0)[0].getInteger() + "+1+" + i);
-				
-				}else { /////////////////////////////////////////////////////////////////////////////////
+					intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());	
+				}else { 
 					list.add(intervall);
-					System.out.println(list.get(0)[0].getInteger() + "+1,25+" + i); //hier ist es 1 beim 2. durchgang
+					
 					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
 					prevIntervallEnding = listRaw.get(i).getInteger();
-					System.out.println(list.get(0)[0].getInteger() + "+1,5+" + i); ///hier ist es 3 beim 2 durchgang
-				}////////////////////////////////////////////////////////////////////////
-				///nach dem 2. Durchgang ist hier 3
-				System.out.println(list.get(0)[0].getInteger() + "+2+" + i);
+				}
+				
 				
 			}else if(listRaw.get(i).getString().equals(dayStringAdd(preDayString)) && prevIntervallEnding > testCalendar.getNumberOfIntervalls()){
 				
 				intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
 				prevIntervallEnding = listRaw.get(i).getInteger();
 				preDayString = listRaw.get(i).getString();
-				System.out.println(list.get(0)[0].getInteger() + "+3+" + i);
 					
 				}else {
 					list.add(intervall);
 					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
 					prevIntervallEnding = listRaw.get(i).getInteger();
-					System.out.println(list.get(0)[0].getInteger() + "+4+" + i);
 				}
 			}
-    	System.out.println(list.size());
-    	System.out.println(list.get(0)[0].getInteger() + "+5");
-    	/////////////////////////////////////////////Hier ist es 3/////////////////////////
+ 
     	return list;
     }
     

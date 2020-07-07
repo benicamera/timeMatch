@@ -15,9 +15,17 @@ import javax.swing.border.EmptyBorder;
 import timeMatch.Calendar;
 import timeMatch.Controller;
 import timeMatch.CustomMap;
+import java.awt.GridBagLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class CompareCalendarsUi {
+public class CompareCalendarsUi extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	final Controller controller;
 	JFrame showFrame = new JFrame();
@@ -31,6 +39,7 @@ public class CompareCalendarsUi {
 	Object[] allCalendarStrings;
 	
 	ArrayList<String> matchIntervallStrings = new ArrayList<String>();
+	private JButton backButton;
 	
 	public CompareCalendarsUi(Controller controller) {
 		this.controller = controller;
@@ -45,23 +54,43 @@ public class CompareCalendarsUi {
 		showFrame.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{217, 1, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane);
+		contentPane.setVisible(true);
+		
 		showFrame.setContentPane(contentPane);
+		
 		
 		list = new JList<String>(model);
 		list.setVisibleRowCount(7);
 		initList(list);
 		
 		GridBagConstraints gbc_list = new GridBagConstraints();
+		gbc_list.anchor = GridBagConstraints.NORTHWEST;
 		gbc_list.ipady = 100;
 		gbc_list.ipadx = 100;
-		gbc_list.insets = new Insets(5, 5, 5, 5);
-		gbc_list.gridwidth = 11;
-		gbc_list.gridheight = 11;
-		gbc_list.gridx = 2;
-		gbc_list.gridy = 2;
-		contentPane.add(list, gbc_list);
-		contentPane.setVisible(true);
-		showFrame.add(contentPane);
+		gbc_list.insets = new Insets(0, 0, 5, 5);
+		gbc_list.gridx = 1;
+		gbc_list.gridy = 0;
+		contentPane.add(list);
+		
+		backButton = new JButton("Zurück");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showFrame.setVisible(false);
+			}
+		});
+		backButton.setToolTipText("Zum Hauptmenü");
+		GridBagConstraints gbc_backButton = new GridBagConstraints();
+		gbc_backButton.insets = new Insets(0, 0, 0, 5);
+		gbc_backButton.gridx = 6;
+		gbc_backButton.gridy = 7;
+		contentPane.add(backButton, gbc_backButton);
+		
 		showFrame.setVisible(true);
 	}
 	
@@ -96,16 +125,26 @@ public class CompareCalendarsUi {
 		ArrayList<String> stringMatchesStrings = new ArrayList<String>();
 		for (CustomMap[] customMaps : matches) {
 			StringBuilder intervallStringBuilder = new StringBuilder();
+			System.out.println(customMaps.length);
 			for(int i = 0; i<customMaps.length; i++) {
 				for(int y = 0; y<3; y++) {
-					intervallStringBuilder.append(controller.reverseDayString(customMaps[i].getString())[y]); //NullPointerException - Warum?
+					System.out.println(y+ "++++");
+					System.out.println(customMaps[i]);
+					intervallStringBuilder.append(controller.reverseDayString(customMaps[i].getString())[y]);
+					if(y < 2)
+						intervallStringBuilder.append(".");
 				}
 			intervallStringBuilder.append(", ");
-			intervallStringBuilder.append(customMaps[i].getInteger() + "h ");
-			if((customMaps.length - i) > 1) 
+			if(i==1)
+				intervallStringBuilder.append((customMaps[i].getInteger() + 1) + "h ");
+			else if(i==0)
+				intervallStringBuilder.append((customMaps[i].getInteger() - 1) + "h ");
+			if(customMaps[i+1] != null) 
 				intervallStringBuilder.append("bis ");
-			else
+			else {
 				intervallStringBuilder.append(".");
+				break;
+			}
 		}
 			stringMatchesStrings.add(intervallStringBuilder.toString());
 		}
