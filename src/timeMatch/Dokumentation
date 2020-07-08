@@ -1,0 +1,67 @@
+Dokumentation:
+
+Änderungen wie folgt eintragen:
+
+tt.mm.jjjj (hh:mm) (Autor): Methode xy erstellt/geändert (nur bei großen Änderungen). Sie tut folgendes: Kurzbeschreibung
+
+Genauere Beschreibung dann als Kommentar in der Klasse selbst. 
+
+ES HIEß DIE DOKUMENTATION SEI WICHTIG!
+
+----GUI:----
+
+20.06.2020 (14:00) (Beni): final controller erstellt. Es tut folgendes: Bindet Controller-Klasse ins Programm ein.
+20.06.2020 (15:15) (Beni): Methode initUI() erstellt. Sie tut folgendes: Baut und erstellt das Fenster.
+20.06.2020 (15:15) (Beni): Methode createActionListener() erstellt. Sie tut folgendes: Buttons können jetzt reagieren.
+20.06.2020 (17:35) (Beni): Methode createCalendar() erstellt. Sie tut folgendes: Bestückt einen Kalender.
+20.06.2020 (17:40) (Beni): Methode createCalendar() in equipCalendar() umbenannt.
+21.06.2020 (12:40) (Beni): Gui wird jetzt mit WindowBuilder gemacht.
+21.06.2020 (20:10) (Beni): GUi weiterentwickelt.
+26.06.2020 (17:40) (Beni): Gui neu aufgesetzt. Bilder als Knöpfe.
+26.06.2020 (19:45) (Beni): ActionListener auf createButton.
+26.06.2020 (20:00) (Beni): String askCalendarName() erstellt. Fragt nach Namen und fragt, ob er bereits vergeben ist.
+26.06.2020 (20:00) (Beni): Klasse EditCalendarUi erstellt. Erschafft Frame, der einen Kalender bearbeiten kann.
+27.06.2020 (18:30) (Beni): editButton mit EditCalendarUi verknüpft: Kalender auswählen und los gehts mit dem bearbeiten.
+27.06.2020 (20:00) (Bernhard): �nderung bei doppeltem Kalender Namen.
+27.06.2020 (20:40) (Bernhard): �nderung der Aufschrift auf den Kn�pfen.
+27.06.2020 (21:00) (Bernhard): Ver�nderung der ausgegebenen Texte.
+27.06.2020 (23:00) (Beni,Bernhard,FJSV(ein freundlicher User auf StackOverFlow)): behebung der gedrehten Arrays, Vertrauen in Foren wiederhergestellt.
+
+EditCalendar:
+26.06.2020 (21:10) (Beni): daysInput(), monthInput(), yearInput() erstellt. Erstellt popup-fenster mit input möglichkeit. Input wird in variable gespeichert.
+27.06.2020 (11:30) (Beni): Angefangen, knöpfe zu positionieren.
+27.06.2020 (16:50) (Beni): initIntervallButtons() fertig gestellt. Positioniert Zeitknöpfe automatisch, egal, wie viele Intervalle es gibt..
+27.06.2020 (18:10) (Beni): okayButton hinzugefügt. schließt Fenster. trshButton konfiguriert: Fragt ob wirklich löschen, löscht und schließt das fenster.
+27.06.2020 (20:55) (Beni): ActionListener in eine andere Methode gemacht. Man kann jetzt einzeln drücken.
+01.07.2020 (06:33) (Beni): Action Performed methode deutlich verbessert. numberOfIntervalls ist jetzt wieder anpassbar. dank Stackoverflow
+
+ShowCalendarUi:
+28.06.2020 (11:20) (Beni): Erstellt.
+
+-------------------
+----CONTROLLER:----
+
+20.06.2020 (14:05) (Beni): final testCalender erstellt. Es tut folgendes: Ermöglicht den Test von Calendar-Methoden durch die toTest-Methode.
+26.06.2020 (16:54) (Felix): Methoden hinzugefügt
+26.06.2020 (16:54) (Felix): HashMap hinzugefügt
+27.06.2020 (10:30) (Beni): boolean isLeapYear(int _year) erstellt. gibt isLeapYear(int _year) vom testCalendar zurück.
+27.06.2020 (11:00) (Beni): boolean isNameTaken(String _calendarName) erstellt. Schaut, ob bereits ein Kalender mit dem Namen existiert.
+27.06.2020 (18:30) (Beni): public  ArrayList<String> getCalendarNameList() erstellt. Gibt alle Namen der Kalender in einer Liste wieder.
+27.06.2020 (19:50) (Beni): String getDayString(int _year, int _month, int _day) erstellt. generiert Datum als String ddmmyyyy.
+28.06.2020 (14:00) (Beni): String delete(String calendarname) hinzugefügt. löscht kalender aus verzeichnis.
+28.06.2020 (16:45) (Beni): save und load methoden erstellt. speichert alle Calendar-Objekte in calendars.dat und kann alle wieder in die HashMap ziehen. 
+01.06.2020 (10:20) (Beni): Bug in der Save methode behoben. Speichert jetzt, auch wenn kein Speicher-Ordner bereits erstellt wurde
+02.07.2020 (13:8) (Beni&Felix): Bug wegen nicht vorhandenen calenders behoben 
+-----------------
+----CALENDAR:----
+20.06.2020 (14:38) (Bernhard): erstellung von arrays mit Variablen.
+27.06.2020 (10:30) (Beni): boolean isLeapYear(int _year) erstellt. Berechnet, ob es ein Schaltjahr ist.
+27.06.2020 (18:45) (Beni): public boolean isFree(int time) erstellt. gibt zurück ob frei oder nicht.
+27.06.2020 (18:45) (Beni): public void setFree(int time, boolean free) erstellt.
+
+
+
+----------------------------
+----KLASSENÜBERGREIFEND:----
+
+20.06.2020 (14:05) (Beni): Methode toTest erstellt. Sie tut folgendes: Ermöglicht das übersichtlichere Testen einzelner Funktionen durch Ausführen des Programms
