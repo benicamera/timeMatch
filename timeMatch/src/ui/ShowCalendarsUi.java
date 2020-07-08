@@ -1,16 +1,10 @@
 package ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import timeMatch.Controller;
 
 import java.awt.GridBagLayout;
@@ -20,26 +14,23 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
-import javax.swing.JScrollBar;
 import java.awt.Insets;
-import java.awt.Scrollbar;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JScrollPane;
-import javax.swing.Popup;
-
-import java.awt.List;
 import java.awt.MouseInfo;
 import java.awt.Font;
 import java.awt.Color;
 
 public class ShowCalendarsUi extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	final Controller controller;
 	JFrame showFrame = new JFrame();
@@ -74,7 +65,7 @@ public class ShowCalendarsUi extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel calendarListLabel = new JLabel("Liste der Kalender");
-		calendarListLabel.setForeground(new Color(255, 182, 193));
+		calendarListLabel.setForeground(new Color(255, 105, 180));
 		calendarListLabel.setFont(new Font("Roboto", Font.BOLD, 30));
 		GridBagConstraints gbc_calendarListLabel = new GridBagConstraints();
 		gbc_calendarListLabel.gridheight = 2;

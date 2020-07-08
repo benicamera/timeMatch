@@ -19,6 +19,9 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
 
 public class CompareCalendarsUi extends JPanel{
 	
@@ -40,6 +43,7 @@ public class CompareCalendarsUi extends JPanel{
 	
 	ArrayList<String> matchIntervallStrings = new ArrayList<String>();
 	private JButton backButton;
+	private JLabel headerLabel;
 	
 	public CompareCalendarsUi(Controller controller) {
 		this.controller = controller;
@@ -56,13 +60,22 @@ public class CompareCalendarsUi extends JPanel{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{217, 1, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		contentPane.setVisible(true);
 		
 		showFrame.setContentPane(contentPane);
+		
+		headerLabel = new JLabel("Termine");
+		headerLabel.setForeground(new Color(255, 105, 180));
+		headerLabel.setFont(new Font("Roboto", Font.BOLD, 30));
+		GridBagConstraints gbc_headerLabel = new GridBagConstraints();
+		gbc_headerLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_headerLabel.gridx = 1;
+		gbc_headerLabel.gridy = 2;
+		contentPane.add(headerLabel, gbc_headerLabel);
 		
 		
 		list = new JList<String>(model);
@@ -75,8 +88,8 @@ public class CompareCalendarsUi extends JPanel{
 		gbc_list.ipadx = 100;
 		gbc_list.insets = new Insets(0, 0, 5, 5);
 		gbc_list.gridx = 1;
-		gbc_list.gridy = 0;
-		contentPane.add(list);
+		gbc_list.gridy = 5;
+		contentPane.add(list, gbc_list);
 		
 		backButton = new JButton("Zurück");
 		backButton.addActionListener(new ActionListener() {
@@ -88,7 +101,7 @@ public class CompareCalendarsUi extends JPanel{
 		GridBagConstraints gbc_backButton = new GridBagConstraints();
 		gbc_backButton.insets = new Insets(0, 0, 0, 5);
 		gbc_backButton.gridx = 6;
-		gbc_backButton.gridy = 7;
+		gbc_backButton.gridy = 8;
 		contentPane.add(backButton, gbc_backButton);
 		
 		showFrame.setVisible(true);
@@ -135,13 +148,16 @@ public class CompareCalendarsUi extends JPanel{
 						intervallStringBuilder.append(".");
 				}
 			intervallStringBuilder.append(", ");
+			
+			//CustomMao[1] existiert nicht - warum
 			if(i==1)
-				intervallStringBuilder.append((customMaps[i].getInteger() + 1) + "h ");
+				intervallStringBuilder.append((customMaps[i].getInteger()) + "h ");
 			else if(i==0)
 				intervallStringBuilder.append((customMaps[i].getInteger() - 1) + "h ");
-			if(customMaps[i+1] != null) 
+			if( i < 1) {
+				if(customMaps[i+1] != null) 
 				intervallStringBuilder.append("bis ");
-			else {
+			}else {
 				intervallStringBuilder.append(".");
 				break;
 			}

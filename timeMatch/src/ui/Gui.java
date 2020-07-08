@@ -47,7 +47,7 @@ public class Gui {
 		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel titleLabel = new JLabel("timeMatch!");
-		titleLabel.setForeground(new Color(221, 160, 221));
+		titleLabel.setForeground(new Color(255, 105, 180));
 		titleLabel.setBackground(new Color(240, 255, 240));
 		titleLabel.setFont(new Font("Rubik", Font.BOLD, 59));
 		GridBagConstraints gbc_titleLabel = new GridBagConstraints();

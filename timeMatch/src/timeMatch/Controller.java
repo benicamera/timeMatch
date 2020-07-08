@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -251,27 +250,31 @@ public class Controller {
         	intervall[0] = new CustomMap(listRaw.get(0).getString(), listRaw.get(0).getInteger());
         	
 			if(listRaw.get(i).getString().equals(preDayString)) {
+				System.out.println("PreDayString: " + preDayString);
+				System.out.println("PrevIntervallEnding: " + prevIntervallEnding + ". Current Intervall: " + listRaw.get(i).getInteger());
 				if(listRaw.get(i).getInteger() == prevIntervallEnding + 1) {
+					System.out.println("Is following Integer");
 					intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());	
-				}else { 
+				}else if(i > 0){ 
 					list.add(intervall);
-					
+					System.out.println("Added to list");
 					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
 					prevIntervallEnding = listRaw.get(i).getInteger();
 				}
 				
 				
-			}else if(listRaw.get(i).getString().equals(dayStringAdd(preDayString)) && prevIntervallEnding > testCalendar.getNumberOfIntervalls()){
-				
+			}else if(listRaw.get(i).getString().equals(dayStringAdd(preDayString)) && prevIntervallEnding > testCalendar.getNumberOfIntervalls()){ //IntervallEnding ist hier glaube ich bullshit
 				intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
-				prevIntervallEnding = listRaw.get(i).getInteger();
 				preDayString = listRaw.get(i).getString();
 					
 				}else {
 					list.add(intervall);
 					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
-					prevIntervallEnding = listRaw.get(i).getInteger();
+					
 				}
+			prevIntervallEnding = listRaw.get(i).getInteger();
+			if(i >= (listRaw.size() - 1))
+				list.add(intervall); System.out.println("Added to list");
 			}
  
     	return list;
