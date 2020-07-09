@@ -48,19 +48,18 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	JButton[] intervallButtons;
 	JLabel[] intervallLabels = new JLabel[12];
 	
-	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 	
 	private final JButton okayButton = new JButton("Okay");
 	
 	/**
 	 * Create the frame.
 	 */
-	public EditCalendarUi(String name, Controller _controller) {
+	public EditCalendarUi(String name, Controller _controller, int _year, int _month, int _day) {
 		
 		controller = _controller;
-		year = yearInput();
-		month = monthInput();
-		day = dayInput();
+		this.year = _year;
+		this.month = _month;
+		this.day = _day;
 		calendarName = name;
 		numberOfIntervalls = controller.getCalendar(name).getNumberOfIntervalls();
 		intervallButtons = new JButton[numberOfIntervalls];
@@ -405,68 +404,4 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		return sb.toString(); //StringBuilder ist kein Objekt der Klasse String und muss deshalb konvertiert werden.
 	}
 	
-	private int yearInput() {
-		try {
-			return Integer.parseInt(JOptionPane.showInputDialog("Welches Jahr?", "Jahr:"));
-		} catch (Exception e) { //wenn nicht eingetragen wurde oder es sonst einen Fehler gibt
-			return yearInput();
-		}
-	}
-	
-	private int dayInput() {
-		Object[] days;
-		List<Object> daysList = new ArrayList<Object>();
-		
-		//Für jeden Tag im Monat die Zahl als String für die Auswahl
-		for (int i = 0; i < monthDays; i++) {
-			daysList.add(String.format("%d", i+1));
-		}
-		
-		days = daysList.toArray();
-		
-		String dayInputString = (String) JOptionPane.showInputDialog( contentPane, "Welcher den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
-		
-		if(dayInputString == "0" || dayInputString == null)
-			return dayInput();
-		else {
-			day = Integer.parseInt(dayInputString);
-			controller.saveCalendars();
-			return day;
-		}
-	}
-	
-	private int monthInput() {
-		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
-		
-		//Wie viele Tage hat der Monat?
-			if(_month < 8) {
-				if(_month%2 == 0) {
-					if(_month == 2) {
-						if(controller.isLeapYear(year))
-							monthDays = 29;
-						else 
-							monthDays = 28;
-					}else {
-						monthDays = 30;
-					}
-					}else {
-						monthDays = 31;
-					}	
-				}else {
-					if(_month%2 == 0) {
-						monthDays = 31;
-					}else {
-						monthDays = 30;
-					}
-			}
-			
-		//Falls eine Ungültige angabe gemacht wird, das Fenster wird zum beispiel geschlossen.
-		if(_month < 1 || _month > 12) {
-			return monthInput();
-		}else {
-			
-			return _month;
-		}
-	}
-
 }

@@ -1,5 +1,7 @@
 package timeMatch;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,6 +33,8 @@ public class Controller {
     final static String CALENDAR_PATH_STRING = "C:\\Calendars\\calendars.dat";
     final Path folderPath = Paths.get("C:\\Calendars");
 
+    final static int FILE_KEY = 231;
+    		
     
     HashMap <String,Calendar> calendarRegister = new HashMap<String, Calendar>(); //erzeugt eine Haschmap f�r die Calendar
     
@@ -50,7 +54,63 @@ public class Controller {
         
 		}
         
+    public boolean isCalendarFile(File file) {
+    	try (FileInputStream fos = new FileInputStream(file);
+	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
+    		int key = oos.read();
+    		return (key == FILE_KEY);
+    	
+    	}catch (Exception e) {
+	    return false;
+	  }
+	}
     
+    public String getSaveLocationFolder() {
+    	return "C:\\Calendars";
+    }
+    
+    public void setClipboard(File file)
+    {
+       Toolkit.getDefaultToolkit().getSystemClipboard().setContents((Transferable) file, null);
+    }
+    
+    public String importCalendars(File file) {
+    	
+    	try (FileInputStream fos = new FileInputStream(file);
+	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
+			int key = oos.read();
+			if(key != FILE_KEY)
+				return "Datei nicht identifizierbar, möglicherweise kaputt.";
+			int numberOfObjects = oos.read(); //schreibt gespeicherte numberOfObjects in int
+			for(int i = 0; i < numberOfObjects; i++) {
+			Calendar obj = (Calendar) oos.readObject(); 
+			String nameString = obj.getName();
+			obj.setName(String.format("%s_%s", nameString, "Importiert_"));
+			while(calendarRegister.containsKey(obj.getName())) {
+				String _nameString = obj.getName();
+				obj.setName(String.format("%s%d", _nameString, 1));
+			}
+		      calendarRegister.put(obj.getName(), obj);
+			}
+			saveCalendars();
+			return "Importieren erfolgreich";
+	   	} catch (FileNotFoundException e) {
+				System.out.println("Load: File not found");
+				System.out.println(e.getMessage()); //Druckt ganauen Fehler
+				saveCalendars();
+				return "Datei nicht gefunden..";
+			} catch (IOException ex) {
+				System.out.println("Load: Error initializing stream");
+				System.out.println(ex);
+				System.out.println(ex.getMessage());
+				return String.format("%s: %s: %s", "Load: Error initializing stream", ex, ex.getMessage());
+	   		}
+	   catch (Exception e) {
+	    e.printStackTrace(); //druckt genaue Fehlerwuelle
+	    return "Fehler aufgetreten.";
+	  }
+	}
+    	
     
     public void saveCalendars() {
     	int numberOfObjects = getCalendarNameList().size();
@@ -59,11 +119,13 @@ public class Controller {
         }
     	 try (FileOutputStream fos = new FileOutputStream(new File(CALENDAR_PATH_STRING)); 
     	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+    		 oos.write(FILE_KEY);
     		 oos.write(numberOfObjects); //schreibt int numberOfObject in Datei.
     		 System.out.println(numberOfObjects);
     	        for (Calendar elementCalendar : calendarRegister.values()) {
     	            oos.writeObject(elementCalendar); //Schreibt Objekt von Calendar in Datei
     	        }
+    	        System.out.println("Saved");
     	      } catch (IOException e) {
     	        System.out.println("Creating: Error initializing stream"); //Falls es einen Error gibt.
     	      }
@@ -74,6 +136,8 @@ public class Controller {
 
     		try (FileInputStream fos = new FileInputStream(CALENDAR_PATH_STRING);
     	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
+    			int key = oos.read();
+    			System.out.println(key + "+Loadkey");
     			int numberOfObjects = oos.read(); //schreibt gespeicherte numberOfObjects in int
     			for(int i = 0; i < numberOfObjects; i++) {
     			Calendar obj = (Calendar) oos.readObject();  
@@ -86,7 +150,7 @@ public class Controller {
     				saveCalendars();
     				return;
     			} catch (IOException ex) {
-    				System.out.println("Load: Error initializing stream");
+    				System.out.println("Load: Error initializing stream. Load");
     				System.out.println(ex);
     				System.out.println(ex.getMessage());
     				

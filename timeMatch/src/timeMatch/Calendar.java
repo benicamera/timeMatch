@@ -32,6 +32,9 @@ public class Calendar implements Serializable{
 		return name;
 	}
 	
+	public void setName(String _name) {
+		name = _name;
+	}
 	public void summonDay(String _day) {
 		/*
 		 * Der String setzt sich nach dem Prinzip ddmmyyyy zusammen.

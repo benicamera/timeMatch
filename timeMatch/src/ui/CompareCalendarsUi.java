@@ -143,7 +143,7 @@ public class CompareCalendarsUi extends JPanel{
 				for(int y = 0; y<3; y++) {
 					System.out.println(y+ "++++");
 					System.out.println(customMaps[i]);
-					intervallStringBuilder.append(controller.reverseDayString(customMaps[i].getString())[y]);
+					intervallStringBuilder.append(controller.reverseDayString(customMaps[i].getString())[y]); //NullPointerException - warum?
 					if(y < 2)
 						intervallStringBuilder.append(".");
 				}
@@ -334,6 +334,10 @@ public class CompareCalendarsUi extends JPanel{
 	
 	private Calendar[] getSelectCalendars() {
 		int number = askNumber("Wie viele Kalender sollen abgeglichen werden??");
+		if(number < 2) {
+			JOptionPane.showMessageDialog(null, "Vergleich nicht durchführbar");
+			showFrame.setVisible(false);
+		}
 		Calendar[] selectedObjects = new Calendar[number];	
 		for(int i = 0; i<number; i++) {
 			System.out.println("getSelectedCalendar-for + " + i);
