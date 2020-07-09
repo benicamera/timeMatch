@@ -45,6 +45,8 @@ public class CompareCalendarsUi extends JPanel{
 	private JButton backButton;
 	private JLabel headerLabel;
 	
+	private int numberOfElements;
+	
 	public CompareCalendarsUi(Controller controller) {
 		this.controller = controller;
 		allCalendarStrings = new String[controller.getCalendarNameList().size()];
@@ -55,7 +57,6 @@ public class CompareCalendarsUi extends JPanel{
 		matchIntervallStrings = initMatch(calendars);
 
 		showFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		showFrame.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -104,13 +105,14 @@ public class CompareCalendarsUi extends JPanel{
 		gbc_backButton.gridy = 8;
 		contentPane.add(backButton, gbc_backButton);
 		
+		showFrame.setBounds(100, 100, 550, (30*numberOfElements));
 		showFrame.setVisible(true);
 	}
 	
 	private ArrayList<String> initMatch(Calendar[] calendars) {
 		
 		intervallStrings = createIntervall();
-		matchIntervallStrings = matchesToStrings(controller.match(calendars, intervallStrings));
+		matchIntervallStrings = matchesToString2(controller.match(calendars, intervallStrings));
 		
 		if(matchIntervallStrings.size() >= 10) {
 			if(JOptionPane.showConfirmDialog(null, String.format("Es wurden %d Termine gefunden. Suchintervall eingrenzen?", matchIntervallStrings.size()), null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
@@ -132,6 +134,27 @@ public class CompareCalendarsUi extends JPanel{
 		for(String elementString : matchIntervallStrings) {
 			model.addElement(elementString);	
 		}
+	}
+	
+	private ArrayList<String> matchesToString2(ArrayList<CustomMap> matches){
+		ArrayList<String> stringMatchesStrings = new ArrayList<String>();
+		for (CustomMap customMap : matches) {
+			StringBuilder intervallStringBuilder = new StringBuilder();
+			if(customMap.getInteger()<24) {
+				for(int y = 0; y<3; y++) {
+					System.out.println(y+ "++++");
+					intervallStringBuilder.append(controller.reverseDayString(customMap.getString())[y]); 
+					if(y < 2)
+						intervallStringBuilder.append(".");
+				}
+			intervallStringBuilder.append(", ");
+			intervallStringBuilder.append((customMap.getInteger()) + "h - " + (customMap.getInteger() + 1) + "h");
+			intervallStringBuilder.append(".");		
+			stringMatchesStrings.add(intervallStringBuilder.toString());
+			}
+			}
+		numberOfElements = stringMatchesStrings.size();
+		return stringMatchesStrings;
 	}
 	
 	private ArrayList<String> matchesToStrings(ArrayList<CustomMap[]> matches){
@@ -334,7 +357,7 @@ public class CompareCalendarsUi extends JPanel{
 	
 	private Calendar[] getSelectCalendars() {
 		int number = askNumber("Wie viele Kalender sollen abgeglichen werden??");
-		if(number < 2) {
+		if(number < 2 || number > controller.getCalendarList().size()) {
 			JOptionPane.showMessageDialog(null, "Vergleich nicht durchführbar");
 			showFrame.setVisible(false);
 		}

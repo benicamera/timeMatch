@@ -260,7 +260,7 @@ public class Controller {
     	return -1;
     }
     
-    public ArrayList<CustomMap[]> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
+    public ArrayList<CustomMap> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
     	ArrayList<CustomMap> listRaw = new ArrayList<CustomMap>();
     	
     	String startString = _intervall[0];
@@ -300,7 +300,8 @@ public class Controller {
     	}
     	System.out.println("____________");
     	System.out.println(listRaw.size());
-    	return  agreementSummary(listRaw);
+    	//return  agreementSummary(listRaw);
+    	return listRaw;
     }
    
     private ArrayList<CustomMap[]> agreementSummary(List<CustomMap> listRaw){

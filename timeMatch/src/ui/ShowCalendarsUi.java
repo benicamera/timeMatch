@@ -108,7 +108,8 @@ public class ShowCalendarsUi extends JFrame {
 		gbc_backButton.gridy = 3;
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menu.setVisible(false);
+				if(menu != null)
+					menu.setVisible(false);
 				showFrame.setVisible(false);
 			}
 		});
