@@ -29,9 +29,9 @@ public class Gui {
 	
 	CompareCalendarsUi matchWindowCalendarsUi;
 	
-	FileFilter filter = new FileNameExtensionFilter("Objektdatei", ".dat");
+	FileFilter filter = new FileNameExtensionFilter("Objektdatei", ".dat"); //Filter für Datachooser (eigentlich unnötig)
 	
-	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}; //die Monate
 	
 	int monthDays;
 	
@@ -60,7 +60,7 @@ public class Gui {
 		frame.getContentPane().setLayout(gridBagLayout); //weißt der Contentebene des Fensters das Layout zu
 		
 		JButton importButton = new JButton(""); //erstellt neuen Knopf mit dem Text ""
-		importButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/icons8-import-50Verkleinert.png"))); //legt Knopficon fest
+		importButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/icons8-import-50Verkleinert.png"))); //legt Knopficon = Bild fest
 		importButton.addActionListener(new ActionListener() { //legt fest, was passieren soll, wenn man auf den Knopf klickt
 			
 			@Override
@@ -92,12 +92,12 @@ public class Gui {
 				 
 		exportButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/icons8-export-50.png")));
 		exportButton.setToolTipText("Kalenderdatei in Zwischenablage kopieren.");
-		GridBagConstraints gbc_exportButton = new GridBagConstraints();
+		GridBagConstraints gbc_exportButton = new GridBagConstraints(); //neues Layout -> Grid
 		gbc_exportButton.insets = new Insets(0, 0, 5, 5);
-		gbc_exportButton.gridx = 9;
-		gbc_exportButton.gridy = 0;
-		frame.getContentPane().add(exportButton, gbc_exportButton);
-		importButton.setToolTipText("Kalender importieren.");
+		gbc_exportButton.gridx = 9; //GridPosition x=9
+		gbc_exportButton.gridy = 0; //GridPosition y=0
+		frame.getContentPane().add(exportButton, gbc_exportButton); //fügt den exportButton an der Stelle x=9, y=0 zur content ebene hinzu
+		importButton.setToolTipText("Kalender importieren."); //fügt den Text "Kalender importieren." als "Hovertext" hinzu.
 		
 		GridBagConstraints gbc_importButton = new GridBagConstraints();
 		gbc_importButton.insets = new Insets(0, 0, 5, 5);
@@ -105,10 +105,10 @@ public class Gui {
 		gbc_importButton.gridy = 0;
 		frame.getContentPane().add(importButton, gbc_importButton);
 		
-		JLabel titleLabel = new JLabel("timeMatch!");
-		titleLabel.setForeground(new Color(255, 105, 180));
-		titleLabel.setBackground(new Color(240, 255, 240));
-		titleLabel.setFont(new Font("Rubik", Font.BOLD, 59));
+		JLabel titleLabel = new JLabel("timeMatch!"); //erstellt ein JLabel - Text - mit dem Text "timeMatch!"
+		titleLabel.setForeground(new Color(255, 105, 180)); //Vordergrundfarbe
+		titleLabel.setBackground(new Color(240, 255, 240)); //Hintergrundfarbe
+		titleLabel.setFont(new Font("Rubik", Font.BOLD, 59)); //bestimmt Schriftart und -größe
 		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
 		gbc_titleLabel.gridwidth = 18;
 		gbc_titleLabel.insets = new Insets(0, 0, 5, 0);
@@ -119,7 +119,7 @@ public class Gui {
 		JButton matchButton = new JButton("");
 		matchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				matchWindowCalendarsUi = new CompareCalendarsUi(controller);
+				matchWindowCalendarsUi = new CompareCalendarsUi(controller); //erstellt Objekt der Klasse CompareCalendarsUi und gibt ihm den controller weiter = neues Fenster
 			}
 		});
 		matchButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
@@ -133,7 +133,7 @@ public class Gui {
 		JButton createButton = new JButton("");
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createButtonAction();
+				createButtonAction(); //ruft createButtonAction() auf -> Zeile 180
 			}
 		});
 		createButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/createButtonIcon.png")));
@@ -154,16 +154,14 @@ public class Gui {
 		JButton showButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/showButtonIcon.png")));
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(controller.getCalendarNameList().size() > 0) {
-					@SuppressWarnings("unused")
-					ShowCalendarsUi showuiCalendarsUi = new ShowCalendarsUi(controller);
+				if(controller.getCalendarNameList().size() > 0) { //wenn wenigstens ein Kalender existiert
+					@SuppressWarnings("unused") //weil in dieser Klasse showuiCalendarsUi nicht mehr benutzt wird
+					ShowCalendarsUi showuiCalendarsUi = new ShowCalendarsUi(controller); //erstellt Objekt der Klasse ShowCalendarsUi und gibt ihm den controller weiter = neues Fenster
 				}else {
-						JOptionPane.showMessageDialog(frame, "Keine Kalender gefunden.");
+						JOptionPane.showMessageDialog(frame, "Keine Kalender gefunden."); //PopUpWindow mit Fehlermeldung anzeigen
 					}
-			System.out.println("show erstellt");
 			}
 		});
-		//showButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/showButtonIcon.png")));
 		GridBagConstraints gbc_showButton = new GridBagConstraints();
 		gbc_showButton.insets = new Insets(0, 0, 5, 5);
 		gbc_showButton.gridx = 13;
@@ -178,57 +176,60 @@ public class Gui {
 		frame.getContentPane().add(spaceLabel, gbc_spaceLabel);
 		frame.setVisible(true);
 	}
-	
-	public void destroyCompare() {
-		matchWindowCalendarsUi = null;
-	}
 
+	//createButtonAction() erfragt Kalendernamen und erstellt den. Leitet an editAction weiter.
 	private void createButtonAction() {
 		// TODO Auto-generated method stub
-		String calendarName = askCalendarName();
+		String calendarName = askCalendarName(); //askCalendarName() -> gibt beim Nutzer erfragten Namen des Kalenders zurück
 		if(calendarName == null)
-			return;
-		JOptionPane.showMessageDialog(frame, String.format("Erstellen: %s", controller.createCalendar(calendarName)), "Kalender erstellen", JOptionPane.INFORMATION_MESSAGE, null);
-		editAction(calendarName);
+			return; //wenn kein name eingegeben wurde, wird der Vorgang abgebrochen
+		JOptionPane.showMessageDialog(frame, String.format("Erstellen: %s", controller.createCalendar(calendarName)), "Kalender erstellen", JOptionPane.INFORMATION_MESSAGE, null); //Zeigt einen kleine Bestätigung an
+		controller.saveCalendars(); //Kalender speichern
+		editAction(calendarName); //editAction() -> öffnet Bearbeitungsfenster
 	}
 	
+	/*editAction erfragt Datum, das bearbeitet werden soll
+	 * und öffnet Bearbeitungsfenster für den Kalender im @Parameter
+	 */
 	private void editAction(String calendarName) {
-		int year = yearInput();
+		int year = yearInput(); //yearInput() erfragt beim Nutzer die Jahreszahl und gibt sie zurück
 		if(year < 1) {
-			JOptionPane.showMessageDialog(null, "Ungültige Eingabe");
-			return;
+			JOptionPane.showMessageDialog(null, "Ungültige Eingabe"); //Fehlermeldung, wenn es unter 1 ist: wenn keine Eingabe getätigt wurde, ist ein Integer 0 und wenn es negativ ist, funktioniert die Speicherung als String nicht mehr zu 100% und -1 signalisiert einen Fehler
+			return; //Vorgang beenden
 		}
-		int month = monthInput(year);
+		int month = monthInput(year); //monthInput() erfragt beim Nutzer den Monat und gibt ihn zurück
 		if(month < 1) {
-			JOptionPane.showMessageDialog(null, "Ungültige Eingabe");
-			return;
+			JOptionPane.showMessageDialog(null, "Ungültige Eingabe"); //es gibt keinen Monat unter 1 :P diese Eingabe sollte überhaupt nicht möglich sein, gibt es aber doch einen Weg, wird hier ein Fehler verhindert. -1 entspricht Fehler
+			return; //Vorgang beenden
 		}
-		int day = dayInput();
+		int day = dayInput(); //dayInput() erfragt beim Nutzer den Tag und gibt ihn zurück
 		if(day < 1) {
-			JOptionPane.showMessageDialog(null, "Ungültige Eingabe");
-			return;
+			JOptionPane.showMessageDialog(null, "Ungültige Eingabe"); //es gibt keinen Tag unter 1 :P diese Eingabe sollte überhaupt nicht möglich sein, gibt es aber doch einen Weg, wird hier ein Fehler verhindert. -1 entspricht Fehler
+			return; //Vorgang beenden
 		}
 		
 		@SuppressWarnings("unused")
-		EditCalendarUi editCalendarUi = new EditCalendarUi(calendarName, controller, year, month, day);
+		EditCalendarUi editCalendarUi = new EditCalendarUi(calendarName, controller, year, month, day); //erstellt Objekt der Klasse EditCalendarUi und gibt Kalendername, controller, Jahreszahl, Monat und Tag weiter
 	}
 	
+	//yearInput() erfragt Jahrezahl beim Nutzer und gibt sie zurück
 	private int yearInput() {
 		try {
-			return Integer.parseInt(JOptionPane.showInputDialog("Welches Jahr?", "Jahr:"));
+			return Integer.parseInt(JOptionPane.showInputDialog("Welches Jahr?", "Jahr:")); //Wandelt den Output des PopUpWindows zu Integer um
 		} catch (Exception e) { //wenn nicht eingetragen wurde oder es sonst einen Fehler gibt
 			return -1;
 		}
 	}
 	
+	//monthInput() erfragt Monat beim Nutzer, legt fest, wie viele Tage der Monat hat und gibt den Monat zurück
 	private int monthInput(int year) {
-		int _month = (int)JOptionPane.showInputDialog(null, "Welcher Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
+		int _month = (int)JOptionPane.showInputDialog(null, "Welcher Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat"); //erfragt Monatszahl. months ist ein Object-Array, der die Zahlen 1-12 enthält. Der Nutzer wählt daraus aus. So wird eine Falsche eingabe nahezu ausgeschlossen
 		
 		//Wie viele Tage hat der Monat?
-			if(_month < 8) {
+			if(_month < 8) { //bis August sind alle ungeraden Monate 31 Tage lang
 				if(_month%2 == 0) {
-					if(_month == 2) {
-						if(controller.isLeapYear(year))
+					if(_month == 2) { //wenn's Februar ist
+						if(controller.isLeapYear(year)) //wenn es ein Schaltjahr ist
 							monthDays = 29;
 						else 
 							monthDays = 28;
@@ -238,7 +239,7 @@ public class Gui {
 					}else {
 						monthDays = 31;
 					}	
-				}else {
+				}else { //Ab August anders herum
 					if(_month%2 == 0) {
 						monthDays = 31;
 					}else {
@@ -246,48 +247,48 @@ public class Gui {
 					}
 			}
 			
-		//Falls eine Ungültige angabe gemacht wird, das Fenster wird zum beispiel geschlossen.
-		if(_month < 1 || _month > 12) {
+		//Falls eine Ungültige angabe gemacht wird
+		if(_month < 1 || _month > 12) { //Sicherung
 			return -1;
 		}else {
-			
 			return _month;
 		}
 	}
 
+	//dayInput() erfragt den Tag beim Nutzer
 	private int dayInput() {
-		Object[] days;
-		List<Object> daysList = new ArrayList<Object>();
-		int day;
-		//Für jeden Tag im Monat die Zahl als String für die Auswahl
-		for (int i = 0; i < monthDays; i++) {
-			daysList.add(String.format("%d", i+1));
+		Object[] days; //Auswahl, aus dem Nutzer auswählen kann
+		List<Object> daysList = new ArrayList<Object>(); //vereinfacht die erstellung des auswahl-Arrays
+		int day; 
+		//Für jeden Tag im Monat die Zahl als String für die Auswahl. So kann man nicht z.B. den 31. Tag im Nocember auswählen
+		for (int i = 0; i < monthDays; i++) { 
+			daysList.add(String.format("%d", i+1)); //muss wegen Debugzwecken ein String sein.
 		}
 		
-		days = daysList.toArray();
+		days = daysList.toArray(); //wandelt daysList in array um und setzte days zu daysList
 		
-		String dayInputString = (String) JOptionPane.showInputDialog(null, "Welcher den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
+		String dayInputString = (String) JOptionPane.showInputDialog(null, "Welcher den Tag", "Tag", JOptionPane.PLAIN_MESSAGE, null, days, "Tag"); //erfragt Tag mithilfe der Auswahl 
 		
-		if(dayInputString == "0" || dayInputString == null)
+		if(dayInputString == "0" || dayInputString == null) //wenn ungültige Ausgaben -> Fehler
 			return -1;
 		else {
-			day = Integer.parseInt(dayInputString);
-			controller.saveCalendars();
+			day = Integer.parseInt(dayInputString); //wandelt inputString zu Integer um
 			return day;
 		}
 	}
 
+	//erfragt den Namen des Kalenders
 	private String askCalendarName() {
 		String calendarName = (String) JOptionPane.showInputDialog(frame,
 			    "Wie soll der Kalender heissen?",
 			    "Kalendername:",
-			    JOptionPane.QUESTION_MESSAGE);
-		if(controller.isNameTaken(calendarName)) {
+			    JOptionPane.QUESTION_MESSAGE); //Erfagt Kalendernamen über
+		if(controller.isNameTaken(calendarName)) { //wenn der Name bereits vergeben ist
 			JOptionPane.showMessageDialog(frame, "Name bereits vergeben", String.format("%s ist breits vergeben, veruche erneut.", calendarName), JOptionPane.ERROR_MESSAGE, null);
-			calendarName = askCalendarName();
-		}else if(calendarName == null || calendarName == ""){
+			calendarName = askCalendarName(); //Vorgang wiederholen
+		}else if(calendarName == null || calendarName == ""){ //wenn es keine eingabe gab
 			JOptionPane.showMessageDialog(frame, "Name nicht werwendbar", String.format("Name ist nicht verwendbar, veruche erneut."), JOptionPane.ERROR_MESSAGE, null);
-			return null;
+			return null; //Vorgang beenden
 			
 		}else
 			return calendarName;
