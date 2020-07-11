@@ -27,6 +27,8 @@ public class Gui {
 
 	final Controller controller;
 	
+	CompareCalendarsUi matchWindowCalendarsUi;
+	
 	FileFilter filter = new FileNameExtensionFilter("Objektdatei", ".dat");
 	
 	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
@@ -112,7 +114,7 @@ public class Gui {
 		JButton matchButton = new JButton("");
 		matchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CompareCalendarsUi matchWindowCalendarsUi = new CompareCalendarsUi(controller);
+				matchWindowCalendarsUi = new CompareCalendarsUi(controller);
 			}
 		});
 		matchButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
@@ -170,6 +172,10 @@ public class Gui {
 		gbc_spaceLabel.gridy = 4;
 		frame.getContentPane().add(spaceLabel, gbc_spaceLabel);
 		frame.setVisible(true);
+	}
+	
+	public void destroyCompare() {
+		matchWindowCalendarsUi = null;
 	}
 
 	private void createButtonAction() {
