@@ -20,7 +20,7 @@ public class Calendar implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
-	int numberOfIntervalls = 24;
+	int numberOfIntervalls = 12;
 	
 	HashMap <String,boolean[]> calendar = new HashMap<String, boolean[]>();
 	

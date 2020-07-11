@@ -137,7 +137,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 			//Damit nicht alle in einer Reihe sind
 			if(i%5 == 0) {
 				gridx = 1;
-				buttonGridy += 2;
+				buttonGridy += 2; 
 				textGridy += 2;
 			}else if(i < 5){
 				gridx = (i%5);
@@ -155,7 +155,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 			gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 			gbc_btnNewButton.gridx = gridx;
 			gbc_btnNewButton.gridy = buttonGridy;		
-			contentPane.add(intervallButtons[i-1], gbc_btnNewButton);
+			contentPane.add(intervallButtons[i-1], gbc_btnNewButton); 
 			
 			GridBagConstraints gbc_labels = new GridBagConstraints();
 			gbc_labels.gridx = gridx;

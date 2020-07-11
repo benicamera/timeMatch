@@ -62,10 +62,14 @@ public class Gui {
 		JButton importButton = new JButton("");
 		importButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/icons8-import-50Verkleinert.png")));
 		importButton.addActionListener(new ActionListener() {
+			
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				 JFileChooser chooser = new JFileChooser(); //erstell Dateienauswahl
+				 
 				 chooser.addChoosableFileFilter(filter);
+				 
 				 int value = chooser.showOpenDialog(null);
 				 if(value == JFileChooser.APPROVE_OPTION)
 			        {
@@ -94,6 +98,7 @@ public class Gui {
 		gbc_exportButton.gridy = 0;
 		frame.getContentPane().add(exportButton, gbc_exportButton);
 		importButton.setToolTipText("Kalender importieren.");
+		
 		GridBagConstraints gbc_importButton = new GridBagConstraints();
 		gbc_importButton.insets = new Insets(0, 0, 5, 5);
 		gbc_importButton.gridx = 13;
