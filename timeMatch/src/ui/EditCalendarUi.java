@@ -7,12 +7,11 @@ import javax.swing.border.EmptyBorder;
 
 import timeMatch.Controller;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Insets;
@@ -24,7 +23,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	 * .
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private JPanel contentPane; //Ebene
 	final Controller controller;
 	int year;
 	int day;
@@ -32,44 +31,43 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	int monthDays;
 	String calendarName;
 	
-	JFrame editFrame = new JFrame();
+	JFrame editFrame = new JFrame(); //neues Fenster
 	
-	int buttonGridy = 2;
-	int textGridy = 1;
-	int gridx = 1;
-	
-	int globalI;
+	int buttonGridy = 2; //y-Positionsvaribale für die Buttons
+	int textGridy = 1; //y-Positionsvaribale für den Text
+	int gridx = 1; //x-Position
 	
 	String buttonText;
 	String buttonToolTipString;
 	
-	int numberOfIntervalls;
+	int numberOfIntervalls; //Anzahl der Intervalle
 	
-	JButton[] intervallButtons;
-	JLabel[] intervallLabels = new JLabel[12];
+	JButton[] intervallButtons; //alle Knöpfe für die Intervalle
+	JLabel[] intervallLabels = new JLabel[12]; //Alle Beschriftungen für die Intervalle
 	
 	
-	private final JButton okayButton = new JButton("Okay");
+	private final JButton okayButton = new JButton("Okay"); //Bestätigungsknopf
 	
 	/**
 	 * Create the frame.
 	 */
 	public EditCalendarUi(String name, Controller _controller, int _year, int _month, int _day) {
 		
-		controller = _controller;
-		this.year = _year;
+		controller = _controller; //gibt controller weiter
+		//setzt Datum fest
+		this.year = _year; 
 		this.month = _month;
 		this.day = _day;
 		calendarName = name;
-		numberOfIntervalls = controller.getCalendar(name).getNumberOfIntervalls();
+		numberOfIntervalls = controller.getCalendar(name).getNumberOfIntervalls(); //holt sich die anzahl der Intervalle von der Kalender-Klasse: Unterste Klasse in der Hierarchie: Schnellere Anpassung 
 		intervallButtons = new JButton[numberOfIntervalls];
 		intervallLabels = new JLabel[numberOfIntervalls];
 		
 		editFrame.setBounds(100, 100, 472, 300);
 		editFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		editFrame.setTitle(String.format("%s - %d.%d.%d",calendarName, day, month, year));
+		editFrame.setTitle(String.format("%s - %d.%d.%d",calendarName, day, month, year)); //setzt den Titel des Fensters
 		
-		contentPane = new JPanel();
+		contentPane = new JPanel(); //neue Ebene
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -89,7 +87,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				}
 				controller.saveCalendars();
 				if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)));
-					editFrame.setVisible(false); 
+					editFrame.setVisible(false); //macht fenster nicht sichtbar
 					editFrame.dispose(); //Löscht Object
 			}
 		});
@@ -102,7 +100,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		contentPane.add(trashButton, gbc_trashButton);	
 		editFrame.getContentPane().add(contentPane);
 		
-		initIntervallButtons();
+		initIntervallButtons(); //Fügt alle Knöpfe hinzu
 		
 		GridBagConstraints gbc_okayButton = new GridBagConstraints();
 		gbc_okayButton.gridx = 13;
@@ -110,8 +108,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		okayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.saveCalendars();
-				editFrame.setVisible(false); //you can't see me!
-				editFrame.dispose(); //Destroy the JFrame object
+				editFrame.setVisible(false); 
+				editFrame.dispose(); 
 			}
 		});
 		okayButton.setToolTipText("Bearbeitung beenden");
@@ -124,11 +122,11 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	private void initIntervallButtons() {
 		for (int i = 1; i <= numberOfIntervalls; i++) { //für jeden Intervall einen Knopf
 			
-			String toolTextString;
+			String toolTextString; //wird nacher gebraucht
 			
 			if(controller.getCalendar(calendarName).isFree(i, controller.getDayString(year, month, day))) {
-				buttonText = "Frei";
-				toolTextString = "Belegt";
+				buttonText = "Frei"; //wenn frei -> Knopftext zu "Frei
+				toolTextString = "Belegt"; //und toolTextString zum Gegenteil
 			}else {
 				buttonText = "Belegt";
 				toolTextString = "Frei";
@@ -145,12 +143,13 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 				gridx = (i%5) + 1;
 			}
 			
-			intervallButtons[i-1] = new JButton(buttonText);
+			intervallButtons[i-1] = new JButton(buttonText); //erstelle neuen Knopf
 			intervallButtons[i-1].setActionCommand("" + i); //Damit der Knopf immer weiß, welchen intervall er repräsentiert
-			intervallButtons[i-1].addActionListener((ActionListener) this);
-			intervallLabels[i-1] = new JLabel(intervallLabelBuilder(i));
-			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", toolTextString));
+			intervallButtons[i-1].addActionListener((ActionListener) this); //fügt ActionListener hinzu: Führt die actionPerformed()-Methode aus
+			intervallLabels[i-1] = new JLabel(intervallLabelBuilder(i)); //Text über Button soll den Text von intervallLabelBuilder tragen
+			intervallButtons[i-1].setToolTipText(String.format("als %s markieren", toolTextString)); //"Hovertext" festlegen
 			
+			//fügt Knopf und Text zu Ebene hinzu
 			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 			gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 			gbc_btnNewButton.gridx = gridx;
@@ -169,9 +168,9 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		 
 		 int index = Integer.parseInt( e.getActionCommand()); //holt sich das "i", also den intervall, den der Knopf repräsentiert
 		 
-		 //einzelige schleifen kann man auch ohne Klammern schreiben :)
-		 if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day)))
- 				controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day));
+		 //einzelige if-Statements kann man auch ohne Klammern schreiben :)
+		 if(!controller.getCalendar(calendarName).isLoaded(controller.getDayString(year, month, day))) //wenn der Tag nicht geladen ist, soll er erstellt werden
+ 				controller.getCalendar(calendarName).summonDay(controller.getDayString(year, month, day)); //controller.getDayString() wandelt datum in String um
 		 
 		 //wenn er frei war, dann belegt und andersherum
 		 if(controller.getCalendar(calendarName).isFree(index, controller.getDayString(year, month, day))) {
@@ -183,7 +182,8 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 			buttonText = "Frei";
 			intervallButtons[index - 1].setToolTipText("Als Belegt markieren");
 		}
-		 
+		
+		//setzt neuen Text
 		intervallButtons[index-1].setText(buttonText);
 		
 		//Kommentar ist für die Dokumentation ist das selbe nur einzeln
@@ -389,6 +389,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 	        controller.saveCalendars(); //damit änderungen sofort gespeichert werden
 	    }
 	
+	//kreiert die Texte je nach intervall
 	private String intervallLabelBuilder(int i) {
 		
 		StringBuilder sb = new StringBuilder();  //Stringbuilder vereinfacht String name += String nachname 
@@ -398,7 +399,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 			sb.append(String.format("%dh-", (i+(12 - (24/2 + 1)))));
 			sb.append(String.format("%dh", (i+(12 - (24/2)))));
 		}else {
-			sb.append(String.format("%dh-", (i+(12 - (numberOfIntervalls/2 + 1)))));
+			sb.append(String.format("%dh-", (i+(12 - (numberOfIntervalls/2 + 1))))); //von    bis
 			sb.append(String.format("%dh", (i+(12 - (numberOfIntervalls/2)))));
 		}
 		return sb.toString(); //StringBuilder ist kein Objekt der Klasse String und muss deshalb konvertiert werden.
