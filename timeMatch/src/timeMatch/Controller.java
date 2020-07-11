@@ -259,6 +259,7 @@ public class Controller {
     		}
     	return -1;
     }
+   
     
     public ArrayList<CustomMap> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
     	ArrayList<CustomMap> listRaw = new ArrayList<CustomMap>();
@@ -272,7 +273,7 @@ public class Controller {
     	System.out.println(startString);
 	    
     	while(!currentString.equals(endString)) { //Solange zwischen den Tagen
-    		while(currentIntervall < testCalendar.getNumberOfIntervalls() + 1) { //sloange im Tag
+    		while(currentIntervall < testCalendar.getNumberOfIntervalls() + 1) { //sloange im Tag 
  	
     		for(int i=0;i<_calendars.length;i++) {
     			
