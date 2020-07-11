@@ -49,34 +49,34 @@ public class Gui {
 	 * Initialize the contents of the frame
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 560, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GridBagLayout gridBagLayout = new GridBagLayout();
+		frame = new JFrame(); //erstellt neues Window
+		frame.setBounds(100, 100, 560, 300); //bestimmt die größe
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //bestimmt, was passiert, wenn man auf das schließen x klickt
+		GridBagLayout gridBagLayout = new GridBagLayout(); //bestimmt Layout
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 66, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.getContentPane().setLayout(gridBagLayout);
+		frame.getContentPane().setLayout(gridBagLayout); //weißt der Contentebene des Fensters das Layout zu
 		
-		JButton importButton = new JButton("");
-		importButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/icons8-import-50Verkleinert.png")));
-		importButton.addActionListener(new ActionListener() {
+		JButton importButton = new JButton(""); //erstellt neuen Knopf mit dem Text ""
+		importButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/icons8-import-50Verkleinert.png"))); //legt Knopficon fest
+		importButton.addActionListener(new ActionListener() { //legt fest, was passieren soll, wenn man auf den Knopf klickt
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				 JFileChooser chooser = new JFileChooser(); //erstell Dateienauswahl
 				 
-				 chooser.addChoosableFileFilter(filter);
+				 //chooser.addChoosableFileFilter(filter);
 				 
-				 int value = chooser.showOpenDialog(null);
-				 if(value == JFileChooser.APPROVE_OPTION)
+				 int value = chooser.showOpenDialog(null); //erstell Dateienauswahlfenster
+				 if(value == JFileChooser.APPROVE_OPTION) //wenn okay geklickt wurde
 			        {
-					 if(controller.isCalendarFile(chooser.getSelectedFile())) {
-						 JOptionPane.showMessageDialog(frame, controller.importCalendars(chooser.getSelectedFile()));
+					 if(controller.isCalendarFile(chooser.getSelectedFile())) { //wenn die ausgewählte Datei eine Datei von uns ist
+						 JOptionPane.showMessageDialog(frame, controller.importCalendars(chooser.getSelectedFile())); //rufe controller.importCalendars mit der ausgewählten datei aus und gebe Status in einem PopUpWindow aus
 					}else {
-						JOptionPane.showMessageDialog(frame, String.format("%s speichert keine timeMatch-Kalender oder ist kaputt.", chooser.getSelectedFile().getName()));
+						JOptionPane.showMessageDialog(frame, String.format("%s speichert keine timeMatch-Kalender oder ist kaputt.", chooser.getSelectedFile().getName())); //Gebe fehlermeldung aus.
 					}
 			                 
 			        }
