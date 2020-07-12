@@ -182,55 +182,56 @@ public class Controller {
     	return "Erfolgreich";
     }
     
+    //gibt die Kalenderals Liste zurück
     public  ArrayList<String> getCalendarNameList(){
     	List<String> _names = new ArrayList<String>();
-    	_names.addAll(calendarRegister.keySet());
+    	_names.addAll(calendarRegister.keySet()); //Fügt alle Keys(=Namen) der HashMap der Liste hinzu
     	return (ArrayList<String>) _names;
     }
     
+    //gibt Namen eines Objekts der Klasse Calendar zurück
     public String getCalendarName(Calendar calendar) {
-    	Calendar[] calendars = (Calendar[]) getCalendarList().toArray();
-    	return calendars[getElementIndexOfArray(calendars, calendar)].getName();
+    	Calendar[] calendars = (Calendar[]) getCalendarList().toArray(); //alle Kalender in einem Array
+    	return calendars[getElementIndexOfArray(calendars, calendar)].getName(); //gibt den Namen (getName) des Kalenders zurück. getElementIndexOfArray gibt die Position des Kalenders im array zurück
     }
     
+    //gibt zurück, ob der String schon der Name eines vorhandenen Kalenders ist
     public boolean isNameTaken(String _calendarName) {
     	return calendarRegister.containsKey(_calendarName);
     }
     
+    //gibt zurück ob ein Objekt ein Element eines Arrays ist
     public boolean isElementOfArray(Object element, Object[] array) {
     	for(Object object : array) {
-    		if(element.equals(object))
+    		if(element.equals(object)) //.equals() wird eigentlich bei allen Objekten eingestezt. nur bei Integern und Booleans nimmt man ==
     			return true;
     	}
-    	
     	return false;
     }
     
+    //erstellt einen neuen Kalender mit dem Namen
     public String createCalendar (String name) {		//mit der methode ist es m�glich einen neuen Calendar in das Buch aufzunehmen
-    	if (calendarRegister.containsKey(name) == false) {		//pr�ft ob der name schon vorhanden ist //Beni: Bei if == !
-    		calendarRegister.put(name,new Calendar(name));
+    	if (calendarRegister.containsKey(name) == false) {		//pr�ft ob der name schon vorhanden ist 
+    		calendarRegister.put(name, new Calendar(name)); //Key: der Name, Value: der neue Kalender
     		saveCalendars();
-    		return "Erfolgreich";
-    	}
-        
+    		return "Erfolgreich"; //wir geben viele Strings zurück, weil unser Programm GUI-orientiert ist
+    	}  
         return "Fehler";
     }
     
+    //gibt alle Kalender in einer Liste zurück
     public ArrayList<Calendar> getCalendarList(){
     	ArrayList<Calendar> list = new ArrayList<Calendar>();
-    	
-    	for (int i = 0; i < getCalendarNameList().size(); i++) {
-			list.add(calendarRegister.get(getCalendarNameList().get(i)));
-		}
-    	
+    	list.addAll(calendarRegister.values()); //fügt alle gespeicherten Kalender der Liste Hinzu
     	return list;
     }
     
+    // gibt die Überschneidung zweier Arrays zurück
     public Object[] getObjectArrayIntersection(Object[] array1, Object[] array2) {
     	ArrayList<Object> resultObjects = new ArrayList<Object>();
-    	  for(int i = 0; i<array1.length; i++ ) {
+    	  for(int i = 0; i<array1.length; i++ ) { //geht für jedes Element des Array1 den Array2 durch und vergleich
     	         for(int j = 0; j<array2.length; j++) {
-    	            if(array1[i]==array2[j]) {
+    	            if(array1[i].equals(array2[j])) {
     	               resultObjects.add(array2[j]);
     	            }
     	         }
@@ -239,17 +240,16 @@ public class Controller {
     	  return resultObjects.toArray();
     }
     
-    public <T> int getElementIndexOfArray(T[] array, T target) {
-    	System.out.println("array length: " + array.length);
+    //gibt index des Elements im Array zurück
+    public <T> int getElementIndexOfArray(T[] array, T target) { //T muss mit dem Aufruf der Methode spezifiziert werden und ersetzt Object, Integer oder Calendar usw.
     	for (int i = 0; i < array.length; i++)
     		if (target.equals(array[i])) {
-    			System.out.println("ElementIndex: " + i);
     			return i;
     		}
-    	return -1;
+    	return -1; //wenn das target nicht im Array vorkommt
     }
    
-    
+    //vergleicht zwei Objekte der Klasse Calendar in einem bestimmten Intervall und gibt Termine, bei denen beide Frei haben in einer Liste zurück
     public ArrayList<CustomMap> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
     	ArrayList<CustomMap> listRaw = new ArrayList<CustomMap>();
     	
@@ -258,82 +258,31 @@ public class Controller {
     	int currentIntervall = 1;
     	String currentString = startString;
     	Boolean allFreeBoolean = false;
-    	System.out.println(endString);
-    	System.out.println(startString);
-	    
+    	
     	while(!currentString.equals(endString)) { //Solange zwischen den Tagen
-    		while(currentIntervall < testCalendar.getNumberOfIntervalls() + 1) { //sloange im Tag 
- 	
-    		for(int i=0;i<_calendars.length;i++) {
-    			
-    			if(_calendars[i].isFree(currentIntervall, currentString)) 
-    				allFreeBoolean = true;
-    			else {
-					allFreeBoolean = false;
-					break;
+    		while(currentIntervall < testCalendar.getNumberOfIntervalls() + 1) { //solange im Tag 
+    			for(int i=0;i<_calendars.length;i++) { //geht jeden Kalender durch
+    				if(_calendars[i].isFree(currentIntervall, currentString)) 
+    					allFreeBoolean = true;
+    				else {
+    					allFreeBoolean = false; //wenn einer nicht frei hat, verlasse For
+    					break;
 				}
-    			//System.out.println(allFreeBoolean +" "+ " " + currentIntervall + " " +currentString);
     		}
     		
-    		if(allFreeBoolean) { //wenn alle frei
+    		if(allFreeBoolean)  //wenn alle frei
     			listRaw.add(new CustomMap(currentString, currentIntervall));
-    			System.out.println(String.format("Added %s, %d to list", currentString, currentIntervall));
-    		}
+    		
     		currentIntervall++;
    
     	}
-    		System.out.println("_"); //Unendlich warum?
-    	
-    		currentString = dayStringAdd(currentString);
+    		currentString = dayStringAdd(currentString); //setzt currentString auf nächsten Tag
     		currentIntervall = 1;
     	
     	}
-    	System.out.println("____________");
-    	System.out.println(listRaw.size());
-    	//return  agreementSummary(listRaw);
     	return listRaw;
     }
    
-    private ArrayList<CustomMap[]> agreementSummary(List<CustomMap> listRaw){
-    	String preDayString = listRaw.get(0).getString();
-    	ArrayList<CustomMap[]> list = new ArrayList<CustomMap[]>();
-    	int prevIntervallEnding = listRaw.get(0).getInteger();
-    	
-    	for (int i = 0; i < listRaw.size(); i++) {
-    		
-        	CustomMap[] intervall = new CustomMap[2];
-        	intervall[0] = new CustomMap(listRaw.get(0).getString(), listRaw.get(0).getInteger());
-        	
-			if(listRaw.get(i).getString().equals(preDayString)) {
-				System.out.println("PreDayString: " + preDayString);
-				System.out.println("PrevIntervallEnding: " + prevIntervallEnding + ". Current Intervall: " + listRaw.get(i).getInteger());
-				if(listRaw.get(i).getInteger() == prevIntervallEnding + 1) {
-					System.out.println("Is following Integer");
-					intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());	
-				}else if(i > 0){ 
-					list.add(intervall);
-					System.out.println("Added to list");
-					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
-					prevIntervallEnding = listRaw.get(i).getInteger();
-				}
-				
-				
-			}else if(listRaw.get(i).getString().equals(dayStringAdd(preDayString)) && prevIntervallEnding > testCalendar.getNumberOfIntervalls()){ //IntervallEnding ist hier glaube ich bullshit
-				intervall[1] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
-				preDayString = listRaw.get(i).getString();
-					
-				}else {
-					list.add(intervall);
-					intervall[0] = new CustomMap(listRaw.get(i).getString(), listRaw.get(i).getInteger());
-					
-				}
-			prevIntervallEnding = listRaw.get(i).getInteger();
-			if(i >= (listRaw.size() - 1))
-				list.add(intervall); System.out.println("Added to list");
-			}
- 
-    	return list;
-    }
     
     public  String dayStringAdd(String previousString) {
     	Integer[] dateIntegers = new Integer[3];
