@@ -1,7 +1,5 @@
 package timeMatch;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,80 +27,67 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
-    final Calendar testCalendar;
-    final static String CALENDAR_PATH_STRING = "C:\\Calendars\\calendars.dat";
-    final Path folderPath = Paths.get("C:\\Calendars");
+	final Calendar testCalendar = new Calendar("testCalendar"); //damit man wichtige Calendarmethoden immer aubrufen kann.
+    final static String CALENDAR_PATH_STRING = "C:\\Calendars\\calendars.dat"; //wo unsere Datei gespeichert ist
+    final static Path FOLDER_PATH = Paths.get("C:\\Calendars"); //der weg zu unserem Ordner
 
-    final static int FILE_KEY = 231;
+    final static int FILE_KEY = 231; //identifikationscode von unseren Dateien
     		
     
-    HashMap <String,Calendar> calendarRegister = new HashMap<String, Calendar>(); //erzeugt eine Haschmap f�r die Calendar
+    HashMap <String,Calendar> calendarRegister = new HashMap<String, Calendar>(); //erzeugt eine Haschmap f�r die Calendar -> kalenderspeicher
     
     public Controller() {
-        testCalendar = new Calendar("testCalendar");
-        loadCalendars();
-        System.out.println(calendarRegister.containsKey("test1"));
-        System.out.println(calendarRegister.containsKey("test2"));
-        if(!calendarRegister.containsKey("test1")) {
-        	calendarRegister.put("test1",new Calendar("test1"));
-        	System.out.println("test1");
-        }
-        toTest();
+        loadCalendars(); //lädt die calendars.dat-Datei
     }
    
-    public void toTest(/* insert Parameters*/) {
-        
-		}
-        
+    //testet ob eine Datei von uns ist
     public boolean isCalendarFile(File file) {
-    	try (FileInputStream fos = new FileInputStream(file);
+    	try (FileInputStream fos = new FileInputStream(file); //braucht man, um dateien auslesen zu können
 	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
-    		int key = oos.read();
+    		int key = oos.read(); //liest den FileKey aus
     		return (key == FILE_KEY);
-    	
-    	}catch (Exception e) {
+    	}catch (Exception e) { //wenn was schief läuft
 	    return false;
 	  }
 	}
     
+    //gibt die Location zum Ordner zurück
     public String getSaveLocationFolder() {
     	return "C:\\Calendars";
     }
     
-    public void setClipboard(File file)
-    {
-       Toolkit.getDefaultToolkit().getSystemClipboard().setContents((Transferable) file, null);
-    }
-    
+    //importiert Objekte der Klasse Calendar von einer Datei
     public String importCalendars(File file) {
-    	
     	try (FileInputStream fos = new FileInputStream(file);
 	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
 			int key = oos.read();
-			if(key != FILE_KEY)
+			if(key != FILE_KEY) //wenn es keine Datei von uns ist
 				return "Datei nicht identifizierbar, möglicherweise kaputt.";
-			int numberOfObjects = oos.read(); //schreibt gespeicherte numberOfObjects in int
+			
+			int numberOfObjects = oos.read(); //schreibt gespeicherte numberOfObjects in int. Wie viele Kalender sind in der Datei gespeichert
 			for(int i = 0; i < numberOfObjects; i++) {
-			Calendar obj = (Calendar) oos.readObject(); 
-			String nameString = obj.getName();
-			obj.setName(String.format("%s_%s", nameString, "Importiert_"));
-			while(calendarRegister.containsKey(obj.getName())) {
-				String _nameString = obj.getName();
-				obj.setName(String.format("%s%d", _nameString, 1));
+				Calendar obj = (Calendar) oos.readObject(); //holt Calendar-Objekt aus der Datei
+				String nameString = obj.getName(); //holt sich den namen der Kalenders
+				//ändert Namen, damit man weiss, dass er importiert wurde
+				obj.setName(String.format("%s_%s", nameString, "Importiert_"));
+				//Falls es den Namen schon gibt
+				while(calendarRegister.containsKey(obj.getName())) {
+					String _nameString = obj.getName();
+					obj.setName(String.format("%s%d", _nameString, 1));
+				}
+		      calendarRegister.put(obj.getName(), obj); //speichere den Kalender in unserer Hashmap
 			}
-		      calendarRegister.put(obj.getName(), obj);
-			}
-			saveCalendars();
+			saveCalendars(); //speichere die HashMap als Datei
 			return "Importieren erfolgreich";
-	   	} catch (FileNotFoundException e) {
+	   	} catch (FileNotFoundException e) { //wenn ein Fehler aufgetreten ist
 				System.out.println("Load: File not found");
 				System.out.println(e.getMessage()); //Druckt ganauen Fehler
 				saveCalendars();
 				return "Datei nicht gefunden..";
 			} catch (IOException ex) {
 				System.out.println("Load: Error initializing stream");
-				System.out.println(ex);
-				System.out.println(ex.getMessage());
+				System.out.println(ex); //gibt art des fehler aus
+				System.out.println(ex.getMessage()); //gibt bedeutung des Fehlers aus
 				return String.format("%s: %s: %s", "Load: Error initializing stream", ex, ex.getMessage());
 	   		}
 	   catch (Exception e) {
@@ -111,42 +96,43 @@ public class Controller {
 	  }
 	}
     	
-    
+    //speichert jeden Kalender der HashMap auf einer Datei
     public void saveCalendars() {
-    	int numberOfObjects = getCalendarNameList().size();
-    	if (!Files.exists(folderPath)) {
+    	int numberOfObjects = getCalendarNameList().size(); //wie viele Kalender werden gespeichert
+    	if (!Files.exists(FOLDER_PATH)) { //wenn unser ordner nich nicht existiert
     		new File("C:\\\\Calendars").mkdirs(); //erstellt den Ordner
         }
-    	 try (FileOutputStream fos = new FileOutputStream(new File(CALENDAR_PATH_STRING)); 
+    	 try (FileOutputStream fos = new FileOutputStream(new File(CALENDAR_PATH_STRING)); //braucht man, um dateien zu beschreiben
     	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-    		 oos.write(FILE_KEY);
+    		 oos.write(FILE_KEY); //damit wir unsere datei identifizieren können
     		 oos.write(numberOfObjects); //schreibt int numberOfObject in Datei.
-    		 System.out.println(numberOfObjects);
     	        for (Calendar elementCalendar : calendarRegister.values()) {
     	            oos.writeObject(elementCalendar); //Schreibt Objekt von Calendar in Datei
     	        }
-    	        System.out.println("Saved");
     	      } catch (IOException e) {
     	        System.out.println("Creating: Error initializing stream"); //Falls es einen Error gibt.
     	      }
     	
     }
     
+    //lädt Kalender in die calendarRegister HashMap
     public void loadCalendars() {
 
     		try (FileInputStream fos = new FileInputStream(CALENDAR_PATH_STRING);
     	   		     ObjectInputStream oos = new ObjectInputStream(fos)){
     			int key = oos.read();
-    			System.out.println(key + "+Loadkey");
+    			if(key != FILE_KEY)  //wenn es keine Datei von uns ist
+    				return;
+    			
     			int numberOfObjects = oos.read(); //schreibt gespeicherte numberOfObjects in int
-    			for(int i = 0; i < numberOfObjects; i++) {
+    			for(int i = 0; i < numberOfObjects; i++) { //holt sich alle Kalender und speichert sie in HashMap
     			Calendar obj = (Calendar) oos.readObject();  
     		      calendarRegister.put(obj.getName(), obj);
     			}
     			
     	   	} catch (FileNotFoundException e) {
     				System.out.println("Load: File not found");
-    				System.out.println(e.getMessage()); //Druckt ganauen Fehler
+    				System.out.println(e.getMessage()); //Druckt genauen Fehler
     				saveCalendars();
     				return;
     			} catch (IOException ex) {
@@ -160,18 +146,19 @@ public class Controller {
     	  }
     	}
     
+    //wandelt Datum aus Integern in Datum als String um: ddmmyyyy
     public String getDayString(int _year, int _month, int _day) {
     	StringBuilder sb = new StringBuilder();  
-    	for(int i = 2; i > String.format("%d", _day).length(); i--) {
-    		sb.append("0");
+    	for(int i = 2; i > String.format("%d", _day).length(); i--) { //damit dd eingehalten wird
+    		sb.append("0"); //fügt zum String hinzu
     	}
     	sb.append(String.format("%d", _day));
     	
-    	for(int i = 2; i > String.format("%d", _month).length(); i--) {
+    	for(int i = 2; i > String.format("%d", _month).length(); i--) { //damit mm eingehlaten wird
     		sb.append("0");
     	}
     	sb.append(String.format("%d", _month));
-    	for(int i = 4; i > String.format("%d", _year).length(); i--) {
+    	for(int i = 4; i > String.format("%d", _year).length(); i--) { //damit yyyy eingehalten wird
     		sb.append("0");
     	}
     	sb.append(String.format("%d", _year));
@@ -179,14 +166,16 @@ public class Controller {
     	return sb.toString();
     }
     
+    //gibt zurück, ob es ein Schaltjahr ist
     public boolean isLeapYear(int _year) {
     	return testCalendar.isLeapYear(_year);
     }
     
+    //Löscht Kalender
     public String delete(String calendarNameString) {
-    	if(calendarRegister.containsKey(calendarNameString)) {
-    		calendarRegister.remove(calendarNameString);
-    		saveCalendars();
+    	if(calendarRegister.containsKey(calendarNameString)) { //falls es einen solchen Kalender im Register gibt
+    		calendarRegister.remove(calendarNameString); //raus aus dem Register -> jetzt nicht mehr auffindbar, aber noch existent. wird irgendwann gelöscht
+    		saveCalendars(); //neue Konfiguration speichern
     	}else {
 			return "Kalender nicht gefunden";
 		}

@@ -33,8 +33,8 @@ public class CompareCalendarsUi extends JPanel{
 	final Controller controller;
 	JFrame showFrame = new JFrame();
 	
-	JList<String> list;
-	DefaultListModel<String> model = new DefaultListModel<>();
+	JList<String> list; //Liste zum ausgeben der gemeinsamen Termin
+	DefaultListModel<String> model = new DefaultListModel<>(); 
 	Calendar[] calendars;
 	String[] intervallStrings;
 	int monthDays;
@@ -43,18 +43,18 @@ public class CompareCalendarsUi extends JPanel{
 	
 	ArrayList<String> matchIntervallStrings = new ArrayList<String>();
 	private JButton backButton;
-	private JLabel headerLabel;
+	private JLabel headerLabel; //Text
 	
 	private int numberOfElements;
 	
 	public CompareCalendarsUi(Controller controller) {
-		this.controller = controller;
-		allCalendarStrings = new String[controller.getCalendarNameList().size()];
+		this.controller = controller; //this. bezeichtnet die Variable dieser Klasse
+		allCalendarStrings = new String[controller.getCalendarNameList().size()]; //deklariert array
 		allCalendarStrings = controller.getCalendarNameList().toArray();
 		
-		calendars = getSelectCalendars();
+		calendars = getSelectCalendars(); //gibt zu verglichende Kalender zurück
 		
-		matchIntervallStrings = initMatch(calendars);
+		matchIntervallStrings = initMatch(calendars); //gibt gemeinsame Termine zurück
 
 		showFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
@@ -81,7 +81,7 @@ public class CompareCalendarsUi extends JPanel{
 		
 		list = new JList<String>(model);
 		list.setVisibleRowCount(7);
-		initList(list);
+		initList(list); //initiiert Liste
 		
 		GridBagConstraints gbc_list = new GridBagConstraints();
 		gbc_list.anchor = GridBagConstraints.NORTHWEST;
@@ -98,162 +98,138 @@ public class CompareCalendarsUi extends JPanel{
 				showFrame.setVisible(false);
 			}
 		});
-		backButton.setToolTipText("Zum Hauptmenü");
+		backButton.setToolTipText("Zum Hauptmenu");
 		GridBagConstraints gbc_backButton = new GridBagConstraints();
 		gbc_backButton.insets = new Insets(0, 0, 0, 5);
 		gbc_backButton.gridx = 6;
 		gbc_backButton.gridy = 8;
 		contentPane.add(backButton, gbc_backButton);
 		
-		showFrame.setBounds(100, 100, 550, (30*numberOfElements));
+		showFrame.setBounds(100, 100, 550, (30*numberOfElements)); //Höhe ist variabel, je nach anzahl der Termine
 		showFrame.setVisible(true);
 	}
 	
+	//initiiert Matches
 	private ArrayList<String> initMatch(Calendar[] calendars) {
 		
-		intervallStrings = createIntervall();
-		matchIntervallStrings = matchesToString2(controller.match(calendars, intervallStrings));
+		intervallStrings = createIntervall(); //gibt intervall als String[2] zurück
+		matchIntervallStrings = matchesToString(controller.match(calendars, intervallStrings)); //gibt Matches als Strings zurück
 		
-		if(matchIntervallStrings.size() >= 10) {
-			if(JOptionPane.showConfirmDialog(null, String.format("Es wurden %d Termine gefunden. Suchintervall eingrenzen?", matchIntervallStrings.size()), null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-				return initMatch(calendars);
+		if(matchIntervallStrings.size() > 10) { //Wenn mehr als 10 Matches gefunden wurden, frage nach, ob der Intervall beschränkt werden soll
+			if(JOptionPane.showConfirmDialog(null, String.format("Es wurden %d Termine gefunden. Suchintervall eingrenzen?", matchIntervallStrings.size()), null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) //wenn ja
+				return initMatch(calendars); //Vorgang wiederholen
 		}
-		
-		return matchIntervallStrings;
+		return matchIntervallStrings; //gebe Matches zurück
 	}
 	
+	//initiiert Liste
 	private void initList(JList<String> list) {
-		if(matchIntervallStrings.size() <= 0) {
+		if(matchIntervallStrings.size() <= 0) { //wenn keine Matches gefunden wurden
 			model.addElement("Keine passenden Termine gefunden.");
 			JOptionPane.showMessageDialog(showFrame, "Keine passenden Termine gefunden.");
-			showFrame.setVisible(false); //you can't see me!
-			showFrame.dispose(); //Destroy the JFrame object.
+			showFrame.setVisible(false); 
+			showFrame.dispose(); 
 			return;
 		}
 			
-		for(String elementString : matchIntervallStrings) {
+		for(String elementString : matchIntervallStrings) { //Füge alle Matches zum Model/Liste hinzu
 			model.addElement(elementString);	
 		}
 	}
 	
-	private ArrayList<String> matchesToString2(ArrayList<CustomMap> matches){
+	//wandelt Matches zu String um. CustumMap speichert nur das datum als String und den Intervall als Integer
+	private ArrayList<String> matchesToString(ArrayList<CustomMap> matches){
 		ArrayList<String> stringMatchesStrings = new ArrayList<String>();
-		for (CustomMap customMap : matches) {
+		for (CustomMap customMap : matches) { //für jedes Match
 			StringBuilder intervallStringBuilder = new StringBuilder();
 			if(customMap.getInteger()<24) {
-				for(int y = 0; y<3; y++) {
-					System.out.println(y+ "++++");
-					intervallStringBuilder.append(controller.reverseDayString(customMap.getString())[y]); 
+				for(int y = 0; y<3; y++) { //geht das Datum durch
+					intervallStringBuilder.append(controller.reverseDayString(customMap.getString())[y]); //reverseDayString gibt Integer[3] mit 0 = tag, 1 = Monat und 2 = Jahr zurück
 					if(y < 2)
-						intervallStringBuilder.append(".");
+						intervallStringBuilder.append("."); //Der Punkt im datum
 				}
 			intervallStringBuilder.append(", ");
-			intervallStringBuilder.append((customMap.getInteger()) + "h - " + (customMap.getInteger() + 1) + "h");
+			intervallStringBuilder.append((customMap.getInteger()) + "h - " + (customMap.getInteger() + 1) + "h"); //gibt Intervall aus
 			intervallStringBuilder.append(".");		
-			stringMatchesStrings.add(intervallStringBuilder.toString());
+			
+			stringMatchesStrings.add(intervallStringBuilder.toString()); //den String zur Liste hinzufügen
 			}
 			}
-		numberOfElements = stringMatchesStrings.size();
-		return stringMatchesStrings;
+		numberOfElements = stringMatchesStrings.size(); //wie viele Matches es gab
+		return stringMatchesStrings; //gebe Matches zurück
 	}
 	
-	private ArrayList<String> matchesToStrings(ArrayList<CustomMap[]> matches){
-		ArrayList<String> stringMatchesStrings = new ArrayList<String>();
-		for (CustomMap[] customMaps : matches) {
-			StringBuilder intervallStringBuilder = new StringBuilder();
-			System.out.println(customMaps.length);
-			for(int i = 0; i<customMaps.length; i++) {
-				for(int y = 0; y<3; y++) {
-					System.out.println(y+ "++++");
-					System.out.println(customMaps[i]);
-					intervallStringBuilder.append(controller.reverseDayString(customMaps[i].getString())[y]); //NullPointerException - warum?
-					if(y < 2)
-						intervallStringBuilder.append(".");
-				}
-			intervallStringBuilder.append(", ");
-			
-			//CustomMao[1] existiert nicht - warum
-			if(i==1)
-				intervallStringBuilder.append((customMaps[i].getInteger()) + "h ");
-			else if(i==0)
-				intervallStringBuilder.append((customMaps[i].getInteger() - 1) + "h ");
-			if( i < 1) {
-				if(customMaps[i+1] != null) 
-				intervallStringBuilder.append("bis ");
-			}else {
-				intervallStringBuilder.append(".");
-				break;
-			}
-		}
-			stringMatchesStrings.add(intervallStringBuilder.toString());
-		}
-		return stringMatchesStrings;
-	}
+    //fügt suchintervallstart und -ende zusammen und gibt als Array zurück
 	private String[] createIntervall() {
 		String[] intervallString = new String[2];
-		intervallString[0] = createIntervallStart();
-		intervallString[1] = createIntervallEnd(intervallString[0]);
+		intervallString[0] = createIntervallStart(); //gibt start zurück
+		intervallString[1] = createIntervallEnd(intervallString[0]); //gibt ende zurück
 		return intervallString;
 	}
 	
+	//Holt sich enddatum vom Nutzer und gibt zurück
 	private String createIntervallEnd(String start) {
+		//holt sich startdatum als Integers, damit der nutzer nicht ein Enddatum vor dem Startdatum ählt
 		Integer[] dateIntegers = controller.reverseDayString(start);
 		int startDay = dateIntegers[0];
 		int startMonth = dateIntegers[1];
 		int startYear = dateIntegers[2];
 		
-		int year = getYearInputMod(startYear);
-		int month = getMonthInputMod(startMonth, year);
-		int day = getDayInputMod(startDay);
+		//die get...InputMod-Methoden sind gleich wie die normalen, ausser, dass man kein datum vor dem Start auswählen kann
+		int year = getYearInputMod(startYear); //gibt Jahreszahl zurück
+		int month = getMonthInputMod(startMonth, year, startDay); //Monat
+		int day = getDayInputMod(startDay, startMonth, month); //Tag
 		
-		return controller.getDayString(year, month, day);
+		return controller.getDayString(year, month, day); //gibt Datum als String zurück
 	}
 	
-	private int getDayInputMod(int startDay) {
+	//holt sich Tag, das nicht vor dem start ist, vom Nutzer
+	private int getDayInputMod(int startDay, int startMonth, int endMonth) {
 		Object[] days;
 		List<Object> daysList = new ArrayList<Object>();
 		int day;
 		
 		//Für jeden Tag im Monat die Zahl als String für die Auswahl
+		if(endMonth != startMonth)  //wenn es der nächste Monat ist
+			startDay = 0;
 		for (int i = startDay; i < monthDays; i++) {
 			daysList.add(String.format("%d", i+1));
 		}
 		
 		days = daysList.toArray();
 		
+		//erfagt den Tag von der Auswahl
 		String dayInputString = (String) JOptionPane.showInputDialog( contentPane, "Welcher den Tag", "Intervallende", JOptionPane.PLAIN_MESSAGE, null, days, "Tag");
 		
+		//wenn Falsche angabe, wiederhole den Vorgang
 		if(dayInputString == "0" || dayInputString == null)
 			return getDayInput();
 		else {
-			day = Integer.parseInt(dayInputString);
-			controller.saveCalendars();
+			day = Integer.parseInt(dayInputString); //input zu Integer
+			controller.saveCalendars(); //sicherheitshalber
 			return day;
 		}
 	}
 	
+	//holt sich Jahr, das nicht vor dem start ist, vom Nutzer
 	private int getYearInputMod(int startYear) {
-		int year = getYearInputMod();
-		if(year < startYear) {
+		int year = getYearInput(); //hole Jahr
+		if(year < startYear) { //wenn vor Startjahr, wiederhole vorgang
 			JOptionPane.showMessageDialog(null, "Auswahl nicht vereinbar");
 			return getYearInputMod(startYear);
 		}
 		return year;
 	}
 	
-	private int getYearInputMod() {
-		try {
-			return Integer.parseInt((String) JOptionPane.showInputDialog(null, "Welches Jahr?", "Intervallende", JOptionPane.PLAIN_MESSAGE, null, null, "Jahr:"));
-		} catch (Exception e) { //wenn nicht eingetragen wurde oder es sonst einen Fehler gibt
-			return getYearInputMod();
-		}
-	}
-	private int getMonthInputMod(int startMonth, int year) {
+	//holt sich Monat, der nicht vor dem start ist, vom Nutzer
+	private int getMonthInputMod(int startMonth, int year, int startYear) {
 		ArrayList<Object> modMonthsObjectList = new ArrayList<Object>();
+		if(year != startYear)
+			startMonth = 1;
 		for(int i = (startMonth - 1); i < months.length; i++) {
-			modMonthsObjectList.add(months[i]);
+			modMonthsObjectList.add(months[i]); //Fügt jeden wählbaren Monat zur auswahl hinzu
 		}
-		
+		//holt sich den Monat vom Nutzer
 		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Intervallende", JOptionPane.PLAIN_MESSAGE, null, modMonthsObjectList.toArray(), "Monat");
 		
 		//Wie viele Tage hat der Monat?
@@ -280,6 +256,7 @@ public class CompareCalendarsUi extends JPanel{
 			return _month;
 	}
 	
+	//setzt suchintervallstartdatum zusammen
 	private String createIntervallStart() {
 		int year = getYearInput();
 		int month = getMonthInput(year);
@@ -289,6 +266,7 @@ public class CompareCalendarsUi extends JPanel{
 	
 	}
 	
+	//Holt sich Jahrezahl vom Nutzer
 	private int getYearInput() {
 		try {
 			return Integer.parseInt((String) JOptionPane.showInputDialog(null, "Welches Jahr?", "Intervallstart", JOptionPane.PLAIN_MESSAGE, null, null, "Jahr:"));
@@ -297,6 +275,7 @@ public class CompareCalendarsUi extends JPanel{
 		}
 	}
 	
+	//holt sich Tag vom Nutzer
 	private int getDayInput() {
 		Object[] days;
 		List<Object> daysList = new ArrayList<Object>();
@@ -320,6 +299,7 @@ public class CompareCalendarsUi extends JPanel{
 		}
 	}
 	
+	//holt sich monat vom Nutzer
 	private int getMonthInput(int year) {
 		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Intervallstart", JOptionPane.PLAIN_MESSAGE, null, months, "Monat");
 		
@@ -355,54 +335,56 @@ public class CompareCalendarsUi extends JPanel{
 		
 	}
 	
+	//holt sich die zu vergleichenden Kalender vom Nutzer
 	private Calendar[] getSelectCalendars() {
-		int number = askNumber("Wie viele Kalender sollen abgeglichen werden??");
-		if(number < 2 || number > controller.getCalendarList().size()) {
+		int number = askNumber("Wie viele Kalender sollen abgeglichen werden?"); 
+		if(number < 2 || number > controller.getCalendarList().size()) { //wenn ungültige Anzahl
 			JOptionPane.showMessageDialog(null, "Vergleich nicht durchführbar");
 			showFrame.setVisible(false);
+			return null;
 		}
 		Calendar[] selectedObjects = new Calendar[number];	
-		for(int i = 0; i<number; i++) {
-			System.out.println("getSelectedCalendar-for + " + i);
-			System.out.println(selectedObjects[0]);
-			selectedObjects[i] = getChoosCalendarWithObjectArrays(selectedObjects);
+		for(int i = 0; i<number; i++) { //hole soviele Kalender, wie ausgewählt
+			selectedObjects[i] = getChoosenCalendarWithObjectArrays(selectedObjects); //gibt ausgewählten Kalender zurück
+			if(selectedObjects[i] == null) //wenn keine richtige Auswahl
+				return null;
 		}
-		
 		return selectedObjects;
 	}
 	
-	private Calendar getChoosCalendarWithObjectArrays(Object[] selectedObjects) {
-		System.out.println(selectedObjects.length);
+	//Holt sich Kalender aus den auswählbaren vom Nutzer
+	private Calendar getChoosenCalendarWithObjectArrays(Object[] selectedObjects) {
+		//erfragt Kalender aus den Kalendern, die noch nicht ausgewählt wurden. sonst würde es einen schlimmen schlimmen fehler geben.
 		Calendar inputCalendar = controller.getCalendar(String.valueOf(JOptionPane.showInputDialog(null, "Welcher Kalender?", "Kalender", JOptionPane.PLAIN_MESSAGE, null, (selectedObjects[0] != null) ? getUnusedFromArrays(allCalendarStrings, calendarArrayToStringArray(selectedObjects)) : allCalendarStrings, controller.getCalendarList().get(0))));
-		return (inputCalendar != null) ? inputCalendar : getChoosCalendarWithObjectArrays(selectedObjects);	
+		return (inputCalendar != null) ? inputCalendar : null;	//einzeilige if: (Statement) ? true : false
 	}
 	
+	//wandelt die Objekte der Klasse Calendar aus einem Array in Texte um und fügt sie zur Liste hinzu
 	private Object[] calendarArrayToStringArray(Object[] calendars) {
-		Object[] stringsObject = new Object[calendars.length];
+		Object[] stringsObject = new Object[calendars.length]; //Object ist jede Klasse: alle Klassen sind unterklassne der klasse Object
 		for (int i = 0; i < calendars.length; i++) {
-			if(calendars[i] == null)
+			if(calendars[i] == null) //wenn ein element des Arrays null ist -> beende for-schleife
 				break;
-			Calendar tempCalendar = (Calendar) calendars[i];
-			stringsObject[i] =  tempCalendar.getName();
+			Calendar tempCalendar = (Calendar) calendars[i]; //setzte mit temporärem Kalender gleich
+			stringsObject[i] = tempCalendar.getName(); //FÜge dessen Namen zum array hinzu. //die beiden zeilen hätte man auch in eine machen können, aber so ist es deutlich,deutlich übersichtlicher
 		}
-		
+		//gibt array zurück
 		return stringsObject;
 	}
 	
+	//filtert alle Elemente heraus, die nicht in beiden array drin sind
 	private Object[] getUnusedFromArrays(Object[] base, Object[] selection) {
 		ArrayList<Object> resultArrayList = new ArrayList<Object>();
-		
 		for (int i = 0; i < base.length; i++) {
-			if(!controller.isElementOfArray(base[i], selection))
+			if(!controller.isElementOfArray(base[i], selection)) //wenn es kein Element des anderen Arrays ist
 				resultArrayList.add(base[i]);
 		}
-		
-		System.out.println(resultArrayList.size());
 		return resultArrayList.toArray();
 	}
-
+	
+	//erfragt eine Nummer über 0 beim Nutzer mit einer Nachricht
 	private int askNumber(String message) {
-	String inputString = JOptionPane.showInputDialog(message);
-	return (inputString == null || Integer.parseInt(inputString)<1) ? askNumber(message) : Integer.parseInt(inputString); //if in einer Zeile
+		String inputString = JOptionPane.showInputDialog(message);
+		return (inputString == null || Integer.parseInt(inputString)<1) ? askNumber(message) : Integer.parseInt(inputString); //if in einer Zeile
 	}
 }
