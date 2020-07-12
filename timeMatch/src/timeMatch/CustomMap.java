@@ -1,7 +1,10 @@
 package timeMatch;
 
 public class CustomMap {
-	//.
+	/* Speichert einen String und einen Integer
+	 * @author Benjamin Dangl
+	 * @version 30.06.2020
+	 */
 	private String string;
 	private int integer;
 	

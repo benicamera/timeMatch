@@ -21,6 +21,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import timeMatch.Controller;
 
+/*
+ * Zeigt Content an
+ * 
+ * @author Benjamin Dangl
+ * @version 08.07.2020
+ * Last Change: 20.06.2020
+ * - Klasse erstellt (20.06.2020).
+ * 
+ */
+
 public class Gui {
 
 	private JFrame frame;
@@ -38,11 +48,6 @@ public class Gui {
 	public Gui() {
 		controller = new Controller();
 		initialize();
-		toTest();
-	}
-	
-	public void toTest(/*Parameters*/) {
-		//controller.toTest(/*Parameters*/);
 	}
 
 	/**

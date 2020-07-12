@@ -11,11 +11,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
-import java.lang.reflect.UndeclaredThrowableException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Insets;
 
+/*
+ * Zeigt Content an
+ * 
+ * @author Benjamin Dangl
+ * @version 08.07.2020
+ * - Klasse erstellt (30.06.2020).
+ * 
+ */
 
 public class EditCalendarUi extends JFrame implements ActionListener{
 

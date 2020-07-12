@@ -23,6 +23,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 
+/*
+ * Zeigt Content an
+ * 
+ * @author Benjamin Dangl
+ * @version 08.07.2020
+ * - Klasse erstellt (30.06.2020).
+ * 
+ */
+
 public class CompareCalendarsUi extends JPanel{
 	
 	/**

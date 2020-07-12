@@ -21,12 +21,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.MouseInfo;
 import java.awt.Font;
 import java.awt.Color;
+
+/*
+ * Zeigt Content an
+ * 
+ * @author Benjamin Dangl
+ * @version 08.07.2020
+ * - Klasse erstellt (30.06.2020).
+ * 
+ */
 
 public class ShowCalendarsUi extends JFrame {
 

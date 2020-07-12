@@ -11,20 +11,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /*
- * Verrechnet und vergleicht
+ * Verrechnet, vergleicht und verwaltet
  * 
  * @author Felix Becht, Hussein Fazeli
- *@version 26.06.2020
- * Last Change: 20.06.2020
+ * @version 08.07.2020
  * - Klasse erstellt (20.06.2020).
  * 
  */
-
-import java.util.HashMap;
-import java.util.List;
 
 public class Controller {
 	final Calendar testCalendar = new Calendar("testCalendar"); //damit man wichtige Calendarmethoden immer aubrufen kann.
@@ -283,15 +281,15 @@ public class Controller {
     	return listRaw;
     }
    
-    
+    //gibt den nächsten Tag als String zurück
     public  String dayStringAdd(String previousString) {
     	Integer[] dateIntegers = new Integer[3];
     	dateIntegers = reverseDayString(previousString);
     	int day = dateIntegers[0];
     	int month = dateIntegers[1];
     	int year = dateIntegers[2];
-    	if(day + 1 > monthDays(month, year)) {
-    		if(!(month + 1 > 12)) {
+    	if(day + 1 > monthDays(month, year)) { //wenn nicht nächster monat
+    		if(!(month + 1 > 12)) { //wenn nicht nächstes Jahr
     			day = 1;
     			month++;
     		}else {
@@ -305,6 +303,7 @@ public class Controller {
     		return getDayString(year, month, day);
     }
     
+    //gibt tage im Monat zurück
     public int monthDays(int month, int year) {
     	int monthDays;
     	if(month < 8) {
@@ -331,13 +330,13 @@ public class Controller {
     	return monthDays;
     }
     
+    //macht aus dem Datum als String 3 Zahlen
     public Integer[] reverseDayString(String dayString) {
-    	
     	int day;
 		int month;
 		int year;
 		Integer[] splitIntegers = new Integer[3];
-		day = Integer.parseInt(dayString.substring(0, 2));
+		day = Integer.parseInt(dayString.substring(0, 2)); //.substring gibt den Teil des Strings zurück
 		month = Integer.parseInt(dayString.substring(2,4));
 		year = Integer.parseInt(dayString.substring(4,dayString.length()));		
 		
@@ -348,6 +347,7 @@ public class Controller {
 		return splitIntegers;
     }
     
+    //gibt den zum Namen gehörenden Calendar zurück
     public Calendar getCalendar(String name) {
        return calendarRegister.get(name);
     }
