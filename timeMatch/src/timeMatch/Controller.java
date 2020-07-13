@@ -370,9 +370,7 @@ public class Controller {
     	Object[] datumObject = calendar.keySet().toArray();
     	for (int z = 0; z < datumObject.length; z++) {
     		datumString [z]  = String.valueOf(datumObject[z]);  
-		}
-    	
-		
+		}		
     	
     	for (int i = 0; i < datumString.length; i++) {
     		for (int j = 0; j < 24; j++) {
@@ -388,11 +386,6 @@ public class Controller {
     	}
 		System.out.println(eventsList);
 		return eventsList;
-		
-		
-	
-	
-
 }
 //////////////////////////////////
    
