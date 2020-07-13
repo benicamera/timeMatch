@@ -145,9 +145,9 @@ public class Controller {
     }
     
     public  ArrayList<String> getCalendarNameList(){
-    	List<String> _names = new ArrayList<String>();
+    	ArrayList<String> _names = new ArrayList<String>();
     	_names.addAll(calendarRegister.keySet());
-    	return (ArrayList<String>) _names;
+       	return  _names;
     }
     
     public boolean isNameTaken(String _calendarName) {
@@ -215,7 +215,6 @@ public class Controller {
     			break;
     		dayCount++;
     	}
-    	System.out.println("____________");
     	System.out.println(listRaw.size());
     	return  agreementSummary(listRaw);
     }
