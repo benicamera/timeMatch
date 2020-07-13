@@ -29,7 +29,7 @@ public class Gui {
 	}
 	
 	public void toTest(/*Parameters*/) {
-		//controller.toTest(/*Parameters*/);
+		controller.toTest(/*Parameters*/);
 	}
 
 	/**
@@ -105,6 +105,20 @@ public class Gui {
 		gbc_matchButton.gridx = 9;
 		gbc_matchButton.gridy = 1;
 		frame.getContentPane().add(matchButton, gbc_matchButton);
+		
+		
+		
+		//////////////////////////////////////////////
+		JButton showEventsButton = new JButton("");
+		showEventsButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
+		showEventsButton.setToolTipText("showEvents");
+		GridBagConstraints gbc_showEventsButton = new GridBagConstraints();
+		gbc_showEventsButton.insets = new Insets(0, 0, 5, 0);
+		gbc_showEventsButton.gridx = 10;
+		gbc_showEventsButton.gridy = 1;
+		frame.getContentPane().add(showEventsButton, gbc_showEventsButton);		
+		////////////////////////////////////////
+		
 		
 		JLabel spaceLabel = new JLabel("");
 		GridBagConstraints gbc_spaceLabel = new GridBagConstraints();

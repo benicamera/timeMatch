@@ -129,5 +129,9 @@ public class Calendar implements Serializable{
 	public void toTest(/* insert Parameters*/) {
 
 	}
+	public HashMap <String,boolean[]> getCalendar(){
+		return calendar;
+		
+	}
 	
 }

@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
+import java.util.Calendar;
 
 /*
  * Verrechnet und vergleicht
@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.List;
+
+import testProjekt.CustomMap;
 
 public class Controller {
     final Calendar testCalendar;
@@ -43,7 +45,8 @@ public class Controller {
     }
    
     public void toTest(/* insert Parameters*/) {
-        testCalendar.toTest(/*insert Parameters*/);
+    
+       testCalendar.toTest(/*insert Parameters*/);
         System.out.println("********");
         Calendar[] calendars = new Calendar[2];
         calendars[0] = calendarRegister.get("test1");
@@ -65,6 +68,8 @@ public class Controller {
 			}
 		}
         
+      
+      
     }
     
     public void saveCalendars() {
@@ -181,42 +186,29 @@ public class Controller {
     	while(currentString != endString) { //Solange zwischen den Tagen
     		while(currentIntervall < testCalendar.getNumberOfIntervalls() + 1) { //sloange im Tag
  	
-    		for(int i=0;i<_calendars.length;i++) {
-    			if(currentIntervall == 0 && currentString == null)
-    				System.out.println("null");
-    			else
-    				System.out.println("Not null");
-    			
-    			System.out.println(currentIntervall);
-    			//System.out.println(calendar.isFree(currentIntervall, currentString));
-    			System.out.println(_calendars[i].getName());
-    			if(_calendars[i].isFree(currentIntervall, currentString)) // nullpointer exception
+    			for(int i=0;i<_calendars.length;i++) {
+    				if(_calendars[i].isFree(currentIntervall, currentString)) 
     				allFreeBoolean = true;
-    			else {
+    				else {
 					allFreeBoolean = false;
 					break;
-				}
+    				}
     			
+    			}
+    		
+    			if(allFreeBoolean) { //wenn alle frei
+    				listRaw.add(new CustomMap(currentString, currentIntervall));
+    				currentIntervall++;
+    			}
+    			currentString = dayStringAdd(currentString);
+    			currentIntervall = 1;
+    			System.out.println(dayCount + "*");
+    			if(dayCount == 2)
+    				break;
+    			dayCount++;
     		}
-    		
-    		if(allFreeBoolean) { //wenn alle frei
-    			listRaw.add(new CustomMap(currentString, currentIntervall));
-    		currentIntervall++;
-    		
-		if(currentIntervall > testCalendar.getNumberOfIntervalls())
-			System.out.println("Planned Stop");
-    	}
-    		System.out.println("_"); //Unendlich warum?
-    	}
-    		currentString = dayStringAdd(currentString);
-    		currentIntervall = 1;
-    		System.out.println(dayCount + "*");
-    		if(dayCount == 2)
-    			break;
-    		dayCount++;
-    	}
-    	System.out.println(listRaw.size());
-    	return  agreementSummary(listRaw);
+    		System.out.println(listRaw.size());
+    		return  agreementSummary(listRaw);
     }
    
     private ArrayList<CustomMap[]> agreementSummary(List<CustomMap> listRaw){
@@ -320,6 +312,27 @@ public class Controller {
        return calendarRegister.get(name);
     }
     
+    
+    /////////////////////////////////////
+    public List<String> events (Calendar _calendar) { 					//gibt alle Vorhandenen Termine an 
+    	List<String> eventsList = new List<String>();	
+    	HashMap <String,boolean[]> calendar = _calendar.getCalendar();
+    	
+    	if(! calendar.containsValue(true)) {							//überprüft ob Termine Vorhanden sind
+    		System.out.println("Keine Termine    (Controler.events)");
+    		return eventsList;
+    	}
+    	
+    	String[] datumString = new String()[calendar.size()];			
+    	datumString = calendar.keySet();							
+    	for (int i = 0; i < datumString.length; i++) {					//geht alle Keys(vorhandenen Datums) durch
+    		if (calendar.get(datumString[i])) {							//wenn der das datum belegt ist
+				eventsList.add(datumString[i]);							//dann fügt es dies in die Liste ein
+			}
+    	}
+    	return eventsList;
+	}
+    //////////////////////////////////
    
     
 }
