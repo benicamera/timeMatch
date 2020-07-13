@@ -140,6 +140,16 @@ public class Gui {
 		gbc_matchButton.gridy = 2;
 		frame.getContentPane().add(matchButton, gbc_matchButton);
 		
+		//////////////////////////////////////////////
+		JButton showEventsButton = new JButton("getEvents"); 	
+		GridBagConstraints gbc_showEventsButton = new GridBagConstraints();
+		gbc_showEventsButton.insets = new Insets(0, 0, 5, 0);
+		gbc_showEventsButton.gridx = 0;
+		gbc_showEventsButton.gridy = 1;
+		showEventsButton.setVisible(true);
+		frame.getContentPane().add(showEventsButton, gbc_showEventsButton);		
+		////////////////////////////////////////
+		
 		JButton createButton = new JButton("");
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

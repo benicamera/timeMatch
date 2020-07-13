@@ -355,25 +355,36 @@ public class Controller {
        return calendarRegister.get(name);
     }
    
-/////////////////////////////////////
-public ArrayList<CustomMap> getEvents (Calendar _calendar) { //gibt alle Vorhandenen Termine an
-	System.out.println("getEvents aufgerufen");
-ArrayList<CustomMap> eventsList = new ArrayList<CustomMap>();	
-HashMap <String,boolean[]> calendar = _calendar.getCalendarHashMap();
+    /////////////////////////////////////
+    public ArrayList<CustomMap> getEvents (Calendar _calendar) { //gibt alle Vorhandenen Termine an
+	
+    	System.out.println("getEvents aufgerufen");
+	
+    	ArrayList<CustomMap> eventsList = new ArrayList<CustomMap>();	
+    	HashMap <String,boolean[]> calendar = _calendar.getCalendarHashMap();
 
-if(! calendar.containsValue(true)) {							//überprüft ob Termine Vorhanden sind
-System.out.println("Keine Termine    (Controler.events)");
-return eventsList;
-}
+    	String[] datumString = new String[calendar.size()];	
+    	System.out.println("calendar.keyset :"+ calendar.keySet());
+    	datumString = calendar.keySet();
+    	for (int i = 0; i < datumString.length; i++) {
+    		for (int j = 0; j < 24; j++) {
+    			boolean [] counter =new boolean [24];
+    			counter = calendar.get(datumString[i]);
+    			if(! counter [j]) {
+    				//eventsList.add(datumString [i],counter [j]);
+    				eventsList.add(setString(datumString[i]) , setInteger(counter [j]));
+    				System.out.println("datumString ("+ i +") : " + datumString[i]);
+    				System.out.println("counter (" + j + ") : " + counter[j]);
+    			}
+    		}
+    	}
+		System.out.println(eventsList);
+		return eventsList;
+		
+		
+	
+	
 
-String[] datumString = new String[calendar.size()];			
-datumString = calendar.keySet();							
-for (int i = 0; i < datumString.length; i++) {					//geht alle Keys(vorhandenen Datums) durch
-if (calendar.get(datumString[i])) {							//wenn der das datum belegt ist
-eventsList.add(datumString[i]);							//dann fügt es dies in die Liste ein
-}
-}
-return eventsList;
 }
 //////////////////////////////////
    
