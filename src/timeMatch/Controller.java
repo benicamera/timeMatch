@@ -314,8 +314,8 @@ public class Controller {
     
     
     /////////////////////////////////////
-    public List<String> events (Calendar _calendar) { 					//gibt alle Vorhandenen Termine an 
-    	List<String> eventsList = new List<String>();	
+    public ArrayList<String> events (Calendar _calendar) { 					//gibt alle Vorhandenen Termine an 
+    	List<String> eventsList = new ArrayList<String>();	
     	HashMap <String,boolean[]> calendar = _calendar.getCalendar();
     	
     	if(! calendar.containsValue(true)) {							//überprüft ob Termine Vorhanden sind
