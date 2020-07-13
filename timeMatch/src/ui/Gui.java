@@ -47,9 +47,14 @@ public class Gui {
 	
 	public Gui() {
 		controller = new Controller();
+		toTest();
 		initialize();
+		
 	}
-
+	public void toTest(/*Parameters*/) {
+		System.out.println("toTest gui aufgerufen");
+		controller.toTest();
+	}
 	/**
 	 * Initialize the contents of the frame
 	 */
