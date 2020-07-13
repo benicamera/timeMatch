@@ -24,12 +24,16 @@ public class Gui {
 	
 	public Gui() {
 		controller = new Controller();
-		initialize();
 		toTest();
+		System.out.println("toTest gui aufgerufen**");
+
+		initialize();
+		
 	}
 	
 	public void toTest(/*Parameters*/) {
-		controller.toTest(/*Parameters*/);
+		System.out.println("toTest gui aufgerufen");
+		controller.toTest();
 	}
 
 	/**
@@ -109,13 +113,12 @@ public class Gui {
 		
 		
 		//////////////////////////////////////////////
-		JButton showEventsButton = new JButton("");
-		showEventsButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
-		showEventsButton.setToolTipText("showEvents");
+		JButton showEventsButton = new JButton("getEvents"); 	
 		GridBagConstraints gbc_showEventsButton = new GridBagConstraints();
 		gbc_showEventsButton.insets = new Insets(0, 0, 5, 0);
-		gbc_showEventsButton.gridx = 10;
+		gbc_showEventsButton.gridx = 0;
 		gbc_showEventsButton.gridy = 1;
+		showEventsButton.setVisible(true);
 		frame.getContentPane().add(showEventsButton, gbc_showEventsButton);		
 		////////////////////////////////////////
 		

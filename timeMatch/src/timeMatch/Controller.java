@@ -37,7 +37,10 @@ public class Controller {
     public Controller() {
         loadCalendars(); //lÃ¤dt die calendars.dat-Datei
     }
-   
+   public void toTest() {
+	   System.out.println("toTest Controller aufgerufen");
+	   getEvents(getCalendar("Felix"));
+   }
     //testet ob eine Datei von uns ist
     public boolean isCalendarFile(File file) {
     	try (FileInputStream fos = new FileInputStream(file); //braucht man, um dateien auslesen zu kÃ¶nnen
@@ -351,25 +354,28 @@ public class Controller {
     public Calendar getCalendar(String name) {
        return calendarRegister.get(name);
     }
-    public ArrayList<String> events (Calendar _calendar) { 					//gibt alle Vorhandenen Termine an 
-    	ArrayList<String> eventsList = new ArrayList<String>();	
-    	HashMap <String,boolean[]> calendar = _calendar.getCalendarHashMap();
-    	
-    	/*if( calendar.containsValue() {							//überprüft ob Termine Vorhanden sind
-    		System.out.println("Keine Termine    (Controler.events)");
-    		return eventsList;
-    	}
-    	*/
-    	
-    	String[] datumString = new String [calendar.size()];			
-    	datumString = calendar.keySet();							
-    	for (int i = 0; i < datumString.length; i++) {					//geht alle Keys(vorhandenen Datums) durch
-    		if (! calendar.get(datumString[i])) {							//wenn der das datum belegt ist
-				eventsList.add(datumString[i]);							//dann fügt es dies in die Liste ein
-			}
-    	}
-    	return eventsList;
-	}
+   
+/////////////////////////////////////
+public ArrayList<CustomMap> getEvents (Calendar _calendar) { //gibt alle Vorhandenen Termine an
+	System.out.println("getEvents aufgerufen");
+ArrayList<CustomMap> eventsList = new ArrayList<CustomMap>();	
+HashMap <String,boolean[]> calendar = _calendar.getCalendarHashMap();
+
+if(! calendar.containsValue(true)) {							//überprüft ob Termine Vorhanden sind
+System.out.println("Keine Termine    (Controler.events)");
+return eventsList;
+}
+
+String[] datumString = new String[calendar.size()];			
+datumString = calendar.keySet();							
+for (int i = 0; i < datumString.length; i++) {					//geht alle Keys(vorhandenen Datums) durch
+if (calendar.get(datumString[i])) {							//wenn der das datum belegt ist
+eventsList.add(datumString[i]);							//dann fügt es dies in die Liste ein
+}
+}
+return eventsList;
+}
+//////////////////////////////////
    
     
 }
