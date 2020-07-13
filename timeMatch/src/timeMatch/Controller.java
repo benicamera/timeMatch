@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -351,7 +352,24 @@ public class Controller {
     public Calendar getCalendar(String name) {
        return calendarRegister.get(name);
     }
-    
+    public ArrayList<String> events (Calendar _calendar) { 					//gibt alle Vorhandenen Termine an 
+    	Array<String> eventsList = new ArrayList<String>();	
+    	HashMap <String,boolean[]> calendar = _calendar.getCalendar();
+    	
+    	if(! calendar.containsValue(true)) {							//überprüft ob Termine Vorhanden sind
+    		System.out.println("Keine Termine    (Controler.events)");
+    		return eventsList;
+    	}
+    	
+    	String[] datumString = new String()[calendar.size()];			
+    	datumString = calendar.keySet();							
+    	for (int i = 0; i < datumString.length; i++) {					//geht alle Keys(vorhandenen Datums) durch
+    		if (calendar.get(datumString[i])) {							//wenn der das datum belegt ist
+				eventsList.add(datumString[i]);							//dann fügt es dies in die Liste ein
+			}
+    	}
+    	return eventsList;
+	}
    
     
 }
