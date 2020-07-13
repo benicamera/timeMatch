@@ -143,9 +143,9 @@ public class Gui {
 		//////////////////////////////////////////////
 		JButton showEventsButton = new JButton("getEvents"); 	
 		GridBagConstraints gbc_showEventsButton = new GridBagConstraints();
-		gbc_showEventsButton.insets = new Insets(0, 0, 5, 0);
-		gbc_showEventsButton.gridx = 0;
-		gbc_showEventsButton.gridy = 1;
+		gbc_showEventsButton.insets = new Insets(0, 0, 5, 5);
+		gbc_showEventsButton.gridx = 1;
+		gbc_showEventsButton.gridy = 2;
 		showEventsButton.setVisible(true);
 		frame.getContentPane().add(showEventsButton, gbc_showEventsButton);		
 		////////////////////////////////////////

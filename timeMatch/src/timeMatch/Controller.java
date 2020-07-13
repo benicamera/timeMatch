@@ -39,7 +39,7 @@ public class Controller {
     }
    public void toTest() {
 	   System.out.println("toTest Controller aufgerufen");
-	   getEvents(getCalendar("Felix"));
+	   getEvents(getCalendar("testEvent"));
    }
     //testet ob eine Datei von uns ist
     public boolean isCalendarFile(File file) {
