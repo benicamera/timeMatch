@@ -363,16 +363,24 @@ public class Controller {
     	ArrayList<CustomMap> eventsList = new ArrayList<CustomMap>();	
     	HashMap <String,boolean[]> calendar = _calendar.getCalendarHashMap();
 
-    	String[] datumString = new String[calendar.size()];	
+
     	System.out.println("calendar.keyset :"+ calendar.keySet());
-    	datumString = calendar.keySet();
+    
+    	String [] datumString = new String [calendar.size()];
+    	Object[] datumObject = calendar.keySet().toArray();
+    	for (int z = 0; z < datumObject.length; z++) {
+    		datumString [z]  = String.valueOf(datumObject[z]);  
+		}
+    	
+		
+    	
     	for (int i = 0; i < datumString.length; i++) {
     		for (int j = 0; j < 24; j++) {
     			boolean [] counter =new boolean [24];
     			counter = calendar.get(datumString[i]);
     			if(! counter [j]) {
     				//eventsList.add(datumString [i],counter [j]);
-    				eventsList.add(setString(datumString[i]) , setInteger(counter [j]));
+    				eventsList.add( new CustomMap(datumString[i], j));
     				System.out.println("datumString ("+ i +") : " + datumString[i]);
     				System.out.println("counter (" + j + ") : " + counter[j]);
     			}
