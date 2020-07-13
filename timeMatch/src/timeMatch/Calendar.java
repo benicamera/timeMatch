@@ -129,5 +129,8 @@ public class Calendar implements Serializable{
 		}
 		return false;
 	}
-	
+	public HashMap <String,boolean[]> getCalendarHashMap(){
+		return calendar;
+		
+	}
 }

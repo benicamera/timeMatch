@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 
 /*
  * Verrechnet und vergleicht
@@ -316,14 +316,14 @@ public class Controller {
     /////////////////////////////////////
     public ArrayList<String> events (Calendar _calendar) { 					//gibt alle Vorhandenen Termine an 
     	ArrayList<String> eventsList = new ArrayList<String>();	
-    	HashMap <String,boolean[]> calendar = _calendar.getCalendar();
+    	HashMap <String,boolean[]> calendar = _calendar.getCalendarHashMap();
     	
     	if(! calendar.containsValue(true)) {							//überprüft ob Termine Vorhanden sind
     		System.out.println("Keine Termine    (Controler.events)");
     		return eventsList;
     	}
     	
-    	String[] datumString = new String()[calendar.size()];			
+    	String[] datumString = new String[calendar.size()];			
     	datumString = calendar.keySet();							
     	for (int i = 0; i < datumString.length; i++) {					//geht alle Keys(vorhandenen Datums) durch
     		if (calendar.get(datumString[i])) {							//wenn der das datum belegt ist
