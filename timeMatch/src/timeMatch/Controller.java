@@ -353,7 +353,7 @@ public class Controller {
        return calendarRegister.get(name);
     }
     public ArrayList<String> events (Calendar _calendar) { 					//gibt alle Vorhandenen Termine an 
-    	Array<String> eventsList = new ArrayList<String>();	
+    	ArrayList<String> eventsList = new ArrayList<String>();	
     	HashMap <String,boolean[]> calendar = _calendar.getCalendar();
     	
     	if(! calendar.containsValue(true)) {							//überprüft ob Termine Vorhanden sind
