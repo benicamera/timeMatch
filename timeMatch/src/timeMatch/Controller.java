@@ -39,7 +39,7 @@ public class Controller {
     }
    public void toTest() {
 	   System.out.println("toTest Controller aufgerufen");
-	   getEvents(getCalendar("testEvent"));
+	  // getEvents(getCalendar("testEvent"));
    }
     //testet ob eine Datei von uns ist
     public boolean isCalendarFile(File file) {
@@ -362,22 +362,18 @@ public class Controller {
 	
     	ArrayList<CustomMap> eventsList = new ArrayList<CustomMap>();	
     	HashMap <String,boolean[]> calendar = _calendar.getCalendarHashMap();
-
-
-    	System.out.println("calendar.keyset :"+ calendar.keySet());
-    
+   
     	String [] datumString = new String [calendar.size()];
     	Object[] datumObject = calendar.keySet().toArray();
-    	for (int z = 0; z < datumObject.length; z++) {
+    	for (int z = 0; z < datumObject.length; z++) 
     		datumString [z]  = String.valueOf(datumObject[z]);  
-		}		
+			
     	
     	for (int i = 0; i < datumString.length; i++) {
     		for (int j = 0; j < 24; j++) {
     			boolean [] counter =new boolean [24];
     			counter = calendar.get(datumString[i]);
     			if(! counter [j]) {
-    				//eventsList.add(datumString [i],counter [j]);
     				eventsList.add( new CustomMap(datumString[i], j));
     				System.out.println("datumString ("+ i +") : " + datumString[i]);
     				System.out.println("counter (" + j + ") : " + counter[j]);

@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import timeMatch.Controller;
+import timeMatch.CustomMap;
 
 /*
  * Zeigt Content an
@@ -142,6 +143,14 @@ public class Gui {
 		
 		//////////////////////////////////////////////
 		JButton showEventsButton = new JButton("getEvents"); 	
+		showEventsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showEventsButtonAction();
+			}
+		});
+		
+		 	
+		showEventsButton.setToolTipText("erhalte deine Termine");
 		GridBagConstraints gbc_showEventsButton = new GridBagConstraints();
 		gbc_showEventsButton.insets = new Insets(0, 0, 5, 5);
 		gbc_showEventsButton.gridx = 1;
@@ -207,6 +216,24 @@ public class Gui {
 		controller.saveCalendars(); //Kalender speichern
 		editAction(calendarName); //editAction() -> öffnet Bearbeitungsfenster
 	}
+	
+	//////////////////////////////////////////////
+	private void showEventsButtonAction() {
+		// TODO Auto-generated method stub
+		String calendarName = askName(); //askCalendarName() -> gibt beim Nutzer erfragten Namen des Kalenders zurück
+		if(calendarName == null)
+			return; //wenn kein name eingegeben wurde, wird der Vorgang abgebrochen
+		JOptionPane.showMessageDialog(frame, String.format("Termine werden angezeigt", controller.createCalendar(calendarName)), "Termine erhalten", JOptionPane.INFORMATION_MESSAGE, null); //Zeigt einen kleine Bestätigung an
+		ArrayList<CustomMap> eventsArrayList = controller.getEvents(controller.getCalendar(calendarName)); 
+		if (eventsArrayList.isEmpty()) {
+			JOptionPane.showMessageDialog(frame, String.format("Leider Keine Termine Vorhanden", controller.createCalendar(calendarName)), "Termine:", JOptionPane.INFORMATION_MESSAGE, null);
+		}
+		else {
+			System.out.println(eventsArrayList);
+		}
+	}
+	//////////////////////////////////////////////////////////
+	
 	
 	/*editAction erfragt Datum, das bearbeitet werden soll
 	 * und öffnet Bearbeitungsfenster für den Kalender im @Parameter
@@ -314,6 +341,28 @@ public class Gui {
 			return calendarName;
 		return calendarName;
 	}
+	
+	///////////////////////////////////////////////
+	private String askName() {
+		String calendarName = (String) JOptionPane.showInputDialog(frame,
+			    "Welcher Kalender?",
+			    "Kalendername:",
+			    JOptionPane.QUESTION_MESSAGE); //Erfagt Kalendernamen über
+		if(controller.isNameTaken(calendarName)) { //wenn der Name bereits vergeben ist
+			JOptionPane.showMessageDialog(frame, "Name Vorhanden : " + calendarName, String.format(" Erfolgreich "), JOptionPane.PLAIN_MESSAGE, null);
+			return calendarName;
+		}else if(calendarName == null || calendarName == ""){ //wenn es keine eingabe gab
+			JOptionPane.showMessageDialog(frame, "Name nicht werwendbar", String.format("Name ist nicht verwendbar, veruche erneut."), JOptionPane.ERROR_MESSAGE, null);
+			return null; //Vorgang beenden
+			
+		}else {
+			JOptionPane.showMessageDialog(frame, "Name nicht Vorhanden", String.format("%s Fehler ", calendarName), JOptionPane.ERROR_MESSAGE, null);
+			calendarName =askName();
+		}
+		return calendarName;
+	}
+	
+	///////////////////////////////////////////////////
 }
 	
 	
