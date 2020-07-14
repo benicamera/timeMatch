@@ -142,14 +142,14 @@ public class Gui {
 		frame.getContentPane().add(matchButton, gbc_matchButton);
 		
 		//////////////////////////////////////////////
-		JButton showEventsButton = new JButton("getEvents"); 	
+		JButton showEventsButton = new JButton(""); 	
 		showEventsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showEventsButtonAction();
 			}
 		});
 		
-		 	
+		showEventsButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/getEventsButtonIcon_klein-min.png")));
 		showEventsButton.setToolTipText("erhalte deine Termine");
 		GridBagConstraints gbc_showEventsButton = new GridBagConstraints();
 		gbc_showEventsButton.insets = new Insets(0, 0, 5, 5);
