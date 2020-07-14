@@ -353,7 +353,7 @@ public class Gui {
 			return calendarName;
 		}else if(calendarName == null || calendarName == ""){ //wenn es keine eingabe gab
 			JOptionPane.showMessageDialog(frame, "Name nicht werwendbar", String.format("Name ist nicht verwendbar, veruche erneut."), JOptionPane.ERROR_MESSAGE, null);
-			return null; //Vorgang beenden
+			calendarName =askName();
 			
 		}else {
 			JOptionPane.showMessageDialog(frame, "Name nicht Vorhanden", String.format("%s Fehler ", calendarName), JOptionPane.ERROR_MESSAGE, null);
