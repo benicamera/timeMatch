@@ -3,6 +3,7 @@ package ui;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import timeMatch.Controller;
@@ -71,7 +72,7 @@ public class EditCalendarUi extends JFrame implements ActionListener{
 		intervallLabels = new JLabel[numberOfIntervalls];
 		
 		editFrame.setBounds(100, 100, 472, 300);
-		editFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		editFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		editFrame.setTitle(String.format("%s - %d.%d.%d",calendarName, day, month, year)); //setzt den Titel des Fensters
 		
 		contentPane = new JPanel(); //neue Ebene

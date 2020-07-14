@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import timeMatch.Calendar;
@@ -50,20 +51,31 @@ public class CompareCalendarsUi extends JPanel{
 	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 	Object[] allCalendarStrings;
 	
+	Calendar dateCalendar;
+	
 	ArrayList<String> matchIntervallStrings = new ArrayList<String>();
 	private JButton backButton;
 	private JLabel headerLabel; //Text
 	
 	private int numberOfElements;
 	
-	public CompareCalendarsUi(Controller controller) {
+	public CompareCalendarsUi(Controller controller, boolean isMatch) {
 		this.controller = controller; //this. bezeichtnet die Variable dieser Klasse
 		allCalendarStrings = new String[controller.getCalendarNameList().size()]; //deklariert array
 		allCalendarStrings = controller.getCalendarNameList().toArray();
 		
-		calendars = getSelectCalendars(); //gibt zu verglichende Kalender zurück
+		showFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		
-		matchIntervallStrings = initMatch(calendars); //gibt gemeinsame Termine zurück
+		if(isMatch) {
+			calendars = getSelectCalendars(); //gibt zu verglichende Kalender zurück
+			matchIntervallStrings = initMatch(calendars); //gibt gemeinsame Termine zurück
+		}else {
+			dateCalendar = getSingleCalendar();
+			if(dateCalendar == null)
+				return;
+			matchIntervallStrings = matchesToString(controller.getEvents(dateCalendar));
+		}
+		
 
 		showFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
@@ -78,7 +90,12 @@ public class CompareCalendarsUi extends JPanel{
 		
 		showFrame.setContentPane(contentPane);
 		
-		headerLabel = new JLabel("Termine");
+		if(isMatch)
+			headerLabel = new JLabel("Freie Zeit");
+		else {
+			headerLabel = new JLabel("Deine Termine");
+		}
+		
 		headerLabel.setForeground(new Color(255, 105, 180));
 		headerLabel.setFont(new Font("Roboto", Font.BOLD, 30));
 		GridBagConstraints gbc_headerLabel = new GridBagConstraints();
@@ -137,6 +154,7 @@ public class CompareCalendarsUi extends JPanel{
 			model.addElement("Keine passenden Termine gefunden.");
 			JOptionPane.showMessageDialog(showFrame, "Keine passenden Termine gefunden.");
 			showFrame.setVisible(false); 
+			contentPane.setVisible(false);
 			showFrame.dispose(); 
 			return;
 		}
@@ -166,6 +184,16 @@ public class CompareCalendarsUi extends JPanel{
 			}
 		numberOfElements = stringMatchesStrings.size(); //wie viele Matches es gab
 		return stringMatchesStrings; //gebe Matches zurück
+	}
+	
+	//erfragt einen Kalender
+	private Calendar getSingleCalendar() {
+		Calendar selectedCalendar;
+		String calendarNameString = (String) JOptionPane.showInputDialog(null, "Welcher Kalender?", "Kalenderauswahl",  JOptionPane.PLAIN_MESSAGE, null, allCalendarStrings, "Kalender");
+		if(calendarNameString == null)
+			return null;
+		selectedCalendar = controller.getCalendar(calendarNameString);
+		return selectedCalendar;
 	}
 	
     //fügt suchintervallstart und -ende zusammen und gibt als Array zurück

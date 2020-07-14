@@ -130,7 +130,7 @@ public class Gui {
 		JButton matchButton = new JButton("");
 		matchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				matchWindowCalendarsUi = new CompareCalendarsUi(controller); //erstellt Objekt der Klasse CompareCalendarsUi und gibt ihm den controller weiter = neues Fenster
+				matchWindowCalendarsUi = new CompareCalendarsUi(controller, true); //erstellt Objekt der Klasse CompareCalendarsUi und gibt ihm den controller weiter = neues Fenster
 			}
 		});
 		matchButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/matchButtonIcon.png")));
@@ -219,18 +219,7 @@ public class Gui {
 	
 	//////////////////////////////////////////////
 	private void showEventsButtonAction() {
-		// TODO Auto-generated method stub
-		String calendarName = askName(); //askCalendarName() -> gibt beim Nutzer erfragten Namen des Kalenders zurück
-		if(calendarName == null)
-			return; //wenn kein name eingegeben wurde, wird der Vorgang abgebrochen
-		JOptionPane.showMessageDialog(frame, String.format("Termine werden angezeigt", controller.createCalendar(calendarName)), "Termine erhalten", JOptionPane.INFORMATION_MESSAGE, null); //Zeigt einen kleine Bestätigung an
-		ArrayList<CustomMap> eventsArrayList = controller.getEvents(controller.getCalendar(calendarName)); 
-		if (eventsArrayList.isEmpty()) {
-			JOptionPane.showMessageDialog(frame, String.format("Leider Keine Termine Vorhanden", controller.createCalendar(calendarName)), "Termine:", JOptionPane.INFORMATION_MESSAGE, null);
-		}
-		else {
-			System.out.println(eventsArrayList);
-		}
+			CompareCalendarsUi compareCalendarsUi = new CompareCalendarsUi(controller, false);
 	}
 	//////////////////////////////////////////////////////////
 	

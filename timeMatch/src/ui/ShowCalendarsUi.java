@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import timeMatch.Controller;
 
@@ -56,7 +57,7 @@ public class ShowCalendarsUi extends JFrame {
 
 	public ShowCalendarsUi(Controller _controller) {
 		controller = _controller;
-		showFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		showFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		showFrame.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
