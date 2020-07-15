@@ -132,7 +132,7 @@ public class CompareCalendarsUi extends JPanel{
 		contentPane.add(backButton, gbc_backButton);
 		
 		int ySize = 30*numberOfElements;
-		if(ySize < 250)
+		if(ySize < 250) //sonst fenster zu klein, wenn nur wenige Matches
 			ySize = 250;
 		showFrame.setBounds(100, 100, 550, ySize); //Höhe ist variabel, je nach anzahl der Termine
 		showFrame.setVisible(true);
