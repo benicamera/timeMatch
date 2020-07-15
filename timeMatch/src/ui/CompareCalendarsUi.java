@@ -271,28 +271,7 @@ public class CompareCalendarsUi extends JPanel{
 		}
 		//holt sich den Monat vom Nutzer
 		int _month = (int)JOptionPane.showInputDialog( contentPane, "Welcher Monat", "Intervallende", JOptionPane.PLAIN_MESSAGE, null, modMonthsObjectList.toArray(), "Monat");
-		
-		//Wie viele Tage hat der Monat?
-			if(_month < 8) {
-				if(_month%2 == 0) {
-					if(_month == 2) {
-						if(controller.isLeapYear(year))
-							monthDays = 29;
-						else 
-							monthDays = 28;
-					}else {
-						monthDays = 30;
-					}
-					}else {
-						monthDays = 31;
-					}	
-				}else {
-					if(_month%2 == 0) {
-						monthDays = 31;
-					}else {
-						monthDays = 30;
-					}
-				}
+		monthDays = controller.monthDays(_month, startYear);
 			return _month;
 	}
 	

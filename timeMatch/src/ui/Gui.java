@@ -20,7 +20,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import timeMatch.Controller;
-import timeMatch.CustomMap;
 
 /*
  * Zeigt Content an
@@ -62,6 +61,7 @@ public class Gui {
 	private void initialize() {
 		frame = new JFrame(); //erstellt neues Window
 		frame.setBounds(100, 100, 560, 300); //bestimmt die größe
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //bestimmt, was passiert, wenn man auf das schließen x klickt
 		GridBagLayout gridBagLayout = new GridBagLayout(); //bestimmt Layout
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
