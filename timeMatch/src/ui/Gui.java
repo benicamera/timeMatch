@@ -219,6 +219,7 @@ public class Gui {
 	
 	//////////////////////////////////////////////
 	private void showEventsButtonAction() {
+			@SuppressWarnings("unused")
 			CompareCalendarsUi compareCalendarsUi = new CompareCalendarsUi(controller, false);
 	}
 	//////////////////////////////////////////////////////////
@@ -261,28 +262,8 @@ public class Gui {
 	private int monthInput(int year) {
 		int _month = (int)JOptionPane.showInputDialog(null, "Welcher Monat", "Monat", JOptionPane.PLAIN_MESSAGE, null, months, "Monat"); //erfragt Monatszahl. months ist ein Object-Array, der die Zahlen 1-12 enthält. Der Nutzer wählt daraus aus. So wird eine Falsche eingabe nahezu ausgeschlossen
 		
-		//Wie viele Tage hat der Monat?
-			if(_month < 8) { //bis August sind alle ungeraden Monate 31 Tage lang
-				if(_month%2 == 0) {
-					if(_month == 2) { //wenn's Februar ist
-						if(controller.isLeapYear(year)) //wenn es ein Schaltjahr ist
-							monthDays = 29;
-						else 
-							monthDays = 28;
-					}else {
-						monthDays = 30;
-					}
-					}else {
-						monthDays = 31;
-					}	
-				}else { //Ab August anders herum
-					if(_month%2 == 0) {
-						monthDays = 31;
-					}else {
-						monthDays = 30;
-					}
-			}
-			
+		monthDays = controller.monthDays(_month, year);
+		
 		//Falls eine Ungültige angabe gemacht wird
 		if(_month < 1 || _month > 12) { //Sicherung
 			return -1;
