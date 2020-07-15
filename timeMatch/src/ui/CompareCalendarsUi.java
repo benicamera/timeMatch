@@ -131,7 +131,10 @@ public class CompareCalendarsUi extends JPanel{
 		gbc_backButton.gridy = 8;
 		contentPane.add(backButton, gbc_backButton);
 		
-		showFrame.setBounds(100, 100, 550, (30*numberOfElements)); //Höhe ist variabel, je nach anzahl der Termine
+		int ySize = 30*numberOfElements;
+		if(ySize < 250)
+			ySize = 250;
+		showFrame.setBounds(100, 100, 550, ySize); //Höhe ist variabel, je nach anzahl der Termine
 		showFrame.setVisible(true);
 	}
 	
