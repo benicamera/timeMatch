@@ -251,7 +251,7 @@ public class Controller {
     }
    
     //vergleicht zwei Objekte der Klasse Calendar in einem bestimmten Intervall und gibt Termine, bei denen beide Frei haben in einer Liste zurück
-    public ArrayList<CustomMap> match (Calendar[] _calendars, String[] _intervall ) { //du hast [] vergessen
+    public ArrayList<CustomMap> match (Calendar[] _calendars, String[] _intervall ) { 
     	ArrayList<CustomMap> listRaw = new ArrayList<CustomMap>();
     	
     	String startString = _intervall[0];
