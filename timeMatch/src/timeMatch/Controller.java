@@ -355,36 +355,25 @@ public class Controller {
        return calendarRegister.get(name);
     }
    
-    /////////////////////////////////////
-    public ArrayList<CustomMap> getEvents (Calendar _calendar) { //gibt alle Vorhandenen Termine an
-	
-    	System.out.println("getEvents aufgerufen");
-	
+    public ArrayList<CustomMap> getEvents (Calendar _calendar) { //gibt alle Vorhandenen Termine an	
     	ArrayList<CustomMap> eventsList = new ArrayList<CustomMap>();	
     	HashMap <String,boolean[]> calendar = _calendar.getCalendarHashMap();
    
-    	String [] datumString = new String [calendar.size()];
-    	Object[] datumObject = calendar.keySet().toArray();
-    	for (int z = 0; z < datumObject.length; z++) 
-    		datumString [z]  = String.valueOf(datumObject[z]);  
+    	String [] dateString = new String [calendar.size()];
+    	Object[] dateObject = calendar.keySet().toArray();
+    	for (int z = 0; z < dateObject.length; z++) //jeder Tag, der irgendwo belegt wird
+    		dateString [z]  = String.valueOf(dateObject[z]);  
 			
-    	
-    	for (int i = 0; i < datumString.length; i++) {
-    		for (int j = 0; j < 24; j++) {
-    			boolean [] counter =new boolean [24];
-    			counter = calendar.get(datumString[i]);
-    			if(! counter [j]) {
-    				eventsList.add( new CustomMap(datumString[i], j));
-    				System.out.println("datumString ("+ i +") : " + datumString[i]);
-    				System.out.println("counter (" + j + ") : " + counter[j]);
-    			}
+    	for (int i = 0; i < dateString.length; i++) { //für jeden der Tage
+    		for (int j = 0; j < 24; j++) { //für jede Stunde
+    			boolean[] intervalls =new boolean[24];
+    			intervalls = calendar.get(dateString[i]); //holt sich die Intervalle für den Tag
+    			if(!intervalls[j]) //wenn belegt
+    				eventsList.add( new CustomMap(dateString[i], j));
     		}
     	}
-		System.out.println(eventsList);
 		return eventsList;
-}
-//////////////////////////////////
-   
-    
+    }  
+  
 }
  
