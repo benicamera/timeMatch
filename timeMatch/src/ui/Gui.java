@@ -45,7 +45,10 @@ public class Gui {
 		initialize();	
 	}
 	
+	//Konstruktor, der eine Fehlermeldung anzeigt. @Paramter e beeinhaltet die Informationen zum Feheler
 	public Gui(Exception e) {
+		//zeigt Fehlermeldung als PopUpWindow an. \n entspricht einem Absatz. String.format setzt für %d Zahlen und für %s strings ein, die hinter dem Text in der selben Reihenfolge angegeben sind.
+		//JOptionPane.ERROR_MESSAGE deklariert die Nachricht als ERROR. null am Anfang ist der Frame, an dem es sich orientieren kann. Da es noch keinen gibt null. der 2. String ist der Titel des Fensters
 		JOptionPane.showMessageDialog(null, String.format("Es tut uns schrecklich Leid, aber da ist wohl ein Fehler aufgetreten. \n Bei der Suche nach dem Fehler fanden wir folgendes: \n %s -> %s. Fehlerquelle: Line %s. \n Fahren Sie fort und/oder kontaktieren Sie einen Entwickler.", e, e.getMessage(), e.getStackTrace()[0].getLineNumber()), "Fehler augetreten.", JOptionPane.ERROR_MESSAGE);
 		controller = new Controller();
 		initialize();	
