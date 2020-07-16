@@ -37,10 +37,7 @@ public class Controller {
     public Controller() {
         loadCalendars(); //lädt die calendars.dat-Datei
     }
-   public void toTest() {
-	   System.out.println("toTest Controller aufgerufen");
-	  // getEvents(getCalendar("testEvent"));
-   }
+ 
     //testet ob eine Datei von uns ist
     public boolean isCalendarFile(File file) {
     	try (FileInputStream fos = new FileInputStream(file); //braucht man, um dateien auslesen zu können

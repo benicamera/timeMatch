@@ -16,9 +16,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import timeMatch.Controller;
 
 /*
@@ -39,22 +36,21 @@ public class Gui {
 	
 	CompareCalendarsUi matchWindowCalendarsUi;
 	
-	FileFilter filter = new FileNameExtensionFilter("Objektdatei", ".dat"); //Filter für Datachooser (eigentlich unnötig)
-	
 	Object[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}; //die Monate
 	
 	int monthDays;
 	
 	public Gui() {
 		controller = new Controller();
-		toTest();
-		initialize();
-		
+		initialize();	
 	}
-	public void toTest(/*Parameters*/) {
-		System.out.println("toTest gui aufgerufen");
-		controller.toTest();
+	
+	public Gui(Exception e) {
+		JOptionPane.showMessageDialog(null, String.format("Es tut uns schrecklich Leid, aber da ist wohl ein Fehler aufgetreten. \n Bei der Suche nach dem Fehler fanden wir folgendes: \n %s -> %s. Fehlerquelle: Line %s. \n Fahren Sie fort und/oder kontaktieren Sie einen Entwickler.", e, e.getMessage(), e.getStackTrace()[0].getLineNumber()), "Fehler augetreten.", JOptionPane.ERROR_MESSAGE);
+		controller = new Controller();
+		initialize();	
 	}
+
 	/**
 	 * Initialize the contents of the frame
 	 */
@@ -141,14 +137,12 @@ public class Gui {
 		gbc_matchButton.gridy = 2;
 		frame.getContentPane().add(matchButton, gbc_matchButton);
 		
-		//////////////////////////////////////////////
 		JButton showEventsButton = new JButton(""); 	
 		showEventsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showEventsButtonAction();
 			}
 		});
-		
 		showEventsButton.setIcon(new ImageIcon(Gui.class.getResource("/resources/getEventsButtonIcon_klein-min.png")));
 		showEventsButton.setToolTipText("erhalte deine Termine");
 		GridBagConstraints gbc_showEventsButton = new GridBagConstraints();
@@ -157,7 +151,6 @@ public class Gui {
 		gbc_showEventsButton.gridy = 2;
 		showEventsButton.setVisible(true);
 		frame.getContentPane().add(showEventsButton, gbc_showEventsButton);		
-		////////////////////////////////////////
 		
 		JButton createButton = new JButton("");
 		createButton.addActionListener(new ActionListener() {
@@ -217,14 +210,11 @@ public class Gui {
 		editAction(calendarName); //editAction() -> öffnet Bearbeitungsfenster
 	}
 	
-	//////////////////////////////////////////////
 	private void showEventsButtonAction() {
 			@SuppressWarnings("unused")
 			CompareCalendarsUi compareCalendarsUi = new CompareCalendarsUi(controller, false);
 	}
-	//////////////////////////////////////////////////////////
-	
-	
+
 	/*editAction erfragt Datum, das bearbeitet werden soll
 	 * und öffnet Bearbeitungsfenster für den Kalender im @Parameter
 	 */
@@ -312,27 +302,6 @@ public class Gui {
 		return calendarName;
 	}
 	
-	///////////////////////////////////////////////
-	private String askName() {
-		String calendarName = (String) JOptionPane.showInputDialog(frame,
-			    "Welcher Kalender?",
-			    "Kalendername:",
-			    JOptionPane.QUESTION_MESSAGE); //Erfagt Kalendernamen über
-		if(controller.isNameTaken(calendarName)) { //wenn der Name bereits vergeben ist
-			JOptionPane.showMessageDialog(frame, "Name Vorhanden : " + calendarName, String.format(" Erfolgreich "), JOptionPane.PLAIN_MESSAGE, null);
-			return calendarName;
-		}else if(calendarName == null || calendarName == ""){ //wenn es keine eingabe gab
-			JOptionPane.showMessageDialog(frame, "Name nicht werwendbar", String.format("Name ist nicht verwendbar, veruche erneut."), JOptionPane.ERROR_MESSAGE, null);
-			calendarName =askName();
-			
-		}else {
-			JOptionPane.showMessageDialog(frame, "Name nicht Vorhanden", String.format("%s Fehler ", calendarName), JOptionPane.ERROR_MESSAGE, null);
-			calendarName =askName();
-		}
-		return calendarName;
-	}
-	
-	///////////////////////////////////////////////////
 }
 	
 	
