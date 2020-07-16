@@ -177,6 +177,7 @@ public class Gui {
 		frame.getContentPane().add(spaceLabel2, gbc_spaceLabel2);
 		
 		JButton showButton = new JButton(new ImageIcon(Gui.class.getResource("/resources/showButtonIcon.png")));
+		showButton.setToolTipText("Alle Kalender anziegen");
 		showButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(controller.getCalendarNameList().size() > 0) { //wenn wenigstens ein Kalender existiert
